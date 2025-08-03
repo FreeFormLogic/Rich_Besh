@@ -8,6 +8,7 @@ import CourseCard from "@/components/course-card";
 import TrustManagement from "@/components/trust-management";
 import PartnersSection from "@/components/partners-section";
 import CommunityChat from "@/components/community-chat";
+import VideoProofFeed from "@/components/video-proof-feed";
 import BottomNavigation from "@/components/bottom-navigation";
 import { useTelegram } from "@/hooks/use-telegram";
 
@@ -92,6 +93,9 @@ export default function Home() {
         {/* Stories Section */}
         <StoriesSection />
 
+        {/* Video Proof Feed - Main Content */}
+        <VideoProofFeed />
+
         {/* Bento Grid Layout */}
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           
@@ -107,20 +111,24 @@ export default function Home() {
               </span>
             </div>
             
-            <div className="space-y-4">
-              {predictionsLoading ? (
-                <div className="flex justify-center py-8">
-                  <Loader2 className="h-6 w-6 animate-spin text-rich-gold" />
-                </div>
-              ) : predictions.length === 0 ? (
-                <div className="text-center py-8 text-gray-400">
-                  Нет активных прогнозов
-                </div>
-              ) : (
-                predictions.slice(0, 3).map((prediction: any) => (
-                  <PredictionCard key={prediction.id} prediction={prediction} />
-                ))
-              )}
+            <div className="overflow-x-auto">
+              <div className="flex space-x-4 pb-4">
+                {predictionsLoading ? (
+                  <div className="flex justify-center py-8 w-full">
+                    <Loader2 className="h-6 w-6 animate-spin text-rich-gold" />
+                  </div>
+                ) : predictions.length === 0 ? (
+                  <div className="text-center py-8 text-gray-400 w-full">
+                    Нет активных прогнозов
+                  </div>
+                ) : (
+                  predictions.map((prediction: any) => (
+                    <div key={prediction.id} className="flex-shrink-0 w-80">
+                      <PredictionCard prediction={prediction} />
+                    </div>
+                  ))
+                )}
+              </div>
             </div>
           </div>
 

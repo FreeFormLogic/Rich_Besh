@@ -9,9 +9,9 @@ interface AchievementCardProps {
 }
 
 export default function AchievementCard({ user }: AchievementCardProps) {
-  const level = user?.level || "Новичок";
-  const experience = user?.experience || 0;
-  const streak = user?.streak || 0;
+  const level = user?.level || "Миллионер";
+  const experience = user?.experience || 2450;
+  const streak = user?.streak || 15;
   
   // Calculate progress (example: 1000 XP per level)
   const experiencePerLevel = 1000;

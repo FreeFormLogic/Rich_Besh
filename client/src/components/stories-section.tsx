@@ -42,8 +42,33 @@ export default function StoriesSection() {
   const displayStories = stories.length > 0 ? stories : defaultStories;
 
   const handleStoryClick = (story: any) => {
-    // TODO: Implement story viewing functionality
-    console.log('Opening story:', story);
+    // Show story in full screen
+    const storyModal = document.createElement('div');
+    storyModal.className = 'fixed inset-0 bg-black z-50 flex items-center justify-center animate-fade-in';
+    storyModal.innerHTML = `
+      <div class="relative w-full h-full max-w-md mx-auto">
+        <img src="${story.imageUrl}" alt="${story.title}" class="w-full h-full object-cover" />
+        <div class="absolute top-4 left-4 right-4 flex justify-between items-center">
+          <div class="flex items-center space-x-3">
+            <div class="story-ring-small">
+              <img src="${story.imageUrl}" alt="Rich Besh" class="w-8 h-8 rounded-full object-cover" />
+            </div>
+            <span class="text-white font-semibold">Rich Besh</span>
+          </div>
+          <button onclick="this.closest('.fixed').remove()" class="text-white text-2xl">&times;</button>
+        </div>
+        <div class="absolute bottom-4 left-4 right-4">
+          <h3 class="text-white text-xl font-bold mb-2">${story.title}</h3>
+          <p class="text-gray-300">${story.content || story.title}</p>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(storyModal);
+    
+    // Auto remove after 5 seconds  
+    setTimeout(() => {
+      storyModal.remove();
+    }, 5000);
   };
 
   if (isLoading) {
@@ -74,11 +99,11 @@ export default function StoriesSection() {
             className="flex-shrink-0 text-center cursor-pointer group" 
             onClick={() => handleStoryClick(story)}
           >
-            <div className="story-ring mb-2">
+            <div className="story-ring mb-2 group-hover:animate-pulse">
               <img 
                 src={story.imageUrl} 
                 alt={story.title} 
-                className="w-16 h-16 rounded-full object-cover group-hover:scale-110 transition-transform"
+                className="rounded-full object-cover group-hover:scale-110 transition-transform"
               />
             </div>
             <p className="text-xs text-gray-300">{story.title}</p>

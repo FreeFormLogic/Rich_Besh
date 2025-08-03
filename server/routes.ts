@@ -210,6 +210,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Invoice creation endpoint for Telegram payments
+  app.post('/api/create-invoice', async (req, res) => {
+    try {
+      const { itemType, itemId, amount, description } = req.body;
+      
+      // Mock invoice creation - in real app this would create Telegram invoice
+      const invoiceLink = `https://t.me/invoice/${Math.random().toString(36).substr(2, 9)}`;
+      
+      res.json({ 
+        success: true, 
+        invoiceLink,
+        amount,
+        description 
+      });
+    } catch (error) {
+      console.error('Invoice creation error:', error);
+      res.status(500).json({ error: "Ошибка создания счета" });
+    }
+  });
+
   app.post('/api/polls/:id/vote', verifyTelegramUser, async (req: any, res) => {
     try {
       const userId = req.telegramUser.id.toString();
@@ -471,15 +491,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const samplePolls = [
         {
           question: "Какой матч смотрим в эти выходные?",
-          options: ["Реал - Барселона", "ПСЖ - Бавария", "Ливerpoolь - Сити", "Ювентус - Милан"],
-          description: "Помогите выбрать топ-матч для детального разбора!",
+          options: ["Реал - Барселона", "ПСЖ - Бавария", "Ливerpool - Сити", "Ювентус - Милан"],
+          totalVotes: 1247,
           expiresAt: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000)
         },
         {
           question: "На какую тему снять следующий курс?",
           options: ["Криптовалюты", "Недвижимость", "Стартапы", "Форекс"],
-          description: "Ваше мнение поможет создать максимально полезный контент",
+          totalVotes: 567,
           expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+        },
+        {
+          question: "Какую машину покупать следующей?",
+          options: ["Lamborghini Urus", "Ferrari 296 GTB", "Porsche 911 Turbo", "McLaren Artura"],
+          totalVotes: 892,
+          expiresAt: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000)
         }
       ];
 

@@ -54,32 +54,34 @@ export default function PartnersSection({ partners }: PartnersSectionProps) {
         Проверенные партнеры
       </h3>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {partners.slice(0, 3).map((partner) => (
-          <div 
-            key={partner.id}
-            className="bg-white/5 rounded-xl p-4 hover:bg-white/10 transition-colors cursor-pointer group"
-            onClick={() => handlePartnerClick(partner)}
-          >
-            <img 
-              src={partner.imageUrl || defaultImage}
-              alt={partner.name}
-              className="w-full h-24 object-cover rounded-lg mb-3 group-hover:scale-105 transition-transform"
-            />
-            
-            <h4 className="font-bold text-white mb-2">{partner.name}</h4>
-            <p className="text-gray-400 text-sm mb-3">{partner.description}</p>
-            
-            <div className="flex justify-between items-center">
-              {partner.bonus && (
-                <span className="bg-neon-green text-black px-2 py-1 rounded text-xs font-bold">
-                  {partner.bonus}
-                </span>
-              )}
-              <i className="fas fa-external-link-alt text-rich-gold group-hover:text-white transition-colors ml-auto"></i>
+      <div className="overflow-x-auto">
+        <div className="flex space-x-4 pb-4">
+          {partners.map((partner) => (
+            <div 
+              key={partner.id}
+              className="flex-shrink-0 w-72 bg-white/5 rounded-xl p-4 hover:bg-white/10 transition-all cursor-pointer group hover:scale-105 animate-slide-up"
+              onClick={() => handlePartnerClick(partner)}
+            >
+              <img 
+                src={partner.imageUrl || defaultImage}
+                alt={partner.name}
+                className="w-full h-24 object-cover rounded-lg mb-3 group-hover:scale-105 transition-transform"
+              />
+              
+              <h4 className="font-bold text-white mb-2">{partner.name}</h4>
+              <p className="text-gray-400 text-sm mb-3 line-clamp-2">{partner.description}</p>
+              
+              <div className="flex justify-between items-center">
+                {partner.bonus && (
+                  <span className="bg-neon-green text-black px-2 py-1 rounded text-xs font-bold animate-pulse">
+                    {partner.bonus}
+                  </span>
+                )}
+                <i className="fas fa-external-link-alt text-rich-gold group-hover:text-white transition-colors ml-auto"></i>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
