@@ -8,8 +8,9 @@ import CourseCard from "@/components/course-card";
 import TrustManagement from "@/components/trust-management";
 import PartnersSection from "@/components/partners-section";
 import CommunityChat from "@/components/community-chat";
-import VideoProofFeed from "@/components/video-proof-feed";
+// import VideoProofFeed from "@/components/video-proof-feed";
 import BottomNavigation from "@/components/bottom-navigation";
+import SupportButton from "@/components/support-button";
 import { useTelegram } from "@/hooks/use-telegram";
 
 export default function Home() {
@@ -93,14 +94,11 @@ export default function Home() {
         {/* Stories Section */}
         <StoriesSection />
 
-        {/* Video Proof Feed - Main Content - Takes most space */}
-        <VideoProofFeed />
-
-        {/* Quick Access Sections - Compact layout */}
+        {/* Quick Access Sections */}
         <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
           
-          {/* Live Predictions Card */}
-          <div className="neubrutalism-card bg-gradient-to-br from-rich-black to-gray-900 p-6 rounded-2xl col-span-1 md:col-span-2 lg:col-span-2 animate-float">
+          {/* Live Predictions Card - без рамки */}
+          <div className="p-6 col-span-1 md:col-span-2 lg:col-span-2">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-2xl font-bold text-rich-gold flex items-center">
                 <i className="fas fa-chart-line mr-2 animate-pulse"></i>
@@ -204,12 +202,7 @@ export default function Home() {
 
       </main>
 
-      {/* Floating Action Button */}
-      <button className="fixed bottom-20 right-4 bg-gradient-to-r from-rich-gold to-yellow-400 text-black w-14 h-14 rounded-full shadow-lg flex items-center justify-center animate-pulse-glow z-40">
-        <i className="fas fa-crown text-xl"></i>
-      </button>
-
-      {/* Bottom Navigation */}
+      <SupportButton />
       <BottomNavigation />
     </div>
   );

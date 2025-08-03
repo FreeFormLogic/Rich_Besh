@@ -39,7 +39,45 @@ export default function StoriesSection() {
     queryKey: ["/api/stories"],
   });
 
-  const displayStories = stories.length > 0 ? stories : defaultStories;
+  const displayStories = stories.length > 0 ? stories.slice(0, 8) : defaultStories.slice(0, 8);
+
+  const showAdWindow = (story: any) => {
+    const ads = [
+      {
+        title: "Где я поставил эту ставку?",
+        text: "Кстати, весь этот экспресс я делал в 1xBet - там самые высокие коэффициенты на топ матчи. Плюс дали бонус 25,000₽ на первый депозит 🔥",
+        button: "ПЕРЕЙТИ НА 1XBET",
+        url: "https://1xbet.com/rich-besh"
+      },
+      {
+        title: "На чем играю в лайве",
+        text: "Для лайв-ставок использую Parimatch - линия обновляется мгновенно, а кэшбэк 10% каждую неделю спасает в минусовых сериях 💰",
+        button: "ЗАРЕГИСТРИРОВАТЬСЯ", 
+        url: "https://parimatch.com/rich-besh"
+      }
+    ];
+    
+    const randomAd = ads[Math.floor(Math.random() * ads.length)];
+    
+    const adModal = document.createElement('div');
+    adModal.innerHTML = `
+      <div class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+        <div class="bg-gradient-to-br from-rich-black to-gray-900 rounded-2xl p-6 max-w-sm w-full border-2 border-rich-gold">
+          <h3 class="text-xl font-bold text-rich-gold mb-3">${randomAd.title}</h3>
+          <p class="text-gray-300 mb-6 leading-relaxed">${randomAd.text}</p>
+          <div class="space-y-3">
+            <button onclick="window.open('${randomAd.url}', '_blank')" class="w-full bg-gradient-to-r from-rich-gold to-yellow-400 text-black font-bold py-3 px-6 rounded-xl hover:scale-105 transition-all">
+              ${randomAd.button}
+            </button>
+            <button onclick="this.closest('.fixed').remove()" class="w-full bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-gray-500 transition-colors">
+              Закрыть
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(adModal);
+  };
 
   const handleStoryClick = (story: any) => {
     // Show story in full screen
@@ -65,9 +103,10 @@ export default function StoriesSection() {
     `;
     document.body.appendChild(storyModal);
     
-    // Auto remove after 5 seconds  
+    // Auto remove after 5 seconds and show ad  
     setTimeout(() => {
       storyModal.remove();
+      showAdWindow(story);
     }, 5000);
   };
 
@@ -92,21 +131,23 @@ export default function StoriesSection() {
         Stories от Rich
       </h2>
       
-      <div className="flex space-x-4 overflow-x-auto pb-4">
+      <div className="grid grid-cols-4 gap-4 pb-4">
         {displayStories.map((story) => (
           <div 
             key={story.id}
-            className="flex-shrink-0 text-center cursor-pointer group" 
+            className="text-center cursor-pointer group" 
             onClick={() => handleStoryClick(story)}
           >
-            <div className="story-ring mb-2 group-hover:animate-pulse">
+            <div className="story-ring mb-2 group-hover:animate-pulse mx-auto">
               <img 
                 src={story.imageUrl} 
                 alt={story.title} 
                 className="rounded-full object-cover group-hover:scale-110 transition-transform"
               />
             </div>
-            <p className="text-xs text-gray-300">{story.title}</p>
+            <p className="text-xs text-gray-300 group-hover:text-rich-gold transition-colors leading-tight">
+              {story.title}
+            </p>
           </div>
         ))}
       </div>
