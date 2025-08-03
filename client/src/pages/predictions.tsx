@@ -5,6 +5,8 @@ import { useTelegram } from "@/hooks/use-telegram";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import BottomNavigation from "@/components/bottom-navigation";
+import Header from "@/components/header";
+import SectionIntro from "@/components/section-intro";
 
 interface Prediction {
   id: string;
@@ -104,18 +106,21 @@ export default function PredictionsPage() {
   return (
     <div className="min-h-screen bg-rich-black text-white pb-20">
       {/* Header */}
-      <header className="sticky top-0 z-50 glass-effect border-b border-rich-gold/20">
-        <div className="container mx-auto px-4 py-4">
-          <h1 className="text-2xl font-bold text-rich-gold flex items-center animate-neon-pulse">
-            <TrendingUp className="mr-2" size={24} />
-            Прогнозы от Rich Besh
-          </h1>
-          <p className="text-gray-300 text-sm mt-1">
-            Ординары, экспрессы и лайв-ставки. Только те события, которые ставлю сам.
-          </p>
+      <Header />
+      
+      {/* Section Introduction */}
+      <div className="pt-20">
+        <div className="container mx-auto px-4 py-6">
+          <SectionIntro
+            title="Прогнозы Live"
+            description="Эксклюзивные прогнозы от профессионалов с проходимостью 87%. Каждый прогноз проверен экспертами и содержит детальный анализ."
+            coverImage="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&h=400&fit=crop"
+            gradient="bg-gradient-to-r from-neon-orange/20 via-red-500/20 to-rich-black"
+            icon="fas fa-fire"
+          />
         </div>
-      </header>
-
+      </div>
+      
       {/* Categories */}
       <div className="container mx-auto px-4 py-4">
         <div className="flex space-x-2 overflow-x-auto pb-2">
@@ -137,18 +142,20 @@ export default function PredictionsPage() {
 
       {/* Predictions Grid */}
       <main className="container mx-auto px-4 space-y-4">
-        {predictions.length === 0 ? (
+        {(predictions as Prediction[]).length === 0 ? (
           <div className="text-center py-12 text-gray-400">
             <TrendingUp size={48} className="mx-auto mb-4 opacity-50" />
             <p>Активных прогнозов пока нет</p>
           </div>
         ) : (
-          predictions.map((prediction: Prediction) => (
+          (predictions as Prediction[]).map((prediction: Prediction) => (
             <PredictionCard
               key={prediction.id}
               prediction={prediction}
               onPurchase={() => purchaseMutation.mutate(prediction.id)}
               isPurchasing={purchaseMutation.isPending}
+              getConfidenceColor={getConfidenceColor}
+              getStatusColor={getStatusColor}
             />
           ))
         )}
@@ -162,84 +169,64 @@ export default function PredictionsPage() {
 function PredictionCard({ 
   prediction, 
   onPurchase, 
-  isPurchasing 
+  isPurchasing,
+  getConfidenceColor,
+  getStatusColor
 }: { 
   prediction: Prediction; 
   onPurchase: () => void;
   isPurchasing: boolean;
+  getConfidenceColor: (confidence: string) => string;
+  getStatusColor: (status: string) => string;
 }) {
-  const getConfidenceColor = (confidence: string) => {
-    switch (confidence) {
-      case "high": return "text-neon-green bg-neon-green/20";
-      case "medium": return "text-rich-gold bg-rich-gold/20";
-      case "low": return "text-gray-400 bg-gray-400/20";
-      default: return "text-gray-400 bg-gray-400/20";
-    }
-  };
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "won": return "text-neon-green";
-      case "lost": return "text-red-500";
-      case "pending": return "text-rich-gold";
-      default: return "text-gray-400";
-    }
-  };
-
   return (
-    <div className="neubrutalism-card bg-gradient-to-br from-rich-black to-gray-900 p-6 rounded-2xl animate-slide-up">
-      <div className="flex justify-between items-start mb-4">
-        <div className="flex-1">
-          <div className="flex items-center space-x-3 mb-2">
-            <span className="text-2xl">{prediction.sport === "football" ? "⚽" : prediction.sport === "basketball" ? "🏀" : "🎾"}</span>
-            <div>
-              <h3 className="text-xl font-bold text-white animate-glow">
-                {prediction.title}
-              </h3>
-              <p className="text-gray-400 text-sm">{prediction.match}</p>
-            </div>
+    <div className="neubrutalism-card bg-gradient-to-br from-rich-black to-gray-900 p-6 rounded-2xl border border-rich-gold/20 hover:border-rich-gold/40 transition-all duration-300">
+      {/* Header */}
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center space-x-3">
+          <div className="bg-rich-gold/20 p-2 rounded-full">
+            <TrendingUp className="text-rich-gold" size={20} />
           </div>
-          
-          <p className="text-gray-300 mb-3">{prediction.description}</p>
-          
-          <div className="flex items-center space-x-4 mb-4">
-            <div className="flex items-center space-x-2">
-              <Clock size={16} className="text-rich-gold" />
-              <span className="text-sm text-gray-300">{prediction.matchTime}</span>
-            </div>
-            
-            <div className={`px-2 py-1 rounded-full text-xs font-bold ${getConfidenceColor(prediction.confidence)}`}>
-              <Star size={12} className="inline mr-1" />
-              {prediction.confidence === "high" ? "Уверен" : prediction.confidence === "medium" ? "Средний" : "Низкий"}
-            </div>
+          <div>
+            <h3 className="text-lg font-bold text-white">{prediction.title}</h3>
+            <p className="text-sm text-gray-400">{prediction.sport}</p>
           </div>
         </div>
         
-        <div className="text-right">
-          <div className="bg-neon-green text-black px-3 py-1 rounded-full font-bold text-lg mb-2">
-            x{prediction.coefficient}
-          </div>
-          <div className={`text-sm font-semibold ${getStatusColor(prediction.status)}`}>
-            {prediction.status === "won" ? "✅ Прошел" : 
-             prediction.status === "lost" ? "❌ Не прошел" :
-             prediction.status === "pending" ? "⏳ В игре" : "🔥 Активен"}
-          </div>
+        <div className={`px-3 py-1 rounded-full text-xs font-bold ${getConfidenceColor(prediction.confidence)}`}>
+          {prediction.confidence === "high" ? "🔥 FIRE" : 
+           prediction.confidence === "medium" ? "⭐ TOP" : "📊 OK"}
         </div>
       </div>
-      
-      <div className="flex justify-between items-center">
-        <div className="text-rich-gold font-bold text-xl">
-          💰 {prediction.price.toLocaleString()} ₽
-        </div>
+
+      {/* Match Info */}
+      <div className="mb-4">
+        <h4 className="font-semibold text-white mb-2">{prediction.match}</h4>
+        <p className="text-sm text-gray-300 mb-3">{prediction.description}</p>
         
-        <button
-          onClick={onPurchase}
-          disabled={isPurchasing || prediction.status !== "active"}
-          className="bg-gradient-to-r from-rich-gold to-yellow-400 text-black font-bold py-3 px-6 rounded-xl hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed animate-pulse-glow"
-        >
-          {isPurchasing ? "Покупка..." : prediction.status === "active" ? "Купить прогноз" : "Недоступен"}
-        </button>
+        <div className="flex items-center space-x-4 text-sm text-gray-400">
+          <div className="flex items-center space-x-1">
+            <Clock size={16} />
+            <span>{prediction.matchTime}</span>
+          </div>
+          <div className="flex items-center space-x-1">
+            <Star size={16} className="text-rich-gold" />
+            <span className="text-rich-gold font-bold">{prediction.coefficient}</span>
+          </div>
+          <div className={`flex items-center space-x-1 ${getStatusColor(prediction.status)}`}>
+            <span className="font-semibold">{prediction.status}</span>
+          </div>
+        </div>
       </div>
+
+      {/* Action */}
+      <button 
+        onClick={onPurchase}
+        disabled={isPurchasing}
+        className="w-full bg-gradient-to-r from-rich-gold to-yellow-400 text-black font-bold py-3 px-4 rounded-xl hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        {isPurchasing ? "Покупка..." : `Купить за ${prediction.price}₽`}
+      </button>
     </div>
   );
 }

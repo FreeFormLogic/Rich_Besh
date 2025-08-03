@@ -5,6 +5,8 @@ import { apiRequest } from "@/lib/queryClient";
 import { useTelegram } from "@/hooks/use-telegram";
 import { useToast } from "@/hooks/use-toast";
 import BottomNavigation from "@/components/bottom-navigation";
+import Header from "@/components/header";
+import SectionIntro from "@/components/section-intro";
 
 export default function ConsultationsPage() {
   const { user } = useTelegram();
@@ -74,17 +76,20 @@ export default function ConsultationsPage() {
   return (
     <div className="min-h-screen bg-rich-black text-white pb-20">
       {/* Header */}
-      <header className="sticky top-0 z-50 glass-effect border-b border-rich-gold/20">
-        <div className="container mx-auto px-4 py-4">
-          <h1 className="text-2xl font-bold text-rich-gold flex items-center animate-neon-pulse">
-            <MessageCircle className="mr-2" size={24} />
-            Личная консультация
-          </h1>
-          <p className="text-gray-300 text-sm mt-1">
-            Приватные разборы со мной один на один. Научу, как стать миллионером и жить на максимум.
-          </p>
+      <Header />
+      
+      {/* Section Introduction */}
+      <div className="pt-20">
+        <div className="container mx-auto px-4 py-6">
+          <SectionIntro
+            title="Личные консультации"
+            description="Персональные встречи с Rich Besh. Узнай секреты достижения миллиона и получи индивидуальный план развития."
+            coverImage="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&h=400&fit=crop"
+            gradient="bg-gradient-to-r from-rich-gold/20 via-neon-orange/20 to-rich-black"
+            icon="fas fa-user-tie"
+          />
         </div>
-      </header>
+      </div>
 
       <main className="container mx-auto px-4 py-6 space-y-8">
         {/* Features */}

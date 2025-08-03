@@ -3,6 +3,8 @@ import { Loader2, ExternalLink, Gift, Star, TrendingUp } from "lucide-react";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import BottomNavigation from "@/components/bottom-navigation";
+import Header from "@/components/header";
+import SectionIntro from "@/components/section-intro";
 
 interface Partner {
   id: string;
@@ -57,17 +59,20 @@ export default function PartnersPage() {
   return (
     <div className="min-h-screen bg-rich-black text-white pb-20">
       {/* Header */}
-      <header className="sticky top-0 z-50 glass-effect border-b border-rich-gold/20">
-        <div className="container mx-auto px-4 py-4">
-          <h1 className="text-2xl font-bold text-rich-gold flex items-center animate-neon-pulse">
-            <Gift className="mr-2" size={24} />
-            Партнёры и бонусы
-          </h1>
-          <p className="text-gray-300 text-sm mt-1">
-            Лучшие предложения от проверенных букмекеров. Залетай и забирай бонус.
-          </p>
+      <Header />
+      
+      {/* Section Introduction */}
+      <div className="pt-20">
+        <div className="container mx-auto px-4 py-6">
+          <SectionIntro
+            title="Партнёры Rich Besh"
+            description="Эксклюзивные предложения от проверенных партнёров. Лучшие условия для заработка и роста капитала."
+            coverImage="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=400&fit=crop"
+            gradient="bg-gradient-to-r from-neon-green/20 via-rich-gold/20 to-rich-black"
+            icon="fas fa-handshake"
+          />
         </div>
-      </header>
+      </div>
 
       {/* Categories */}
       <div className="container mx-auto px-4 py-4">
@@ -85,13 +90,13 @@ export default function PartnersPage() {
 
       {/* Partners Grid */}
       <main className="container mx-auto px-4 space-y-6">
-        {partners.length === 0 ? (
+        {(partners as Partner[]).length === 0 ? (
           <div className="text-center py-12 text-gray-400">
             <Gift size={48} className="mx-auto mb-4 opacity-50" />
             <p>Партнеры загружаются...</p>
           </div>
         ) : (
-          partners.map((partner: Partner) => (
+          (partners as Partner[]).map((partner: Partner) => (
             <PartnerCard
               key={partner.id}
               partner={partner}

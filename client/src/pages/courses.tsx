@@ -2,6 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import CourseCard from "@/components/course-card";
 import BottomNavigation from "@/components/bottom-navigation";
+import Header from "@/components/header";
+import SectionIntro from "@/components/section-intro";
 
 export default function Courses() {
   const { data: courses = [], isLoading } = useQuery({
@@ -11,14 +13,20 @@ export default function Courses() {
   return (
     <div className="min-h-screen bg-rich-black text-white pb-20">
       {/* Header */}
-      <header className="sticky top-0 z-50 glass-effect border-b border-rich-gold/20">
-        <div className="container mx-auto px-4 py-4">
-          <h1 className="text-2xl font-bold text-neon-green flex items-center">
-            <i className="fas fa-graduation-cap mr-2"></i>
-            Обучающие курсы
-          </h1>
+      <Header />
+      
+      {/* Section Introduction */}
+      <div className="pt-20">
+        <div className="container mx-auto px-4 py-6">
+          <SectionIntro
+            title="Курсы миллионера"
+            description="Эксклюзивные обучающие курсы от Rich Besh. Психология успеха, финансовая грамотность и секреты миллионеров."
+            coverImage="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=400&fit=crop"
+            gradient="bg-gradient-to-r from-electric-purple/20 via-neon-pink/20 to-rich-black"
+            icon="fas fa-graduation-cap"
+          />
         </div>
-      </header>
+      </div>
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-6">

@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { Loader2, ShoppingBag, CheckCircle, Clock, XCircle, Download } from "lucide-react";
 import BottomNavigation from "@/components/bottom-navigation";
+import Header from "@/components/header";
+import SectionIntro from "@/components/section-intro";
 
 interface Purchase {
   id: string;
@@ -67,20 +69,23 @@ export default function PurchasesPage() {
   return (
     <div className="min-h-screen bg-rich-black text-white pb-20">
       {/* Header */}
-      <header className="sticky top-0 z-50 glass-effect border-b border-rich-gold/20">
-        <div className="container mx-auto px-4 py-4">
-          <h1 className="text-2xl font-bold text-rich-gold flex items-center animate-neon-pulse">
-            <ShoppingBag className="mr-2" size={24} />
-            История покупок
-          </h1>
-          <p className="text-gray-300 text-sm mt-1">
-            Здесь хранятся все прогнозы, курсы и консультации, которые ты оплатил.
-          </p>
+      <Header />
+      
+      {/* Section Introduction */}
+      <div className="pt-20">
+        <div className="container mx-auto px-4 py-6">
+          <SectionIntro
+            title="Мои покупки"
+            description="История всех покупок: прогнозы, курсы и консультации. Твои инвестиции в успешное будущее."
+            coverImage="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=400&fit=crop"
+            gradient="bg-gradient-to-r from-neon-pink/20 via-electric-purple/20 to-rich-black"
+            icon="fas fa-shopping-bag"
+          />
         </div>
-      </header>
+      </div>
 
       <main className="container mx-auto px-4 py-6">
-        {purchases.length === 0 ? (
+        {(purchases as Purchase[]).length === 0 ? (
           <div className="text-center py-12">
             <ShoppingBag size={64} className="mx-auto mb-4 text-gray-600" />
             <h2 className="text-xl font-bold text-gray-400 mb-2">Пока нет покупок</h2>
@@ -91,7 +96,7 @@ export default function PurchasesPage() {
           </div>
         ) : (
           <div className="space-y-4">
-            {purchases.map((purchase: Purchase) => (
+            {(purchases as Purchase[]).map((purchase: Purchase) => (
               <PurchaseCard key={purchase.id} purchase={purchase} />
             ))}
           </div>
