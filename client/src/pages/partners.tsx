@@ -177,11 +177,11 @@ function PartnerCard({
           
           <div className="bg-rich-gold/10 border border-rich-gold/30 rounded-lg p-3 mb-4">
             <h4 className="text-rich-gold font-bold text-lg mb-2">🎁 {partner.bonus}</h4>
-            {partner.features.length > 0 && (
+            {partner.features && partner.features.length > 0 && (
               <ul className="text-sm text-gray-300 space-y-1">
                 {partner.features.slice(0, 3).map((feature, index) => (
                   <li key={index} className="flex items-center">
-                    <span className="text-neon-green mr-2">✓</span>
+                    <span className="text-rich-gold mr-2">✓</span>
                     {feature}
                   </li>
                 ))}

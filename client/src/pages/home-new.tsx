@@ -90,103 +90,92 @@ export default function Home() {
               </span>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {predictionsLoading ? (
-                <div className="col-span-full flex justify-center py-8">
-                  <Loader2 className="h-8 w-8 animate-spin text-rich-gold" />
-                </div>
-              ) : predictions.length === 0 ? (
-                <div className="col-span-full text-center py-8 text-gray-400">
-                  <i className="fas fa-chart-line text-4xl mb-4 opacity-50"></i>
-                  <p className="text-lg">Готовим новые прогнозы...</p>
-                </div>
-              ) : (
-                predictions.map((prediction: any) => (
-                  <div key={prediction.id} className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-5 border border-rich-gold/20 hover:border-rich-gold/40 hover:scale-105 hover:shadow-lg hover:shadow-rich-gold/20 transition-all duration-300">
-                    {/* Match Cover Image */}
-                    <div className="relative mb-4">
-                      <img 
-                        src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=400&h=200&fit=crop" 
-                        alt="Match cover" 
-                        className="w-full h-32 object-cover rounded-lg"
-                      />
-                      <div className="absolute top-2 right-2 bg-neon-orange text-white px-2 py-1 rounded text-xs font-bold">
-                        LIVE
-                      </div>
-                    </div>
-                    
-                    {/* Match Info */}
-                    <div className="space-y-3">
-                      <h4 className="text-white font-bold text-lg leading-tight">
-                        {prediction.match}
-                      </h4>
-                      <div className="flex items-center space-x-2 text-sm text-gray-400">
-                        <i className="fas fa-clock"></i>
-                        <span>{prediction.time}</span>
-                      </div>
-                      
-                      {/* Prediction Details */}
-                      <div className="bg-rich-black/50 rounded-lg p-3">
-                        <div className="flex justify-between items-center mb-2">
-                          <span className="text-gray-300 text-sm">Прогноз:</span>
-                          <span className="text-rich-gold font-bold">{prediction.prediction}</span>
-                        </div>
-                        <div className="flex justify-between items-center">
-                          <span className="text-gray-300 text-sm">Коэф:</span>
-                          <span className="text-white font-bold">{prediction.odds}</span>
-                        </div>
-                      </div>
-                      
-                      {/* Action Button */}
-                      <button className="w-full bg-gradient-to-r from-rich-gold to-neon-orange text-black font-bold py-2 px-4 rounded-lg hover:scale-105 transition-all">
-                        Купить за {prediction.price}₽
-                      </button>
-                    </div>
+            <div className="overflow-x-auto">
+              <div className="flex space-x-4 pb-4">
+                {predictionsLoading ? (
+                  <div className="flex justify-center py-8 w-full">
+                    <Loader2 className="h-8 w-8 animate-spin text-rich-gold" />
                   </div>
-                ))
-              )}
+                ) : predictions.length === 0 ? (
+                  <div className="text-center py-8 text-gray-400 w-full">
+                    <i className="fas fa-chart-line text-4xl mb-4 opacity-50"></i>
+                    <p className="text-lg">Готовим новые прогнозы...</p>
+                  </div>
+                ) : (
+                  predictions.map((prediction: any) => (
+                    <div key={prediction.id} className="flex-shrink-0 w-80 bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-5 border border-rich-gold/20 hover:border-rich-gold/40 hover:scale-105 hover:shadow-lg hover:shadow-rich-gold/20 transition-all duration-300">
+                      {/* Match Cover Image */}
+                      <div className="relative mb-4">
+                        <img 
+                          src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=400&h=200&fit=crop" 
+                          alt="Match cover" 
+                          className="w-full h-32 object-cover rounded-lg"
+                        />
+                        <div className="absolute top-2 right-2 bg-neon-orange text-white px-2 py-1 rounded text-xs font-bold">
+                          LIVE
+                        </div>
+                      </div>
+                      
+                      {/* Match Info */}
+                      <div className="space-y-3">
+                        <h4 className="text-white font-bold text-lg leading-tight">
+                          {prediction.match}
+                        </h4>
+                        <div className="flex items-center space-x-2 text-sm text-gray-400">
+                          <i className="fas fa-clock"></i>
+                          <span>{prediction.time}</span>
+                        </div>
+                        
+                        {/* Prediction Details */}
+                        <div className="bg-rich-black/50 rounded-lg p-3">
+                          <div className="flex justify-between items-center mb-2">
+                            <span className="text-gray-300 text-sm">Прогноз:</span>
+                            <span className="text-rich-gold font-bold">{prediction.prediction}</span>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-gray-300 text-sm">Коэф:</span>
+                            <span className="text-white font-bold">{prediction.odds}</span>
+                          </div>
+                        </div>
+                        
+                        {/* Action Button */}
+                        <button className="w-full bg-gradient-to-r from-rich-gold to-neon-orange text-black font-bold py-2 px-4 rounded-lg hover:scale-105 transition-all">
+                          Купить за {prediction.price}₽
+                        </button>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
             </div>
           </div>
 
-          {/* Video Proofs Section */}
+          {/* Video Proof Section */}
           <div className="bg-gradient-to-br from-electric-purple/20 to-rich-black p-6 rounded-2xl border border-electric-purple/20">
             <h4 className="text-xl font-bold text-electric-purple mb-4 flex items-center">
               <i className="fas fa-video mr-2"></i>
-              Пруфы выигрышей
+              Последний пруф
             </h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="relative">
-                <img 
-                  src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=300&h=200&fit=crop" 
-                  alt="Proof video" 
-                  className="w-full h-32 object-cover rounded-lg"
-                />
-                <div className="absolute inset-0 bg-black/30 rounded-lg flex items-center justify-center">
-                  <button className="bg-rich-gold text-black rounded-full w-12 h-12 flex items-center justify-center hover:scale-110 transition-all">
-                    <i className="fas fa-play ml-1"></i>
-                  </button>
-                </div>
-                <div className="absolute bottom-2 left-2 bg-black/70 text-white px-2 py-1 rounded text-xs">
-                  +347,000₽
-                </div>
+            <div className="relative">
+              <img 
+                src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=600&h=300&fit=crop" 
+                alt="Proof video" 
+                className="w-full h-48 object-cover rounded-lg"
+              />
+              <div className="absolute inset-0 bg-black/30 rounded-lg flex items-center justify-center">
+                <button className="bg-rich-gold text-black rounded-full w-16 h-16 flex items-center justify-center hover:scale-110 transition-all">
+                  <i className="fas fa-play ml-1 text-xl"></i>
+                </button>
               </div>
-              <div className="relative">
-                <img 
-                  src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=300&h=200&fit=crop" 
-                  alt="Proof video" 
-                  className="w-full h-32 object-cover rounded-lg"
-                />
-                <div className="absolute inset-0 bg-black/30 rounded-lg flex items-center justify-center">
-                  <button className="bg-rich-gold text-black rounded-full w-12 h-12 flex items-center justify-center hover:scale-110 transition-all">
-                    <i className="fas fa-play ml-1"></i>
-                  </button>
-                </div>
-                <div className="absolute bottom-2 left-2 bg-black/70 text-white px-2 py-1 rounded text-xs">
-                  +195,500₽
-                </div>
+              <div className="absolute bottom-4 left-4 bg-black/80 text-white px-3 py-2 rounded-lg">
+                <p className="text-lg font-bold text-rich-gold">+347,000₽</p>
+                <p className="text-sm">Экспресс на НБА</p>
+              </div>
+              <div className="absolute top-4 right-4 bg-red-500 text-white px-2 py-1 rounded text-xs font-bold animate-pulse">
+                LIVE
               </div>
             </div>
-            <button className="w-full mt-4 bg-gradient-to-r from-electric-purple to-neon-pink text-white font-bold py-2 px-4 rounded-lg hover:scale-105 transition-all">
+            <button className="w-full mt-4 bg-gradient-to-r from-electric-purple to-neon-pink text-white font-bold py-3 px-4 rounded-lg hover:scale-105 transition-all">
               Смотреть все пруфы
             </button>
           </div>
@@ -344,26 +333,15 @@ export default function Home() {
               <i className="fas fa-diamond mr-2"></i>
               Мотивация дня
             </h4>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="relative">
-                <img 
-                  src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&h=120&fit=crop" 
-                  alt="Luxury watch" 
-                  className="w-full h-20 object-cover rounded-lg"
-                />
-                <div className="absolute bottom-1 left-1 bg-black/70 text-white px-2 py-1 rounded text-xs">
-                  Rolex Daytona
-                </div>
-              </div>
-              <div className="relative">
-                <img 
-                  src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=120&fit=crop" 
-                  alt="Luxury apartment" 
-                  className="w-full h-20 object-cover rounded-lg"
-                />
-                <div className="absolute bottom-1 left-1 bg-black/70 text-white px-2 py-1 rounded text-xs">
-                  Пентхаус Москва
-                </div>
+            <div className="relative">
+              <img 
+                src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=600&h=300&fit=crop" 
+                alt="Luxury car" 
+                className="w-full h-40 object-cover rounded-lg"
+              />
+              <div className="absolute bottom-4 left-4 bg-black/80 text-white px-4 py-3 rounded-lg">
+                <p className="text-lg font-bold text-neon-orange">Lamborghini Huracán</p>
+                <p className="text-sm">Следующая цель</p>
               </div>
             </div>
             <p className="text-gray-300 text-sm mt-4 italic">
