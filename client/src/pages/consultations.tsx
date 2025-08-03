@@ -52,10 +52,10 @@ export default function ConsultationsPage() {
   };
 
   const topics = [
-    { id: "general", name: "Общая стратегия", price: "5,000₽", description: "Разбор твоей стратегии и банка" },
-    { id: "bankroll", name: "Банкролл-менеджмент", price: "4,000₽", description: "Управление банком и рисками" },
-    { id: "analytics", name: "Аналитика матчей", price: "6,000₽", description: "Как анализировать события" },
-    { id: "custom", name: "Своя тема", price: "7,000₽", description: "Индивидуальный запрос" }
+    { id: "general", name: "Путь миллионера", price: "5,000₽", description: "Как я заработал первый миллион и как можешь ты" },
+    { id: "bankroll", name: "Управление капиталом", price: "7,500₽", description: "Инвестиции, активы и пассивный доход" },
+    { id: "analytics", name: "Психология богатства", price: "10,000₽", description: "Мышление миллионера и преодоление барьеров" },
+    { id: "custom", name: "VIP наставничество", price: "15,000₽", description: "Персональный план достижения финансовой свободы" }
   ];
 
   const durations = [
@@ -65,10 +65,10 @@ export default function ConsultationsPage() {
   ];
 
   const features = [
-    "Персональный разбор твоей ситуации",
-    "Практические советы и рекомендации", 
-    "Запись консультации для повторного просмотра",
-    "Поддержка в чате 24 часа после встречи"
+    "Персональный план развития к миллиону",
+    "Разбор источников дохода и инвестиций", 
+    "Психология успеха и преодоление барьеров",
+    "Поддержка в чате и контроль прогресса"
   ];
 
   return (
@@ -81,7 +81,7 @@ export default function ConsultationsPage() {
             Личная консультация
           </h1>
           <p className="text-gray-300 text-sm mt-1">
-            Хочешь поговорить напрямую? Разбор твоей стратегии, банка или ситуации.
+            Приватные разборы со мной один на один. Научу, как стать миллионером и жить на максимум.
           </p>
         </div>
       </header>
@@ -93,7 +93,7 @@ export default function ConsultationsPage() {
           <div className="grid md:grid-cols-2 gap-3">
             {features.map((feature, index) => (
               <div key={index} className="flex items-center text-gray-300">
-                <CheckCircle className="text-neon-green mr-3" size={16} />
+                <CheckCircle className="text-rich-gold mr-3" size={16} />
                 <span className="text-sm">{feature}</span>
               </div>
             ))}

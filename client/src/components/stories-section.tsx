@@ -131,21 +131,21 @@ export default function StoriesSection() {
         Stories от Rich
       </h2>
       
-      <div className="grid grid-cols-4 gap-4 pb-4">
+      <div className="flex space-x-4 overflow-x-auto pb-4 scrollbar-hide">
         {displayStories.map((story) => (
           <div 
             key={story.id}
-            className="text-center cursor-pointer group" 
+            className="flex-shrink-0 w-20 text-center cursor-pointer group" 
             onClick={() => handleStoryClick(story)}
           >
-            <div className="story-ring mb-2 group-hover:animate-pulse mx-auto">
+            <div className="story-ring mb-2 group-hover:animate-pulse">
               <img 
                 src={story.imageUrl} 
                 alt={story.title} 
                 className="rounded-full object-cover group-hover:scale-110 transition-transform"
               />
             </div>
-            <p className="text-xs text-gray-300 group-hover:text-rich-gold transition-colors leading-tight">
+            <p className="text-xs text-gray-300 group-hover:text-rich-gold transition-colors leading-tight break-words">
               {story.title}
             </p>
           </div>

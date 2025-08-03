@@ -14,11 +14,11 @@ export default function BottomNavigation() {
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 bg-rich-black border-t border-rich-gold/20 z-50">
-      <div className="flex justify-around py-2">
+      <div className="flex justify-around py-2 px-2">
         {navItems.map((item) => (
           <button
             key={item.path}
-            className={`flex flex-col items-center transition-colors min-w-0 ${
+            className={`flex flex-col items-center transition-colors flex-1 min-w-0 px-1 ${
               location === item.path 
                 ? "text-rich-gold" 
                 : "text-gray-400 hover:text-rich-gold"
@@ -26,7 +26,7 @@ export default function BottomNavigation() {
             onClick={() => setLocation(item.path)}
           >
             <i className={`${item.icon} text-lg mb-1`}></i>
-            <span className="text-xs text-center leading-tight">{item.label}</span>
+            <span className="text-xs text-center leading-none max-w-full break-words">{item.label}</span>
           </button>
         ))}
       </div>
