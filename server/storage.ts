@@ -317,11 +317,40 @@ export class DatabaseStorage implements IStorage {
     return story;
   }
 
+  async createStory(storyData: InsertStory): Promise<Story> {
+    const [story] = await db.insert(stories).values(storyData).returning();
+    return story;
+  }
+
   async incrementStoryViews(id: string): Promise<void> {
     await db
       .update(stories)
-      .set({ viewCount: sql`${stories.viewCount} + 1` })
+      .set({ views: sql`${stories.views} + 1` })
       .where(eq(stories.id, id));
+  }
+
+  async createPartner(partnerData: any): Promise<Partner> {
+    const [partner] = await db.insert(partners).values(partnerData).returning();
+    return partner;
+  }
+
+  // Achievements
+  async getUserAchievements(userId: string): Promise<any[]> {
+    const result = await db
+      .select()
+      .from(userAchievements)
+      .where(eq(userAchievements.userId, userId))
+      .orderBy(desc(userAchievements.achievedAt));
+    
+    return result;
+  }
+
+  async addUserAchievement(userId: string, achievementType: string, data: any = {}): Promise<void> {
+    await db.insert(userAchievements).values({
+      userId,
+      achievementType,
+      data: JSON.stringify(data)
+    });
   }
 
   // Achievements
