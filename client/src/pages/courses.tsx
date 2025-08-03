@@ -21,8 +21,8 @@ export default function Courses() {
           <SectionIntro
             title="Курсы миллионера"
             description="Эксклюзивные обучающие курсы от Rich Besh. Психология успеха, финансовая грамотность и секреты миллионеров."
-            coverImage="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=400&fit=crop"
-            gradient="bg-gradient-to-r from-electric-purple/20 via-neon-pink/20 to-rich-black"
+            coverImage="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?w=800&h=400&fit=crop"
+            gradient=""
             icon="fas fa-graduation-cap"
           />
         </div>
@@ -32,9 +32,9 @@ export default function Courses() {
       <main className="container mx-auto px-4 py-6">
         {isLoading ? (
           <div className="flex justify-center py-8">
-            <Loader2 className="h-8 w-8 animate-spin text-neon-green" />
+            <Loader2 className="h-8 w-8 animate-spin text-rich-gold" />
           </div>
-        ) : courses.length === 0 ? (
+        ) : (courses as any[]).length === 0 ? (
           <div className="text-center py-12">
             <i className="fas fa-graduation-cap text-6xl text-gray-600 mb-4"></i>
             <h2 className="text-xl font-bold text-gray-400 mb-2">Курсы в разработке</h2>
@@ -42,8 +42,8 @@ export default function Courses() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {courses.map((course: any) => (
-              <div key={course.id} className="neubrutalism-card bg-gradient-to-br from-neon-green/20 to-rich-black p-4 rounded-2xl">
+            {(courses as any[]).map((course: any) => (
+              <div key={course.id} className="neubrutalism-card bg-gradient-to-br from-electric-purple/20 to-rich-black p-4 rounded-2xl">
                 <CourseCard course={course} />
               </div>
             ))}

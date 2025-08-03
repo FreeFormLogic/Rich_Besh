@@ -79,7 +79,7 @@ export default function PredictionsPage() {
 
   const getConfidenceColor = (confidence: string) => {
     switch (confidence) {
-      case "high": return "text-neon-green bg-neon-green/20";
+      case "high": return "text-neon-orange bg-neon-orange/20";
       case "medium": return "text-rich-gold bg-rich-gold/20";
       case "low": return "text-gray-400 bg-gray-400/20";
       default: return "text-gray-400 bg-gray-400/20";
@@ -88,7 +88,7 @@ export default function PredictionsPage() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "won": return "text-neon-green";
+      case "won": return "text-neon-orange";
       case "lost": return "text-red-500";
       case "pending": return "text-rich-gold";
       default: return "text-gray-400";
@@ -114,8 +114,8 @@ export default function PredictionsPage() {
           <SectionIntro
             title="Прогнозы Live"
             description="Эксклюзивные прогнозы от профессионалов с проходимостью 87%. Каждый прогноз проверен экспертами и содержит детальный анализ."
-            coverImage="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=800&h=400&fit=crop"
-            gradient="bg-gradient-to-r from-neon-orange/20 via-red-500/20 to-rich-black"
+            coverImage="https://images.unsplash.com/photo-1504593811423-6dd665756598?w=800&h=400&fit=crop"
+            gradient=""
             icon="fas fa-fire"
           />
         </div>

@@ -67,8 +67,8 @@ export default function PartnersPage() {
           <SectionIntro
             title="Партнёры Rich Besh"
             description="Эксклюзивные предложения от проверенных партнёров. Лучшие условия для заработка и роста капитала."
-            coverImage="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=400&fit=crop"
-            gradient="bg-gradient-to-r from-neon-green/20 via-rich-gold/20 to-rich-black"
+            coverImage="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&h=400&fit=crop"
+            gradient=""
             icon="fas fa-handshake"
           />
         </div>

@@ -64,9 +64,10 @@ export default {
         // Rich Besh brand colors
         "rich-gold": "#FFD700",
         "rich-black": "#1A1A1A",
-        "neon-green": "#00FF41",
-        "neon-pink": "#FF1493",
-        "electric-purple": "#8A2BE2",
+        "neon-orange": "#FF7A00",
+        "neon-pink": "#FF006B",
+        "electric-purple": "#8B5DFF",
+        "electric-blue": "#0080FF",
       },
       keyframes: {
         "accordion-down": {

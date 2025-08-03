@@ -84,8 +84,8 @@ export default function ConsultationsPage() {
           <SectionIntro
             title="Личные консультации"
             description="Персональные встречи с Rich Besh. Узнай секреты достижения миллиона и получи индивидуальный план развития."
-            coverImage="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&h=400&fit=crop"
-            gradient="bg-gradient-to-r from-rich-gold/20 via-neon-orange/20 to-rich-black"
+            coverImage="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=400&fit=crop"
+            gradient=""
             icon="fas fa-user-tie"
           />
         </div>

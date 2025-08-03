@@ -27,9 +27,10 @@
   /* Rich Besh brand colors */
   --rich-gold: hsl(51, 100%, 50%);
   --rich-black: hsl(0, 0%, 10%);
-  --neon-green: hsl(141, 100%, 50%);
+  --neon-orange: hsl(28, 100%, 60%);
   --neon-pink: hsl(345, 100%, 60%);
   --electric-purple: hsl(258, 89%, 66%);
+  --electric-blue: hsl(220, 100%, 60%);
 }
 
 .dark {

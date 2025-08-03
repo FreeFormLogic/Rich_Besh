@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Loader2, ShoppingBag, CheckCircle, Clock, XCircle, Download } from "lucide-react";
+import { Loader2, ShoppingBag, Calendar, Download, Star } from "lucide-react";
 import BottomNavigation from "@/components/bottom-navigation";
 import Header from "@/components/header";
 import SectionIntro from "@/components/section-intro";
@@ -8,11 +8,12 @@ interface Purchase {
   id: string;
   type: "prediction" | "course" | "consultation";
   title: string;
+  description: string;
   price: number;
-  status: "delivered" | "pending" | "cancelled" | "available";
   purchaseDate: string;
-  deliveryDate?: string;
+  status: "completed" | "active" | "expired";
   downloadUrl?: string;
+  rating?: number;
 }
 
 export default function PurchasesPage() {
@@ -20,24 +21,14 @@ export default function PurchasesPage() {
     queryKey: ["/api/user/purchases"],
   });
 
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case "delivered": return <CheckCircle className="text-neon-green" size={20} />;
-      case "pending": return <Clock className="text-rich-gold" size={20} />;
-      case "cancelled": return <XCircle className="text-red-500" size={20} />;
-      case "available": return <Download className="text-electric-purple" size={20} />;
-      default: return <Clock className="text-gray-400" size={20} />;
-    }
+  const handleDownload = (purchaseId: string) => {
+    // Download logic
+    console.log("Downloading purchase:", purchaseId);
   };
 
-  const getStatusText = (status: string) => {
-    switch (status) {
-      case "delivered": return "✅ доставлен";
-      case "pending": return "🕓 в ожидании";
-      case "cancelled": return "❌ отменен";
-      case "available": return "📥 доступен";
-      default: return "⏳ обработка";
-    }
+  const handleRate = (purchaseId: string, rating: number) => {
+    // Rating logic
+    console.log("Rating purchase:", purchaseId, rating);
   };
 
   const getTypeIcon = (type: string) => {
@@ -51,7 +42,7 @@ export default function PurchasesPage() {
 
   const getTypeColor = (type: string) => {
     switch (type) {
-      case "prediction": return "border-neon-green/30 bg-neon-green/5";
+      case "prediction": return "border-neon-orange/30 bg-neon-orange/5";
       case "course": return "border-electric-purple/30 bg-electric-purple/5";
       case "consultation": return "border-neon-pink/30 bg-neon-pink/5";
       default: return "border-gray-600/30 bg-gray-800/5";
@@ -77,8 +68,8 @@ export default function PurchasesPage() {
           <SectionIntro
             title="Мои покупки"
             description="История всех покупок: прогнозы, курсы и консультации. Твои инвестиции в успешное будущее."
-            coverImage="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=400&fit=crop"
-            gradient="bg-gradient-to-r from-neon-pink/20 via-electric-purple/20 to-rich-black"
+            coverImage="https://images.unsplash.com/photo-1607400201515-c2c41d0e7dba?w=800&h=400&fit=crop"
+            gradient=""
             icon="fas fa-shopping-bag"
           />
         </div>
@@ -109,26 +100,6 @@ export default function PurchasesPage() {
 }
 
 function PurchaseCard({ purchase }: { purchase: Purchase }) {
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case "delivered": return <CheckCircle className="text-neon-green" size={20} />;
-      case "pending": return <Clock className="text-rich-gold" size={20} />;
-      case "cancelled": return <XCircle className="text-red-500" size={20} />;
-      case "available": return <Download className="text-electric-purple" size={20} />;
-      default: return <Clock className="text-gray-400" size={20} />;
-    }
-  };
-
-  const getStatusText = (status: string) => {
-    switch (status) {
-      case "delivered": return "✅ доставлен";
-      case "pending": return "🕓 в ожидании";
-      case "cancelled": return "❌ отменен";
-      case "available": return "📥 доступен";
-      default: return "⏳ обработка";
-    }
-  };
-
   const getTypeIcon = (type: string) => {
     switch (type) {
       case "prediction": return "⚽";
@@ -140,59 +111,77 @@ function PurchaseCard({ purchase }: { purchase: Purchase }) {
 
   const getTypeColor = (type: string) => {
     switch (type) {
-      case "prediction": return "border-neon-green/30 bg-neon-green/5";
+      case "prediction": return "border-neon-orange/30 bg-neon-orange/5";
       case "course": return "border-electric-purple/30 bg-electric-purple/5";
       case "consultation": return "border-neon-pink/30 bg-neon-pink/5";
       default: return "border-gray-600/30 bg-gray-800/5";
     }
   };
 
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case "completed": return "text-rich-gold";
+      case "active": return "text-electric-blue";
+      case "expired": return "text-gray-500";
+      default: return "text-gray-400";
+    }
+  };
+
   return (
-    <div className={`neubrutalism-card bg-gradient-to-br from-rich-black to-gray-900 p-6 rounded-2xl border-2 ${getTypeColor(purchase.type)} animate-slide-up`}>
+    <div className={`neubrutalism-card bg-gradient-to-br from-rich-black to-gray-900 p-6 rounded-2xl border-2 ${getTypeColor(purchase.type)} hover:border-rich-gold/40 transition-all duration-300`}>
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center space-x-3">
-          <span className="text-2xl">{getTypeIcon(purchase.type)}</span>
+          <div className="text-2xl">{getTypeIcon(purchase.type)}</div>
           <div>
             <h3 className="text-lg font-bold text-white">{purchase.title}</h3>
-            <p className="text-sm text-gray-400">
-              Куплено: {new Date(purchase.purchaseDate).toLocaleDateString("ru-RU")}
-            </p>
-            {purchase.deliveryDate && (
-              <p className="text-sm text-gray-400">
-                Доставлено: {new Date(purchase.deliveryDate).toLocaleDateString("ru-RU")}
-              </p>
-            )}
+            <p className="text-sm text-gray-400">{purchase.description}</p>
           </div>
         </div>
         
         <div className="text-right">
-          <div className="flex items-center space-x-2 mb-2">
-            {getStatusIcon(purchase.status)}
-            <span className="text-sm font-semibold">{getStatusText(purchase.status)}</span>
-          </div>
-          <div className="text-rich-gold font-bold">
-            {purchase.price.toLocaleString()} ₽
+          <div className="text-lg font-bold text-rich-gold">{purchase.price}₽</div>
+          <div className={`text-sm font-semibold ${getStatusColor(purchase.status)}`}>
+            {purchase.status === "completed" ? "Завершено" : 
+             purchase.status === "active" ? "Активно" : "Истекло"}
           </div>
         </div>
       </div>
 
-      {purchase.status === "available" && purchase.downloadUrl && (
-        <button
-          onClick={() => window.open(purchase.downloadUrl, '_blank')}
-          className="w-full bg-gradient-to-r from-electric-purple to-purple-400 text-white font-bold py-3 px-6 rounded-xl hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2"
-        >
-          <Download size={16} />
-          <span>Перейти к материалам</span>
-        </button>
-      )}
-
-      {purchase.status === "pending" && (
-        <div className="bg-rich-gold/10 border border-rich-gold/30 rounded-lg p-3 text-center">
-          <p className="text-rich-gold text-sm">
-            Ожидаем подтверждение. Материалы будут доставлены в ближайшее время.
-          </p>
+      <div className="flex items-center justify-between text-sm text-gray-400 mb-4">
+        <div className="flex items-center space-x-1">
+          <Calendar size={16} />
+          <span>{new Date(purchase.purchaseDate).toLocaleDateString('ru-RU')}</span>
         </div>
-      )}
+        
+        {purchase.rating && (
+          <div className="flex items-center space-x-1">
+            <Star size={16} className="text-rich-gold" />
+            <span className="text-rich-gold">{purchase.rating}/5</span>
+          </div>
+        )}
+      </div>
+
+      <div className="flex space-x-2">
+        {purchase.downloadUrl && (
+          <button 
+            onClick={() => console.log("Download", purchase.id)}
+            className="flex-1 bg-electric-purple/20 border border-electric-purple/40 text-electric-purple font-semibold py-2 px-4 rounded-xl hover:bg-electric-purple/30 transition-all duration-300 flex items-center justify-center space-x-2"
+          >
+            <Download size={16} />
+            <span>Скачать</span>
+          </button>
+        )}
+        
+        {!purchase.rating && purchase.status === "completed" && (
+          <button 
+            onClick={() => console.log("Rate", purchase.id)}
+            className="flex-1 bg-rich-gold/20 border border-rich-gold/40 text-rich-gold font-semibold py-2 px-4 rounded-xl hover:bg-rich-gold/30 transition-all duration-300 flex items-center justify-center space-x-2"
+          >
+            <Star size={16} />
+            <span>Оценить</span>
+          </button>
+        )}
+      </div>
     </div>
   );
 }
