@@ -93,11 +93,11 @@ export default function Home() {
         {/* Stories Section */}
         <StoriesSection />
 
-        {/* Video Proof Feed - Main Content */}
+        {/* Video Proof Feed - Main Content - Takes most space */}
         <VideoProofFeed />
 
-        {/* Bento Grid Layout */}
-        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Quick Access Sections - Compact layout */}
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
           
           {/* Live Predictions Card */}
           <div className="neubrutalism-card bg-gradient-to-br from-rich-black to-gray-900 p-6 rounded-2xl col-span-1 md:col-span-2 lg:col-span-2 animate-float">

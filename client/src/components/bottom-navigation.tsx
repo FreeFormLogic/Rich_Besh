@@ -6,7 +6,8 @@ export default function BottomNavigation() {
   const navItems = [
     { path: "/", icon: "fas fa-home", label: "Главная" },
     { path: "/predictions", icon: "fas fa-chart-line", label: "Прогнозы" },
-    { path: "/courses", icon: "fas fa-graduation-cap", label: "Обучение" },
+    { path: "/trust-management", icon: "fas fa-shield-alt", label: "Раскрутка" },
+    { path: "/courses", icon: "fas fa-graduation-cap", label: "Курсы" },
     { path: "/profile", icon: "fas fa-user", label: "Профиль" },
   ];
 

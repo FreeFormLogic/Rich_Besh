@@ -7,6 +7,7 @@ import TelegramApp from "@/components/telegram-app";
 import Home from "@/pages/home";
 import Predictions from "@/pages/predictions";
 import Courses from "@/pages/courses";
+import TrustManagement from "@/pages/trust-management";
 import Profile from "@/pages/profile";
 import NotFound from "@/pages/not-found";
 
@@ -16,6 +17,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/predictions" component={Predictions} />
       <Route path="/courses" component={Courses} />
+      <Route path="/trust-management" component={TrustManagement} />
       <Route path="/profile" component={Profile} />
       <Route component={NotFound} />
     </Switch>
