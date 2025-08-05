@@ -8,6 +8,15 @@ Rich Besh is a premium Telegram WebApp focused on sports betting predictions, ed
 
 Preferred communication style: Simple, everyday language.
 
+### Rich Besh Integration Requirements
+- **Primary Goal**: Create app that showcases Rich Besh's wealth and luxury lifestyle
+- **Content Sources**: 
+  - Instagram content from richbesh.b-cdn.net/IG/ (with posts_info.csv metadata)
+  - Telegram channel t.me/+Mwbx2HUKDvRkNGI8 for betting wins and proofs
+- **Content Focus**: Rich Besh loves appearing in content showing off his wealth
+- **Design Approach**: Premium luxury aesthetic, no green colors (replaced with orange, blue, purple)
+- **Authentic Data**: Use real Instagram posts, engagement metrics, and betting proofs as success demonstrations
+
 ## System Architecture
 
 ### Frontend Architecture
@@ -24,6 +33,13 @@ Authentication is handled through Telegram's WebApp integration, where user iden
 
 ### Real-time Features
 WebSocket integration enables real-time chat functionality where users can communicate in community channels. The WebSocket server broadcasts messages to all connected clients and persists chat history to the database. Connection management includes automatic reconnection with exponential backoff for reliability.
+
+### Content Integration & Authenticity
+The application showcases authentic Rich Besh content from multiple sources:
+- **Instagram Content**: Real posts from richbesh.b-cdn.net/IG/ with authentic engagement metrics (likes, comments, views)
+- **Telegram Integration**: Live betting wins and proofs from official channel showing real money results
+- **Success Demonstrations**: Luxury lifestyle content (yachts, cars, VIP events, royal meetings) as proof of Rich Besh's wealth
+- **CDN Integration**: Direct content delivery from Rich Besh's CDN for authentic media display
 
 ### Payment Integration
 The application integrates with Telegram's payment system for handling course purchases and prediction sales. Invoice creation and payment status handling are managed through Telegram's native payment APIs, providing a seamless in-app purchase experience.

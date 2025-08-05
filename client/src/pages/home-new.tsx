@@ -5,6 +5,9 @@ import StoriesSection from "@/components/stories-section";
 import BottomNavigation from "@/components/bottom-navigation";
 import SupportButton from "@/components/support-button";
 import Header from "@/components/header";
+import RichContentGallery from "@/components/rich-content-gallery";
+import SuccessProofs from "@/components/success-proofs";
+import TelegramWins from "@/components/telegram-wins";
 
 export default function Home() {
   const { user: telegramUser } = useTelegram();
@@ -29,7 +32,16 @@ export default function Home() {
           {/* Stories Section */}
           <StoriesSection />
 
-          {/* Motivation Wall - Main Content */}
+          {/* Rich Besh Success Proofs - Main Content */}
+          <SuccessProofs />
+
+          {/* Telegram Channel Wins - Real Betting Proofs */}
+          <TelegramWins />
+
+          {/* Rich Besh Instagram Content Gallery */}
+          <RichContentGallery />
+
+          {/* Live Predictions Section */}
           <section className="space-y-6">
             
             {/* Live Predictions Card - Premium Design */}
