@@ -29,62 +29,138 @@ const Stories = () => {
     {
       id: 1,
       type: 'video',
-      url: 'https://richbesh.b-cdn.net/IG/videos/trading_win_1.mp4',
-      thumbnail: 'https://richbesh.b-cdn.net/IG/thumbnails/trading_1.jpg',
-      title: 'Выигрыш +180,000₽ за день',
-      description: 'Показываю как я заработал за один день на Форекс больше чем многие за месяц',
-      duration: 15,
-      ctaText: 'Попробовать трейдинг',
-      ctaLink: 'https://broker-link.com/richbesh',
-      winAmount: '+180,000₽',
+      url: 'https://richbesh.b-cdn.net/TG/9A703ADD-2C56-41CE-BA14-BFF553B28172.MP4',
+      title: 'Заработок на форексе',
+      description: 'Показываю реальную сделку с прибылью. Смотри как я зарабатываю деньги прямо сейчас!',
+      duration: 20,
+      ctaText: 'Начать торговать на Forex',
+      ctaLink: 'https://forexclub.com/richbesh',
+      winAmount: '+125,000₽',
       category: 'trading'
     },
     {
       id: 2,
-      type: 'video', 
-      url: 'https://richbesh.b-cdn.net/IG/videos/lifestyle_1.mp4',
-      thumbnail: 'https://richbesh.b-cdn.net/IG/thumbnails/lifestyle_1.jpg',
-      title: 'Новый Lamborghini Aventador',
-      description: 'Купил новую тачку за свои торговые прибыли. Результат упорной работы!',
-      duration: 12,
-      ctaText: 'Изучить курс трейдинга',
-      ctaLink: '/courses',
-      category: 'lifestyle'
+      type: 'video',
+      url: 'https://richbesh.b-cdn.net/TG/circle%201.mp4',
+      title: 'Бинарные опционы',
+      description: 'Быстрый заработок на бинарных опционах. Показываю точки входа и стратегию.',
+      duration: 15,
+      ctaText: 'Попробовать IQ Option',
+      ctaLink: 'https://iqoption.com/richbesh',
+      winAmount: '+85,000₽',
+      category: 'trading'
     },
     {
       id: 3,
       type: 'video',
-      url: 'https://richbesh.b-cdn.net/IG/videos/trading_win_2.mp4', 
-      thumbnail: 'https://richbesh.b-cdn.net/IG/thumbnails/trading_2.jpg',
-      title: 'Бинарные опционы: +95,000₽',
-      description: 'Разбираю свою стратегию на бинарных опционах. Показываю все сделки в реальном времени',
+      url: 'https://richbesh.b-cdn.net/TG/circle%202.mp4',
+      title: 'Роскошная жизнь',
+      description: 'Результаты моего трейдинга - новая машина и квартира в Дубае',
       duration: 18,
-      ctaText: 'Начать торговать',
-      ctaLink: 'https://iqoption.com/richbesh',
-      winAmount: '+95,000₽',
-      category: 'trading'
+      ctaText: 'Изучить мой курс',
+      ctaLink: '/courses',
+      category: 'lifestyle'
     },
     {
       id: 4,
       type: 'video',
-      url: 'https://richbesh.b-cdn.net/IG/videos/course_promo.mp4',
-      thumbnail: 'https://richbesh.b-cdn.net/IG/thumbnails/course_1.jpg', 
-      title: 'Мой новый курс по трейдингу',
-      description: 'Обучаю всем секретам профитного трейдинга. Уже 500+ учеников получили прибыль!',
-      duration: 20,
-      ctaText: 'Купить курс со скидкой',
-      ctaLink: '/courses',
-      category: 'course'
+      url: 'https://richbesh.b-cdn.net/TG/circle%203.mp4',
+      title: 'Криптовалюты',
+      description: 'Торгую криптой и показываю свои позиции. Большие возможности для заработка!',
+      duration: 22,
+      ctaText: 'Торговать криптой',
+      ctaLink: 'https://binance.com/richbesh',
+      winAmount: '+200,000₽',
+      category: 'trading'
     },
     {
       id: 5,
       type: 'video',
-      url: 'https://richbesh.b-cdn.net/IG/videos/luxury_life.mp4',
-      thumbnail: 'https://richbesh.b-cdn.net/IG/thumbnails/luxury_1.jpg',
-      title: 'Жизнь в Дубае',
-      description: 'Показываю как живу в Дубае благодаря финансовой свободе от трейдинга',
+      url: 'https://richbesh.b-cdn.net/TG/circle%204.mp4',
+      title: 'Успех в трейдинге',
+      description: 'Делюсь секретами прибыльной торговли и психологией успешного трейдера',
+      duration: 25,
+      ctaText: 'Записаться на консультацию',
+      ctaLink: '/consultations',
+      category: 'course'
+    },
+    {
+      id: 6,
+      type: 'video',
+      url: 'https://richbesh.b-cdn.net/TG/circle%205.mp4',
+      title: 'Личный брендинг',
+      description: 'Как я построил свой бренд в трейдинге и стал зарабатывать миллионы',
+      duration: 16,
+      ctaText: 'Получить VIP доступ',
+      ctaLink: '/courses',
+      category: 'lifestyle'
+    },
+    {
+      id: 7,
+      type: 'video',
+      url: 'https://richbesh.b-cdn.net/TG/circle%206.mp4',
+      title: 'Инвестиции',
+      description: 'Показываю свой инвестиционный портфель и стратегии долгосрочного заработка',
+      duration: 19,
+      ctaText: 'Начать инвестировать',
+      ctaLink: 'https://tinkoff.com/richbesh',
+      winAmount: '+350,000₽',
+      category: 'trading'
+    },
+    {
+      id: 8,
+      type: 'video',
+      url: 'https://richbesh.b-cdn.net/TG/circle%207.mp4',
+      title: 'Мотивация',
+      description: 'От нуля до миллионов - моя история успеха в трейдинге',
       duration: 14,
-      ctaText: 'Достичь финансовой свободы',
+      ctaText: 'Начать свой путь',
+      ctaLink: '/courses',
+      category: 'lifestyle'
+    },
+    {
+      id: 9,
+      type: 'video',
+      url: 'https://richbesh.b-cdn.net/TG/circle%208.mp4',
+      title: 'Скальпинг',
+      description: 'Быстрые сделки с большой прибылью. Учу скальпингу на реальных примерах',
+      duration: 12,
+      ctaText: 'Освоить скальпинг',
+      ctaLink: 'https://forexclub.com/richbesh',
+      winAmount: '+95,000₽',
+      category: 'trading'
+    },
+    {
+      id: 10,
+      type: 'video',
+      url: 'https://richbesh.b-cdn.net/TG/E97D113E-0D7D-4268-B08B-CB647C4EAA65.MOV',
+      title: 'Результаты учеников',
+      description: 'Показываю результаты моих учеников - они тоже начали зарабатывать!',
+      duration: 21,
+      ctaText: 'Стать учеником',
+      ctaLink: '/consultations',
+      category: 'course'
+    },
+    {
+      id: 11,
+      type: 'video',
+      url: 'https://richbesh.b-cdn.net/TG/IMG_6817.MP4',
+      title: 'Дневной заработок',
+      description: 'Обычный торговый день - показываю все сделки от начала до конца',
+      duration: 17,
+      ctaText: 'Начать торговать',
+      ctaLink: 'https://iqoption.com/richbesh',
+      winAmount: '+115,000₽',
+      category: 'trading'
+    },
+    {
+      id: 12,
+      type: 'video',
+      url: 'https://richbesh.b-cdn.net/TG/IMG_8764.MOV',
+      title: 'Финансовая свобода',
+      description: 'Что значит быть финансово свободным и как этого достичь через трейдинг',
+      duration: 23,
+      ctaText: 'Достичь свободы',
       ctaLink: '/consultations',
       category: 'lifestyle'
     }
@@ -267,20 +343,46 @@ const Stories = () => {
               {currentStoryData.description}
             </p>
 
-            {/* CTA Button */}
-            <button
-              onClick={() => {
-                if (currentStoryData.ctaLink.startsWith('http')) {
-                  window.open(currentStoryData.ctaLink, '_blank');
-                } else {
-                  navigate(currentStoryData.ctaLink);
-                }
-              }}
-              className="w-full bg-white text-black py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-3 hover:bg-gray-100 transition-colors shadow-xl"
-            >
-              <ExternalLink className="w-5 h-5" />
-              {currentStoryData.ctaText}
-            </button>
+            {/* Partner Offers - Show after watching */}
+            {progress > 90 && (
+              <div className="space-y-3">
+                <div className="bg-gradient-to-r from-blue-600 to-cyan-500 rounded-xl p-4">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                      <span className="text-blue-600 text-sm font-black">IQ</span>
+                    </div>
+                    <div>
+                      <h4 className="text-white font-bold text-sm">IQ Option</h4>
+                      <p className="text-blue-100 text-xs">Депозит от 10$</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => window.open('https://iqoption.com/richbesh')}
+                    className="w-full bg-white text-blue-600 py-2 rounded-lg font-bold text-sm hover:scale-105 transition-all"
+                  >
+                    Начать торговать
+                  </button>
+                </div>
+
+                <div className="bg-gradient-to-r from-orange-600 to-red-500 rounded-xl p-4">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                      <span className="text-orange-600 text-sm font-black">FX</span>
+                    </div>
+                    <div>
+                      <h4 className="text-white font-bold text-sm">ForexClub</h4>
+                      <p className="text-orange-100 text-xs">Бонус $100</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => window.open('https://forexclub.com/richbesh')}
+                    className="w-full bg-white text-orange-600 py-2 rounded-lg font-bold text-sm hover:scale-105 transition-all"
+                  >
+                    Получить бонус
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 

@@ -237,3 +237,12 @@
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(51, 100%, 60%);
 }
+
+/* Hide scrollbar for Stories */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

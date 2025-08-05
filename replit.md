@@ -8,12 +8,13 @@ Rich Besh is a premium Telegram WebApp focused on sports betting predictions, ed
 
 Preferred communication style: Simple, everyday language.
 
-### Recent Updates (December 2024)
-- Переработана тональность контента: убраны упоминания "показухи", заменены на мотивационные тексты
-- Интегрирован реальный контент из richbesh.b-cdn.net/IG/ с данными из posts_info.csv
-- Добавлены новые компоненты: SuccessShowcase, MoneyToolsSection, DepositManagement, PremiumStories
-- Все тексты переписаны в продающем стиле: "Путь к успеху", "Результаты учеников", "Инвестиции в себя"
-- Создана система категоризации контента: lifestyle, success, motivation, luxury, business
+### Recent Updates (August 2025)
+- Реализованы горизонтальные Stories в виде простых кружков без подписей с реальным контентом Rich Besh
+- Интегрированы видео из richbesh.b-cdn.net/TG/ с торговыми результатами и роскошной жизнью
+- Добавлены партнерские предложения после просмотра Stories (IQ Option, ForexClub)
+- Создана страница эксклюзивного контента с категоризацией (стратегии, крипто, обучение, мышление)
+- Убран раздел "Партнеры и спонсоры" - партнерские предложения теперь появляются контекстно
+- Реализован горизонтальный скролл Stories с CSS скрытием скроллбара
 
 ### Rich Besh Integration Requirements
 - **Primary Goal**: Create app that showcases Rich Besh's wealth and luxury lifestyle
