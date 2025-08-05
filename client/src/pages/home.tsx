@@ -1,209 +1,311 @@
-import { useQuery } from "@tanstack/react-query";
-import { Loader2 } from "lucide-react";
-import StoriesSection from "@/components/stories-section";
-import PredictionCard from "@/components/prediction-card";
-import AchievementCard from "@/components/achievement-card";
-import CommunityPoll from "@/components/community-poll";
-import CourseCard from "@/components/course-card";
-import TrustManagement from "@/components/trust-management";
-import PartnersSection from "@/components/partners-section";
-import CommunityChat from "@/components/community-chat";
-// import VideoProofFeed from "@/components/video-proof-feed";
-import BottomNavigation from "@/components/bottom-navigation";
-import SupportButton from "@/components/support-button";
-import { useTelegram } from "@/hooks/use-telegram";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Play, Crown, Zap, TrendingUp, Sparkles, ChevronRight, Star } from 'lucide-react';
+import BottomNavigation from '@/components/bottom-navigation';
 
-export default function Home() {
-  const { user } = useTelegram();
+const Home = () => {
+  const navigate = useNavigate();
 
-  const { data: currentUser, isLoading: userLoading } = useQuery({
-    queryKey: ["/api/user"],
-    enabled: !!user,
-  });
+  const featuredVideos = [
+    {
+      id: 'luxury-lifestyle',
+      title: 'Роскошь как стиль жизни',
+      videoUrl: 'https://richbesh.b-cdn.net/IG/2025-07-21_3681517492775539740.mp4',
+      description: 'Как я живу в Дубае и зарабатываю миллионы',
+      views: '1.2M',
+      duration: '02:15'
+    },
+    {
+      id: 'success-story',
+      title: 'Мой путь к успеху',
+      videoUrl: 'https://richbesh.b-cdn.net/IG/2025-07-23_3683192790368544979.mp4',
+      description: 'От простого парня до миллионера',
+      views: '850K',
+      duration: '03:42'
+    },
+    {
+      id: 'luxury-cars',
+      title: 'Коллекция суперкаров',
+      videoUrl: 'https://richbesh.b-cdn.net/IG/2025-04-26_3619375607072811190.mp4',
+      description: 'Lamborghini, Ferrari и другие игрушки',
+      views: '2.1M',
+      duration: '01:58'
+    }
+  ];
 
-  const { data: predictions = [], isLoading: predictionsLoading } = useQuery({
-    queryKey: ["/api/predictions"],
-  });
-
-  const { data: courses = [], isLoading: coursesLoading } = useQuery({
-    queryKey: ["/api/courses"],
-  });
-
-  const { data: polls = [], isLoading: pollsLoading } = useQuery({
-    queryKey: ["/api/polls"],
-  });
-
-  const { data: partners = [], isLoading: partnersLoading } = useQuery({
-    queryKey: ["/api/partners"],
-  });
-
-  if (userLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-rich-black">
-        <Loader2 className="h-8 w-8 animate-spin text-rich-gold" />
-      </div>
-    );
-  }
+  const features = [
+    {
+      icon: <TrendingUp className="w-8 h-8" />,
+      title: 'Стратегии миллионера',
+      description: 'Проверенные методы заработка от 7-значных доходов',
+      color: 'from-emerald-600 to-green-500'
+    },
+    {
+      icon: <Crown className="w-8 h-8" />,
+      title: 'VIP сопровождение',
+      description: 'Персональное наставничество для избранных',
+      color: 'from-yellow-500 to-orange-500'
+    },
+    {
+      icon: <Sparkles className="w-8 h-8" />,
+      title: 'Эксклюзивная информация',
+      description: 'Инсайды и возможности для элиты',
+      color: 'from-purple-600 to-pink-500'
+    }
+  ];
 
   return (
-    <div className="min-h-screen bg-rich-black text-white pb-20">
-      {/* Header */}
-      <header className="sticky top-0 z-50 glass-effect border-b border-rich-gold/20">
-        <div className="container mx-auto px-4 py-3">
+    <div className="pb-20 bg-gradient-to-b from-black via-gray-900 to-black min-h-screen overflow-hidden">
+      {/* Hero Section */}
+      <div className="relative h-screen overflow-hidden">
+        <video 
+          autoPlay 
+          muted 
+          loop 
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          src="https://richbesh.b-cdn.net/IG/2025-07-21_3681517492775539740.mp4"
+        />
+        
+        {/* Gradient Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40" />
+        
+        {/* Header */}
+        <div className="absolute top-0 left-0 right-0 p-6 z-20">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <div className="story-ring">
-                <img 
-                  src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100" 
-                  alt="Rich Besh Profile" 
-                  className="w-12 h-12 rounded-full object-cover"
-                />
+              <div className="relative">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-yellow-400 via-orange-500 to-yellow-400 p-1 animate-pulse">
+                  <div className="w-full h-full rounded-full bg-black flex items-center justify-center">
+                    <Crown className="w-8 h-8 text-yellow-400" />
+                  </div>
+                </div>
+                <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-black flex items-center justify-center">
+                  <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                </div>
               </div>
               <div>
-                <h1 className="text-xl font-bold text-rich-gold animate-neon-pulse">
-                  {currentUser?.firstName || "Rich Besh"}
-                </h1>
-                <p className="text-sm text-gray-300">
-                  Уровень: {currentUser?.level || "Миллионер"} 💎
-                </p>
+                <h2 className="text-white font-bold text-xl">Rich Besh</h2>
+                <p className="text-yellow-400 text-sm font-medium">Миллионер • Ментор • Lifestyle</p>
+                <div className="flex items-center text-xs text-gray-300 mt-1">
+                  <Star className="w-3 h-3 text-yellow-400 mr-1" />
+                  <span>4.9 • 25K подписчиков</span>
+                </div>
               </div>
             </div>
             
-            <div className="flex items-center space-x-3">
-              <button className="relative text-rich-gold hover:text-white transition-colors">
-                <i className="fas fa-bell text-xl"></i>
-                <span className="absolute -top-2 -right-2 bg-neon-pink text-white text-xs rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
-                  3
-                </span>
-              </button>
-              
-              <div className="flex items-center space-x-2 bg-rich-gold/10 rounded-full px-3 py-1">
-                <i className="fas fa-coins text-rich-gold"></i>
-                <span className="font-bold text-rich-gold">
-                  {currentUser?.balance?.toLocaleString() || "12,450"}
-                </span>
-              </div>
+            <div className="bg-red-500 backdrop-blur-sm px-4 py-2 rounded-full animate-pulse">
+              <span className="text-white font-bold text-sm flex items-center">
+                <div className="w-2 h-2 bg-white rounded-full mr-2 animate-ping"></div>
+                LIVE
+              </span>
             </div>
           </div>
         </div>
-      </header>
 
-      {/* Main Content */}
-      <main className="container mx-auto px-4 py-6 space-y-8">
-        
-        {/* Stories Section */}
-        <StoriesSection />
-
-        {/* Quick Access Sections */}
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          
-          {/* Live Predictions Card - без рамки */}
-          <div className="p-6 col-span-1 md:col-span-2 lg:col-span-2">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-2xl font-bold text-rich-gold flex items-center">
-                <i className="fas fa-chart-line mr-2 animate-pulse"></i>
-                Прогнозы Live
-              </h3>
-              <span className="bg-neon-green/20 text-neon-green px-3 py-1 rounded-full text-sm font-bold animate-pulse">
-                🔥 ГОРЯЧИЕ
+        {/* Main Content */}
+        <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
+          <div className="max-w-2xl">
+            <h1 className="text-6xl font-black text-white mb-6 leading-none tracking-tight">
+              ПУТЬ К
+              <br/>
+              <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent animate-pulse">
+                БОГАТСТВУ
               </span>
-            </div>
+            </h1>
             
-            <div className="overflow-x-auto">
-              <div className="flex space-x-4 pb-4">
-                {predictionsLoading ? (
-                  <div className="flex justify-center py-8 w-full">
-                    <Loader2 className="h-6 w-6 animate-spin text-rich-gold" />
-                  </div>
-                ) : predictions.length === 0 ? (
-                  <div className="text-center py-8 text-gray-400 w-full">
-                    Нет активных прогнозов
-                  </div>
-                ) : (
-                  predictions.map((prediction: any) => (
-                    <div key={prediction.id} className="flex-shrink-0 w-80">
-                      <PredictionCard prediction={prediction} />
-                    </div>
-                  ))
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* Achievement Progress */}
-          <AchievementCard user={currentUser} />
-
-          {/* Community Poll */}
-          <div className="col-span-1">
-            {pollsLoading ? (
-              <div className="neubrutalism-card bg-gradient-to-br from-neon-pink/20 to-rich-black p-6 rounded-2xl flex items-center justify-center">
-                <Loader2 className="h-6 w-6 animate-spin text-neon-pink" />
-              </div>
-            ) : polls.length > 0 ? (
-              <CommunityPoll poll={polls[0]} />
-            ) : (
-              <div className="neubrutalism-card bg-gradient-to-br from-neon-pink/20 to-rich-black p-6 rounded-2xl">
-                <h3 className="text-xl font-bold text-neon-pink mb-4 flex items-center">
-                  <i className="fas fa-poll mr-2"></i>
-                  Опросы
-                </h3>
-                <p className="text-gray-400">Нет активных опросов</p>
-              </div>
-            )}
-          </div>
-
-          {/* Courses Preview */}
-          <div className="neubrutalism-card bg-gradient-to-br from-neon-green/20 to-rich-black p-6 rounded-2xl col-span-1 md:col-span-2 lg:col-span-2">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-2xl font-bold text-neon-green flex items-center">
-                <i className="fas fa-graduation-cap mr-2"></i>
-                Обучение
-              </h3>
-              <button className="text-rich-gold hover:text-white transition-colors">
-                Все курсы <i className="fas fa-arrow-right ml-1"></i>
+            <p className="text-white/90 text-xl mb-8 font-medium leading-relaxed">
+              Узнай секреты luxury lifestyle и научись зарабатывать 
+              <span className="text-yellow-400 font-bold"> миллионы</span> как я
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4">
+              <button 
+                onClick={() => navigate('/predictions')}
+                className="group bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-8 py-5 rounded-2xl font-bold text-lg flex items-center justify-center gap-3 shadow-2xl transform hover:scale-105 transition-all duration-300 hover:shadow-yellow-400/25"
+              >
+                <Play className="w-6 h-6 group-hover:scale-110 transition-transform" />
+                Начать зарабатывать
+                <ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+              </button>
+              
+              <button 
+                onClick={() => navigate('/courses')}
+                className="group bg-black/60 backdrop-blur-md text-white px-8 py-5 rounded-2xl font-bold text-lg flex items-center justify-center gap-3 border border-yellow-400/50 hover:border-yellow-400 transition-all duration-300"
+              >
+                <Crown className="w-6 h-6 text-yellow-400" />
+                VIP курсы
               </button>
             </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {coursesLoading ? (
-                <div className="col-span-2 flex justify-center py-8">
-                  <Loader2 className="h-6 w-6 animate-spin text-neon-green" />
-                </div>
-              ) : courses.length === 0 ? (
-                <div className="col-span-2 text-center py-8 text-gray-400">
-                  Нет доступных курсов
-                </div>
-              ) : (
-                courses.slice(0, 2).map((course: any) => (
-                  <CourseCard key={course.id} course={course} />
-                ))
-              )}
+          </div>
+        </div>
+      </div>
+
+      {/* Premium Stats */}
+      <div className="relative -mt-24 mx-6 z-30">
+        <div className="bg-black/90 backdrop-blur-xl rounded-3xl border border-yellow-400/30 p-8 shadow-2xl">
+          <div className="grid grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="text-4xl font-black bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent mb-2">
+                25K+
+              </div>
+              <div className="text-gray-300 text-sm font-medium">Учеников в элите</div>
+            </div>
+            <div className="text-center border-x border-gray-700/50">
+              <div className="text-4xl font-black bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent mb-2">
+                94%
+              </div>
+              <div className="text-gray-300 text-sm font-medium">Успешных результатов</div>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl font-black bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent mb-2">
+                $5M+
+              </div>
+              <div className="text-gray-300 text-sm font-medium">Заработано учениками</div>
             </div>
           </div>
+        </div>
+      </div>
 
-          {/* Trust Management */}
-          <TrustManagement />
-
-          {/* Partners Section */}
-          <div className="col-span-1 md:col-span-2 lg:col-span-3">
-            {partnersLoading ? (
-              <div className="neubrutalism-card bg-gradient-to-br from-rich-gold/20 to-rich-black p-6 rounded-2xl flex items-center justify-center">
-                <Loader2 className="h-6 w-6 animate-spin text-rich-gold" />
+      {/* Features Section */}
+      <div className="px-6 py-16">
+        <h2 className="text-4xl font-black text-white mb-4 text-center">
+          Почему выбирают
+          <span className="text-yellow-400"> Rich Besh</span>
+        </h2>
+        <p className="text-gray-400 text-center mb-12 text-lg">
+          Эксклюзивные возможности для избранных
+        </p>
+        
+        <div className="space-y-6 max-w-4xl mx-auto">
+          {features.map((feature, index) => (
+            <div 
+              key={index}
+              className="group relative bg-gradient-to-r from-gray-900/80 to-gray-800/80 backdrop-blur-xl rounded-3xl p-8 border border-gray-700/50 hover:border-yellow-400/50 transition-all duration-300 cursor-pointer overflow-hidden"
+            >
+              <div className={`absolute inset-0 bg-gradient-to-r ${feature.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
+              
+              <div className="relative flex items-center gap-6">
+                <div className={`p-4 rounded-2xl bg-gradient-to-r ${feature.color} text-white group-hover:scale-110 transition-transform duration-300`}>
+                  {feature.icon}
+                </div>
+                
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-yellow-400 transition-colors">
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray-300 text-lg leading-relaxed">
+                    {feature.description}
+                  </p>
+                </div>
+                
+                <ChevronRight className="w-8 h-8 text-gray-500 group-hover:text-yellow-400 group-hover:translate-x-2 transition-all duration-300" />
               </div>
-            ) : (
-              <PartnersSection partners={partners} />
-            )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Featured Videos */}
+      <div className="px-6 py-12">
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-4xl font-black text-white">
+            Эксклюзивный контент
+          </h2>
+          <button className="text-yellow-400 hover:text-white transition-colors font-semibold">
+            Смотреть все
+          </button>
+        </div>
+        
+        <div className="space-y-6">
+          {featuredVideos.map((video, index) => (
+            <div 
+              key={video.id}
+              className="group relative bg-gradient-to-r from-gray-900/90 to-gray-800/90 backdrop-blur-xl rounded-3xl overflow-hidden border border-gray-700/50 hover:border-yellow-400/50 transition-all duration-300 cursor-pointer"
+              onClick={() => navigate(`/video/${index + 1}`)}
+            >
+              <div className="flex">
+                <div className="relative w-40 h-28 flex-shrink-0">
+                  <video 
+                    src={video.videoUrl}
+                    className="w-full h-full object-cover"
+                    muted
+                    poster={video.videoUrl.replace('.mp4', '_thumbnail.jpg')}
+                  />
+                  <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                    <div className="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-2xl">
+                      <Play className="w-8 h-8 text-black ml-1" />
+                    </div>
+                  </div>
+                  
+                  <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-1 rounded">
+                    {video.duration}
+                  </div>
+                </div>
+                
+                <div className="flex-1 p-6">
+                  <h3 className="text-white font-bold text-xl mb-2 group-hover:text-yellow-400 transition-colors">
+                    {video.title}
+                  </h3>
+                  <p className="text-gray-300 text-base mb-3 leading-relaxed">
+                    {video.description}
+                  </p>
+                  
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center text-yellow-400 text-sm font-medium">
+                      <Crown className="w-4 h-4 mr-2" />
+                      <span>Премиум контент</span>
+                    </div>
+                    
+                    <div className="text-gray-400 text-sm">
+                      {video.views} просмотров
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Call to Action */}
+      <div className="px-6 pb-16">
+        <div className="relative bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 rounded-3xl p-8 text-center overflow-hidden">
+          <div className="absolute inset-0 bg-black/20"></div>
+          
+          <div className="relative z-10">
+            <h2 className="text-black text-3xl font-black mb-4">
+              Готов стать миллионером?
+            </h2>
+            <p className="text-black/80 text-lg mb-8 font-medium">
+              Присоединяйся к элитному сообществу успешных людей и измени свою жизнь навсегда
+            </p>
+            
+            <div className="space-y-4 max-w-md mx-auto">
+              <button 
+                onClick={() => navigate('/predictions')}
+                className="w-full bg-black text-yellow-400 py-5 rounded-2xl font-bold text-lg flex items-center justify-center gap-3 hover:bg-gray-900 transition-colors shadow-2xl"
+              >
+                <Zap className="w-6 h-6" />
+                Получить VIP прогнозы
+                <ChevronRight className="w-6 h-6" />
+              </button>
+              
+              <button 
+                onClick={() => navigate('/courses')}
+                className="w-full bg-black/20 backdrop-blur-sm text-black py-5 rounded-2xl font-bold text-lg hover:bg-black/30 transition-colors"
+              >
+                Смотреть курсы обучения
+              </button>
+            </div>
           </div>
+        </div>
+      </div>
 
-        </section>
-
-        {/* Community Chat Preview */}
-        <CommunityChat />
-
-      </main>
-
-      <SupportButton />
       <BottomNavigation />
     </div>
   );
-}
+};
+
+export default Home;

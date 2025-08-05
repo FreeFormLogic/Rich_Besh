@@ -1,35 +1,96 @@
-import { useLocation } from "wouter";
+import React from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Home, Target, Award, User } from 'react-feather';
 
-export default function BottomNavigation() {
-  const [location, setLocation] = useLocation();
+const BottomNavigation = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const navItems = [
-    { path: "/predictions", icon: "fas fa-chart-line", label: "Прогнозы" },
-    { path: "/courses", icon: "fas fa-graduation-cap", label: "Курсы" },
-    { path: "/trust-management", icon: "fas fa-shield-alt", label: "Раскрутка" },
-    { path: "/consultations", icon: "fas fa-comments", label: "Консультации" },
-    { path: "/partners", icon: "fas fa-handshake", label: "Партнёры" },
-    { path: "/purchases", icon: "fas fa-shopping-bag", label: "Покупки" },
+    {
+      id: 'home',
+      label: 'Главная',
+      icon: Home,
+      path: '/',
+      gradient: 'from-yellow-400 to-orange-500'
+    },
+    {
+      id: 'predictions',
+      label: 'Прогнозы',
+      icon: Target,
+      path: '/predictions',
+      gradient: 'from-red-500 to-pink-500'
+    },
+    {
+      id: 'success',
+      label: 'Успех',
+      icon: Award,
+      path: '/success',
+      gradient: 'from-green-500 to-emerald-500'
+    },
+    {
+      id: 'profile',
+      label: 'Профиль',
+      icon: User,
+      path: '/profile',
+      gradient: 'from-purple-500 to-indigo-500'
+    }
   ];
 
+  const isActive = (path: string) => {
+    if (path === '/') {
+      return location.pathname === '/';
+    }
+    return location.pathname.startsWith(path);
+  };
+
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-rich-black border-t border-rich-gold/20 z-50">
-      <div className="flex justify-around py-2 px-2">
-        {navItems.map((item) => (
-          <button
-            key={item.path}
-            className={`flex flex-col items-center transition-colors flex-1 min-w-0 px-1 ${
-              location === item.path 
-                ? "text-rich-gold" 
-                : "text-gray-400 hover:text-rich-gold"
-            }`}
-            onClick={() => setLocation(item.path)}
-          >
-            <i className={`${item.icon} text-lg mb-1`}></i>
-            <span className="text-xs text-center leading-none max-w-full break-words">{item.label}</span>
-          </button>
-        ))}
+    <div className="fixed bottom-0 left-0 right-0 z-50">
+      <div className="bg-black/90 backdrop-blur-xl border-t border-gray-800/50">
+        <div className="max-w-md mx-auto px-4 py-2">
+          <div className="flex items-center justify-around">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              const active = isActive(item.path);
+              
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => navigate(item.path)}
+                  className={`flex flex-col items-center p-3 rounded-2xl transition-all duration-300 ${
+                    active 
+                      ? 'scale-110' 
+                      : 'scale-100 hover:scale-105'
+                  }`}
+                >
+                  <div className={`p-3 rounded-2xl transition-all duration-300 ${
+                    active 
+                      ? `bg-gradient-to-r ${item.gradient} shadow-lg` 
+                      : 'bg-gray-800/50 hover:bg-gray-700/50'
+                  }`}>
+                    <Icon 
+                      className={`w-6 h-6 transition-colors ${
+                        active ? 'text-white' : 'text-gray-400'
+                      }`}
+                      strokeWidth={active ? 2.5 : 2}
+                    />
+                  </div>
+                  
+                  <span className={`text-xs font-medium mt-1 transition-colors ${
+                    active 
+                      ? 'text-white' 
+                      : 'text-gray-500'
+                  }`}>
+                    {item.label}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
       </div>
-    </nav>
+    </div>
   );
-}
+};
+
+export default BottomNavigation;
