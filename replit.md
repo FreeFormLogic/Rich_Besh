@@ -8,6 +8,13 @@ Rich Besh is a premium Telegram WebApp focused on sports betting predictions, ed
 
 Preferred communication style: Simple, everyday language.
 
+### Recent Updates (December 2024)
+- Переработана тональность контента: убраны упоминания "показухи", заменены на мотивационные тексты
+- Интегрирован реальный контент из richbesh.b-cdn.net/IG/ с данными из posts_info.csv
+- Добавлены новые компоненты: SuccessShowcase, MoneyToolsSection, DepositManagement, PremiumStories
+- Все тексты переписаны в продающем стиле: "Путь к успеху", "Результаты учеников", "Инвестиции в себя"
+- Создана система категоризации контента: lifestyle, success, motivation, luxury, business
+
 ### Rich Besh Integration Requirements
 - **Primary Goal**: Create app that showcases Rich Besh's wealth and luxury lifestyle
 - **Content Sources**: 
@@ -35,11 +42,12 @@ Authentication is handled through Telegram's WebApp integration, where user iden
 WebSocket integration enables real-time chat functionality where users can communicate in community channels. The WebSocket server broadcasts messages to all connected clients and persists chat history to the database. Connection management includes automatic reconnection with exponential backoff for reliability.
 
 ### Content Integration & Authenticity
-The application showcases authentic Rich Besh content from multiple sources:
-- **Instagram Content**: Real posts from richbesh.b-cdn.net/IG/ with authentic engagement metrics (likes, comments, views)
-- **Telegram Integration**: Live betting wins and proofs from official channel showing real money results
-- **Success Demonstrations**: Luxury lifestyle content (yachts, cars, VIP events, royal meetings) as proof of Rich Besh's wealth
-- **CDN Integration**: Direct content delivery from Rich Besh's CDN for authentic media display
+The application showcases authentic Rich Besh content with updated monetization focus:
+- **Instagram Content**: Real posts from richbesh.b-cdn.net/IG/ with переработанной тональностью на продажи
+- **Telegram Integration**: Live betting wins positioned as "результаты учеников"
+- **Success Demonstrations**: Luxury lifestyle as "инвестиции в себя" и "путь к финансовой свободе" 
+- **CDN Integration**: Direct content delivery with categorized Stories (success, lifestyle, motivation, luxury, business)
+- **Monetization Focus**: All content leads to conversions - прогнозы, курсы, консультации, партнерские программы
 
 ### Payment Integration
 The application integrates with Telegram's payment system for handling course purchases and prediction sales. Invoice creation and payment status handling are managed through Telegram's native payment APIs, providing a seamless in-app purchase experience.
