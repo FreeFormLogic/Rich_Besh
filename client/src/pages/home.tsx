@@ -336,6 +336,9 @@ const Home = () => {
                     src={video.thumbnail}
                     alt={video.title}
                     className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.currentTarget.src = '/attached_assets/image_1754412229756.png';
+                    }}
                   />
                   <div 
                     className="video-play-area absolute inset-0 bg-black/50 flex items-center justify-center cursor-pointer"
