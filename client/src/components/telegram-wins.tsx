@@ -160,11 +160,16 @@ export default function TelegramWins() {
               {/* Play Button for Videos */}
               {win.proofType === "video" && (
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="bg-white/20 backdrop-blur-sm rounded-full p-4 group-hover:scale-110 transition-transform duration-300">
-                    <Play className="text-white w-8 h-8" />
+                  <div className="bg-neon-orange/20 backdrop-blur-sm rounded-full p-4 group-hover:scale-110 transition-transform duration-300 border border-neon-orange/50">
+                    <Play className="text-neon-orange w-8 h-8" />
                   </div>
                 </div>
               )}
+
+              {/* Proof Type Badge */}
+              <div className="absolute bottom-4 right-4 bg-rich-gold/90 text-black px-2 py-1 rounded-full text-xs font-bold">
+                {win.proofType === "screenshot" ? "📸 СКРИН" : win.proofType === "video" ? "🎬 ВИДЕО" : "🔴 LIVE"}
+              </div>
 
               {/* Win Amount Overlay */}
               <div className="absolute bottom-4 left-4 right-4">

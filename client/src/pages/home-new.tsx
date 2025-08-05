@@ -8,6 +8,7 @@ import Header from "@/components/header";
 import RichContentGallery from "@/components/rich-content-gallery";
 import SuccessProofs from "@/components/success-proofs";
 import TelegramWins from "@/components/telegram-wins";
+import DemoVideos from "@/components/demo-videos";
 
 export default function Home() {
   const { user: telegramUser } = useTelegram();
@@ -34,6 +35,9 @@ export default function Home() {
 
           {/* Rich Besh Success Proofs - Main Content */}
           <SuccessProofs />
+
+          {/* Demo Videos - Working Video Examples */}
+          <DemoVideos />
 
           {/* Telegram Channel Wins - Real Betting Proofs */}
           <TelegramWins />

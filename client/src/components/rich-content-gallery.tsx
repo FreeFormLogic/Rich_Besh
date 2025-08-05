@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { Play, Heart, MessageCircle, Eye, Calendar } from "lucide-react";
 import { richInstagramContent, formatNumber, getContentUrl, type RichInstagramPost } from "@/lib/rich-content-data";
+import VideoPlayer from "@/components/video-player";
 
 // Используем реальные данные из Rich Besh Instagram
 const richLifestyleContent = richInstagramContent.slice(0, 8);
 
 export default function RichContentGallery() {
   const [selectedContent, setSelectedContent] = useState<RichInstagramPost | null>(null);
+  const [showVideoPlayer, setShowVideoPlayer] = useState(false);
 
   return (
     <div className="space-y-6">
@@ -24,54 +26,63 @@ export default function RichContentGallery() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {richLifestyleContent.map((content) => (
           <div
-            key={content.id}
+            key={content.post_id}
             className="group relative bg-gradient-to-br from-rich-black to-gray-900 rounded-3xl overflow-hidden border border-rich-gold/30 hover:border-rich-gold/60 transition-all duration-300 cursor-pointer"
-            onClick={() => setSelectedContent(content)}
+            onClick={() => {
+              setSelectedContent(content);
+              if (content.type === "video") {
+                setShowVideoPlayer(true);
+              }
+            }}
           >
             {/* Video/Image Container */}
             <div className="relative aspect-video bg-gray-800 overflow-hidden">
-              {content.type === "video" ? (
-                <>
-                  {/* Real video thumbnail - try to load from CDN first */}
-                  <video 
-                    className="w-full h-full object-cover"
-                    poster="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500&h=300&fit=crop"
-                    onError={(e) => {
-                      // Fallback to luxury image if video fails
-                      const target = e.target as HTMLVideoElement;
-                      target.style.display = 'none';
-                      const img = document.createElement('img');
-                      img.src = 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500&h=300&fit=crop';
-                      img.className = 'w-full h-full object-cover';
-                      target.parentNode?.appendChild(img);
-                    }}
-                  >
-                    <source src={getContentUrl(content.filename)} type="video/mp4" />
-                  </video>
-                  
-                  {/* Play Button Overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/50 transition-all duration-300">
-                    <div className="bg-rich-gold/90 rounded-full p-4 group-hover:scale-110 transition-transform duration-300">
-                      <Play className="text-black w-8 h-8" />
-                    </div>
-                  </div>
-
-                  {/* Live Badge */}
-                  <div className="absolute top-3 left-3 bg-gradient-to-r from-neon-orange to-red-500 text-white px-3 py-1 rounded-full text-sm font-bold animate-pulse">
-                    🔴 REAL RICH
-                  </div>
-                </>
-              ) : (
+              {/* Всегда показываем статичное превью с play кнопкой для видео */}
+              <div 
+                className="w-full h-full bg-cover bg-center relative"
+                style={{
+                  backgroundImage: content.type === "video" 
+                    ? `url('https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600&h=400&fit=crop')`
+                    : `url('${getContentUrl(content.filename)}')`
+                }}
+              >
+                {/* Fallback если изображение не загружается */}
                 <img 
-                  src={getContentUrl(content.filename)}
+                  src={content.type === "image" ? getContentUrl(content.filename) : "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600&h=400&fit=crop"}
                   alt={content.description}
                   className="w-full h-full object-cover"
                   onError={(e) => {
-                    // Fallback to luxury image if CDN fails
-                    (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=500&h=300&fit=crop';
+                    (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600&h=400&fit=crop';
                   }}
                 />
+              </div>
+              
+              {/* Play Button Overlay для видео */}
+              {content.type === "video" && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/60 transition-all duration-300">
+                  <div className="bg-rich-gold/90 rounded-full p-4 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                    <Play className="text-black w-8 h-8" />
+                  </div>
+                </div>
               )}
+
+              {/* Badge */}
+              <div className="absolute top-3 left-3 bg-gradient-to-r from-neon-orange to-red-500 text-white px-3 py-1 rounded-full text-sm font-bold animate-pulse shadow-lg">
+                {content.type === "video" ? "🎬 VIDEO" : "📸 PHOTO"}
+              </div>
+
+              {/* Link to actual content */}
+              <div className="absolute top-3 right-3">
+                <a 
+                  href={getContentUrl(content.filename)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="bg-black/70 backdrop-blur-sm rounded-full p-2 hover:bg-black/90 transition-all duration-300"
+                >
+                  <Eye className="w-4 h-4 text-white" />
+                </a>
+              </div>
             </div>
 
             {/* Content Info */}
@@ -108,8 +119,22 @@ export default function RichContentGallery() {
         ))}
       </div>
 
+      {/* Video Player */}
+      {showVideoPlayer && selectedContent && selectedContent.type === "video" && (
+        <VideoPlayer
+          src={getContentUrl(selectedContent.filename)}
+          poster="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600&h=400&fit=crop"
+          title={`Rich Besh - ${selectedContent.description.slice(0, 50)}...`}
+          description={`${formatNumber(selectedContent.likes)} лайков • ${formatNumber(selectedContent.comments)} комментариев`}
+          onClose={() => {
+            setShowVideoPlayer(false);
+            setSelectedContent(null);
+          }}
+        />
+      )}
+
       {/* Modal for selected content */}
-      {selectedContent && (
+      {selectedContent && !showVideoPlayer && (
         <div 
           className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
           onClick={() => setSelectedContent(null)}
