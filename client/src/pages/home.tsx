@@ -11,25 +11,55 @@ const Home = () => {
       id: 'luxury-lifestyle',
       title: 'Роскошь как стиль жизни',
       videoUrl: 'https://richbesh.b-cdn.net/IG/2025-07-21_3681517492775539740.mp4',
+      thumbnail: 'https://richbesh.b-cdn.net/IG/2024-05-25_3372073464799556629.jpg',
       description: 'Как я живу в Дубае и зарабатываю миллионы',
       views: '1.2M',
       duration: '02:15'
     },
     {
       id: 'success-story',
-      title: 'Мой путь к успеху',
+      title: 'Торговля на миллионы',
       videoUrl: 'https://richbesh.b-cdn.net/IG/2025-07-23_3683192790368544979.mp4',
-      description: 'От простого парня до миллионера',
+      thumbnail: 'https://richbesh.b-cdn.net/IG/2024-05-25_3372073464799556635.jpg',
+      description: 'Показываю крупную сделку в реальном времени',
       views: '850K',
       duration: '03:42'
     },
     {
       id: 'luxury-cars',
-      title: 'Коллекция суперкаров',
+      title: 'Новый Lamborghini за прибыль',
       videoUrl: 'https://richbesh.b-cdn.net/IG/2025-04-26_3619375607072811190.mp4',
-      description: 'Lamborghini, Ferrari и другие игрушки',
+      thumbnail: 'https://richbesh.b-cdn.net/IG/2024-05-25_3372073464799556642.jpg',
+      description: 'Покупаю суперкар на торговые доходы',
       views: '2.1M',
       duration: '01:58'
+    },
+    {
+      id: 'penthouse-tour',
+      title: 'Пентхаус в Дубае',
+      videoUrl: 'https://richbesh.b-cdn.net/IG/videos/penthouse_tour.mp4',
+      thumbnail: 'https://richbesh.b-cdn.net/IG/2024-05-25_3372073464799556648.jpg',
+      description: 'Экскурсия по моей новой квартире за $5M',
+      views: '3.2M',
+      duration: '08:15'
+    },
+    {
+      id: 'psychology',
+      title: 'Психология миллионера',
+      videoUrl: 'https://richbesh.b-cdn.net/IG/videos/psychology.mp4',
+      thumbnail: 'https://richbesh.b-cdn.net/IG/2024-05-25_3372073464799556654.jpg',
+      description: 'Как контролировать эмоции и зарабатывать больше',
+      views: '1.9M',
+      duration: '15:30'
+    },
+    {
+      id: 'private-jet',
+      title: 'Частный самолет и бизнес',
+      videoUrl: 'https://richbesh.b-cdn.net/IG/videos/private_jet.mp4',
+      thumbnail: 'https://richbesh.b-cdn.net/IG/2024-05-25_3372073464799556661.jpg',
+      description: 'Рассказываю о своих инвестициях в авиацию',
+      views: '2.4M',
+      duration: '06:45'
     }
   ];
 
@@ -101,6 +131,39 @@ const Home = () => {
                 LIVE
               </span>
             </div>
+          </div>
+          
+          {/* Stories Section */}
+          <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide mt-6">
+            {[
+              'https://richbesh.b-cdn.net/TG/9A703ADD-2C56-41CE-BA14-BFF553B28172.MP4',
+              'https://richbesh.b-cdn.net/TG/circle%201.mp4',
+              'https://richbesh.b-cdn.net/TG/circle%202.mp4',
+              'https://richbesh.b-cdn.net/TG/circle%203.mp4',
+              'https://richbesh.b-cdn.net/TG/circle%204.mp4',
+              'https://richbesh.b-cdn.net/TG/circle%205.mp4',
+              'https://richbesh.b-cdn.net/TG/circle%206.mp4',
+              'https://richbesh.b-cdn.net/TG/circle%207.mp4',
+              'https://richbesh.b-cdn.net/TG/circle%208.mp4',
+              'https://richbesh.b-cdn.net/TG/E97D113E-0D7D-4268-B08B-CB647C4EAA65.MOV',
+              'https://richbesh.b-cdn.net/TG/IMG_6817.MP4',
+              'https://richbesh.b-cdn.net/TG/IMG_8764.MOV'
+            ].filter(url => url.endsWith('.MP4') || url.endsWith('.MOV') || url.endsWith('.mp4')).map((videoUrl, index) => (
+              <button
+                key={index}
+                onClick={() => navigate('/stories')}
+                className="relative w-20 h-20 flex-shrink-0 rounded-full overflow-hidden border-4 border-yellow-400 p-0.5 hover:scale-110 transition-all duration-300"
+              >
+                <div className="w-full h-full rounded-full overflow-hidden bg-gray-800">
+                  <video
+                    src={videoUrl}
+                    className="w-full h-full object-cover"
+                    muted
+                    playsInline
+                  />
+                </div>
+              </button>
+            ))}
           </div>
         </div>
 
@@ -207,40 +270,7 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Stories Section */}
-      <div className="px-6 py-8">
-        <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
-          {[
-            'https://richbesh.b-cdn.net/TG/9A703ADD-2C56-41CE-BA14-BFF553B28172.MP4',
-            'https://richbesh.b-cdn.net/TG/circle%201.mp4',
-            'https://richbesh.b-cdn.net/TG/circle%202.mp4',
-            'https://richbesh.b-cdn.net/TG/circle%203.mp4',
-            'https://richbesh.b-cdn.net/TG/circle%204.mp4',
-            'https://richbesh.b-cdn.net/TG/circle%205.mp4',
-            'https://richbesh.b-cdn.net/TG/circle%206.mp4',
-            'https://richbesh.b-cdn.net/TG/circle%207.mp4',
-            'https://richbesh.b-cdn.net/TG/circle%208.mp4',
-            'https://richbesh.b-cdn.net/TG/E97D113E-0D7D-4268-B08B-CB647C4EAA65.MOV',
-            'https://richbesh.b-cdn.net/TG/IMG_6817.MP4',
-            'https://richbesh.b-cdn.net/TG/IMG_8764.MOV'
-          ].filter(url => url.endsWith('.MP4') || url.endsWith('.MOV') || url.endsWith('.mp4')).map((videoUrl, index) => (
-            <button
-              key={index}
-              onClick={() => navigate('/stories')}
-              className="relative w-20 h-20 flex-shrink-0 rounded-full overflow-hidden border-4 border-gradient-to-r from-yellow-400 to-orange-500 p-0.5 hover:scale-110 transition-all duration-300"
-            >
-              <div className="w-full h-full rounded-full overflow-hidden bg-gray-800">
-                <video
-                  src={videoUrl}
-                  className="w-full h-full object-cover"
-                  muted
-                  playsInline
-                />
-              </div>
-            </button>
-          ))}
-        </div>
-      </div>
+
 
       {/* Featured Videos */}
       <div className="px-6 py-12">
@@ -262,15 +292,14 @@ const Home = () => {
             <div 
               key={video.id}
               className="group relative bg-gradient-to-r from-gray-900/90 to-gray-800/90 backdrop-blur-xl rounded-3xl overflow-hidden border border-gray-700/50 hover:border-yellow-400/50 transition-all duration-300 cursor-pointer"
-              onClick={() => navigate(`/video/${index + 1}`)}
+              onClick={() => navigate('/exclusive-content')}
             >
               <div className="flex">
                 <div className="relative w-40 h-28 flex-shrink-0">
-                  <video 
-                    src={video.videoUrl}
+                  <img 
+                    src={video.thumbnail}
+                    alt={video.title}
                     className="w-full h-full object-cover"
-                    muted
-                    poster={video.videoUrl.replace('.mp4', '_thumbnail.jpg')}
                   />
                   <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
                     <div className="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-2xl">
