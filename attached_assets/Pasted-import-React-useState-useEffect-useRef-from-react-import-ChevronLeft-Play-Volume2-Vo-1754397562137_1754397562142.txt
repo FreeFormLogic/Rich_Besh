@@ -1,0 +1,136 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { ChevronLeft, Play, Volume2, VolumeX } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+
+interface VideoItem {
+  id: string;
+  title: string;
+  description: string;
+  videoUrl: string;
+  thumbnail?: string;
+  orientation?: 'portrait' | 'landscape';
+}
+
+const videoItems: VideoItem[] = [
+  {
+    id: '1',
+    title: 'Путь к финансовой свободе',
+    description: 'Как я построил успешный бизнес и живу в роскоши',
+    videoUrl: 'https://richbesh.b-cdn.net/IG/2025-08-04_3691990056212267586.mp4',
+    orientation: 'portrait'
+  },
+  {
+    id: '2',
+    title: 'Мой стиль жизни',
+    description: 'Премиальные автомобили, путешествия и успех',
+    videoUrl: 'https://richbesh.b-cdn.net/IG/2025-07-21_3681517492775539740.mp4',
+    orientation: 'portrait'
+  },
+  {
+    id: '3',
+    title: 'Результаты моих учеников',
+    description: 'Истории успеха тех, кто прошел мое обучение',
+    videoUrl: 'https://richbesh.b-cdn.net/IG/2025-07-19_3680433559831940339.mp4',
+    orientation: 'portrait'
+  },
+  {
+    id: '4',
+    title: 'Секреты успешных ставок',
+    description: 'Эксклюзивные стратегии для стабильного дохода',
+    videoUrl: 'https://richbesh.b-cdn.net/IG/2025-07-08_3672283629659014228.mp4',
+    orientation: 'portrait'
+  },
+  {
+    id: '5',
+    title: 'Жизнь без ограничений',
+    description: 'Как я достиг финансовой независимости',
+    videoUrl: 'https://richbesh.b-cdn.net/IG/2025-06-29_3665593209631858696.mp4',
+    orientation: 'portrait'
+  },
+  {
+    id: '6',
+    title: 'Инвестиции в себя',
+    description: 'Почему обучение - лучшая инвестиция',
+    videoUrl: 'https://richbesh.b-cdn.net/IG/2025-06-22_3660677984742886674.mp4',
+    orientation: 'portrait'
+  }
+];
+
+const SuccessLife: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleVideoSelect = (item: VideoItem) => {
+    // Навигация на страницу просмотра видео
+    navigate('/video/' + item.id);
+  };
+
+  return (
+    <div className="p-4">
+      <div className="flex items-center mb-4">
+        <ChevronLeft className="w-6 h-6 text-gray-500 cursor-pointer" onClick={() => navigate(-1)} />
+        <h1 className="text-2xl font-bold ml-2">Успешная жизнь</h1>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {videoItems.map(item => (
+          <VideoCard key={item.id} item={item} onClick={() => handleVideoSelect(item)} />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const VideoCard: React.FC<{ item: VideoItem; onClick: () => void }> = ({ item, onClick }) => {
+  const [thumbnail, setThumbnail] = useState<string>('');
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    // Создаем превью из первого кадра видео
+    const video = document.createElement('video');
+    video.src = item.videoUrl;
+    video.crossOrigin = 'anonymous';
+    video.addEventListener('loadeddata', () => {
+      video.currentTime = 1; // Берем кадр на 1 секунде
+    });
+    video.addEventListener('seeked', () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        setThumbnail(canvas.toDataURL());
+      }
+    });
+  }, [item.videoUrl]);
+
+  return (
+    <div 
+      className="relative rounded-xl overflow-hidden shadow-lg cursor-pointer transform transition-all hover:scale-105"
+      onClick={onClick}
+    >
+      <div className={`relative ${item.orientation === 'portrait' ? 'aspect-[9/16]' : 'aspect-video'}`}>
+        {thumbnail ? (
+          <img 
+            src={thumbnail} 
+            alt={item.title}
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <div className="w-full h-full bg-gradient-to-br from-purple-900 to-purple-600 animate-pulse" />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+          <h3 className="font-bold text-lg mb-1">{item.title}</h3>
+          <p className="text-sm opacity-90 line-clamp-2">{item.description}</p>
+        </div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+            <Play className="w-8 h-8 text-white ml-1" fill="white" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default SuccessLife;

@@ -1,0 +1,104 @@
+```tsx
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { TrendingUp, Star, DollarSign } from 'lucide-react';
+
+const Home = () => {
+  const navigate = useNavigate();
+
+  return (
+    <div>
+      {/* Hero Section */}
+      <div className="relative h-[60vh] overflow-hidden">
+        <video 
+          autoPlay 
+          muted 
+          loop 
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          src="https://richbesh.b-cdn.net/IG/2025-07-21_3681517492775539740.mp4"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+        
+        <div className="absolute bottom-0 left-0 right-0 p-6">
+          <h1 className="text-4xl font-bold text-white mb-2">
+            Измени свою жизнь
+          </h1>
+          <p className="text-white/90 text-lg mb-4">
+            Присоединяйся к успешным людям
+          </p>
+          <button 
+            onClick={() => navigate('/predictions')}
+            className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-3 rounded-full font-semibold flex items-center gap-2 shadow-lg"
+          >
+            Начать зарабатывать
+            <TrendingUp className="w-5 h-5" />
+          </button>
+        </div>
+      </div>
+
+      {/* Quick Stats */}
+      <div className="grid grid-cols-3 gap-4 p-6 -mt-8 relative z-10">
+        <div className="bg-gray-800/80 backdrop-blur-md rounded-xl p-4 text-center">
+          <p className="text-2xl font-bold text-white">15K+</p>
+          <p className="text-gray-400 text-sm">Учеников</p>
+        </div>
+        <div className="bg-gray-800/80 backdrop-blur-md rounded-xl p-4 text-center">
+          <p className="text-2xl font-bold text-green-400">89%</p>
+          <p className="text-gray-400 text-sm">Успешных прогнозов</p>
+        </div>
+        <div className="bg-gray-800/80 backdrop-blur-md rounded-xl p-4 text-center">
+          <p className="text-2xl font-bold text-purple-400">VIP</p>
+          <p className="text-gray-400 text-sm">Доступ 24/7</p>
+        </div>
+      </div>
+
+      {/* Featured Content */}
+      <div className="p-6">
+        <h2 className="text-2xl font-bold text-white mb-4">Почему выбирают меня</h2>
+        <div className="space-y-4">
+          <div className="bg-gradient-to-r from-purple-900/50 to-pink-900/50 rounded-xl p-4">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                <TrendingUp className="w-6 h-6 text-white" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-white font-semibold">Проверенные стратегии</h3>
+                <p className="text-gray-300 text-sm">Только рабочие методы с доказанной эффективностью</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-gradient-to-r from-purple-900/50 to-pink-900/50 rounded-xl p-4">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center">
+                <Star className="w-6 h-6 text-white" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-white font-semibold">VIP сопровождение</h3>
+                <p className="text-gray-300 text-sm">Персональная поддержка и эксклюзивные прогнозы</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-gradient-to-r from-purple-900/50 to-pink-900/50 rounded-xl p-4">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-pink-500 rounded-full flex items-center justify-center">
+                <DollarSign className="w-6 h-6 text-white" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-white font-semibold">Гарантированный результат</h3>
+                <p className="text-gray-300 text-sm">Начни зарабатывать с первого дня</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ...existing code... */}
+    </div>
+  );
+};
+
+export default Home;
+```

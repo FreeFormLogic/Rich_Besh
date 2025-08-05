@@ -1,0 +1,156 @@
+import React, { useState, useEffect } from 'react';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+
+interface Story {
+  id: string;
+  title: string;
+  imageUrl?: string;
+  videoUrl?: string;
+  duration?: number;
+}
+
+const stories: Story[] = [
+  {
+    id: '1',
+    title: 'Утренний анализ рынка',
+    videoUrl: 'https://richbesh.b-cdn.net/IG/2025-08-04_3691640094265248969.mp4',
+    duration: 15
+  },
+  {
+    id: '2',
+    title: 'VIP прогноз дня',
+    imageUrl: 'https://richbesh.b-cdn.net/IG/2025-08-04_3691716951136701955.jpg',
+    duration: 5
+  },
+  {
+    id: '3',
+    title: 'Результаты вчерашних ставок',
+    videoUrl: 'https://richbesh.b-cdn.net/IG/2025-08-04_3691974232277519463.mp4',
+    duration: 10
+  },
+  {
+    id: '4',
+    title: 'Эксклюзивный совет',
+    imageUrl: 'https://richbesh.b-cdn.net/IG/2025-07-23_3683198137687340008.jpg',
+    duration: 5
+  },
+  {
+    id: '5',
+    title: 'Live ставка',
+    videoUrl: 'https://richbesh.b-cdn.net/IG/2025-07-23_3683192790368544979.mp4',
+    duration: 20
+  },
+  {
+    id: '6',
+    title: 'Мотивация дня',
+    videoUrl: 'https://richbesh.b-cdn.net/IG/2025-07-21_3681796527653064475.mp4',
+    duration: 15
+  }
+];
+
+const Stories = () => {
+  const [currentStory, setCurrentStory] = useState(0);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') {
+        nextStory();
+      } else if (e.key === 'ArrowLeft') {
+        prevStory();
+      } else if (e.key === 'Escape') {
+        handleClose();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [currentStory]);
+
+  const nextStory = () => {
+    setCurrentStory((prev) => (prev + 1) % stories.length);
+  };
+
+  const prevStory = () => {
+    setCurrentStory((prev) => (prev - 1 + stories.length) % stories.length);
+  };
+
+  const handleClose = () => {
+    navigate(-1);
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black z-50">
+      <div className="relative h-full">
+        {/* Progress bars */}
+        <div className="absolute top-0 left-0 right-0 flex gap-1 p-2 z-20">
+          {stories.map((_, index) => (
+            <div key={index} className="flex-1 h-1 bg-white/30 rounded-full overflow-hidden">
+              <div 
+                className={`h-full bg-white transition-all duration-300 ${
+                  index < currentStory ? 'w-full' : index === currentStory ? 'animate-progress' : 'w-0'
+                }`}
+                style={{
+                  animationDuration: index === currentStory ? `${story.duration || 5}s` : '0s'
+                }}
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Header */}
+        <div className="absolute top-8 left-0 right-0 flex items-center justify-between p-4 z-20">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 p-0.5">
+              <div className="w-full h-full rounded-full bg-black flex items-center justify-center">
+                <span className="text-white font-bold">RB</span>
+              </div>
+            </div>
+            <div>
+              <p className="text-white font-semibold">Rich Besh</p>
+              <p className="text-white/70 text-sm">Только что</p>
+            </div>
+          </div>
+          <button onClick={handleClose} className="text-white p-2">
+            <X className="w-6 h-6" />
+          </button>
+        </div>
+
+        {/* Story content */}
+        <div className="flex items-center justify-center h-full">
+          {stories[currentStory].videoUrl ? (
+            <video
+              src={stories[currentStory].videoUrl}
+              className="max-w-full max-h-full"
+              autoPlay
+              loop
+              muted
+            />
+          ) : (
+            <img
+              src={stories[currentStory].imageUrl}
+              className="max-w-full max-h-full object-contain"
+              alt={stories[currentStory].title}
+            />
+          )}
+        </div>
+
+        {/* Navigation arrows */}
+        <div className="absolute top-1/2 left-0 right-0 flex justify-between p-4 z-10">
+          <button onClick={prevStory} className="bg-black/50 p-2 rounded-full">
+            <ChevronLeft className="w-6 h-6 text-white" />
+          </button>
+          <button onClick={nextStory} className="bg-black/50 p-2 rounded-full">
+            <ChevronRight className="w-6 h-6 text-white" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Stories;
