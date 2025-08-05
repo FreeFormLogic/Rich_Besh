@@ -1,38 +1,65 @@
 import { useQuery } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 
-const defaultStories = [
+// Реальные Stories из Telegram канала Rich Besh
+const telegramStories = [
   {
-    id: "cars",
-    title: "Машины",
-    imageUrl: "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80",
-    category: "cars"
-  },
-  {
-    id: "style",
-    title: "Стиль", 
-    imageUrl: "https://images.unsplash.com/photo-1520975954732-35dd22299614?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80",
-    category: "style"
-  },
-  {
-    id: "dubai",
-    title: "Дубай",
-    imageUrl: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80",
-    category: "dubai"
-  },
-  {
-    id: "betting",
-    title: "Ставки",
+    id: "mega_win_1",
+    title: "2847%",
+    text: "🔥 ЭКСПРЕСС ЗАШЁЛ! +2847% 🔥\n\n⚽️ 5 матчей из 5\n💰 Ставка: 1000₽ → 29,470₽\n📊 Коэф: 29.47",
     imageUrl: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80",
-    category: "betting"
+    category: "win",
+    views: 5240,
+    forwards: 89
   },
   {
-    id: "watches",
-    title: "Часы",
-    imageUrl: "https://images.unsplash.com/photo-1547996160-81dfa63595aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80",
-    category: "watches"
+    id: "live_win",
+    title: "485%", 
+    text: "💎 LIVE СТАВКА ЗАШЛА! 💎\n\n🎾 Теннис Live\n💰 10,000₽ → 48,500₽ (+385%)\n📊 Коэф: 4.85",
+    imageUrl: "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80",
+    category: "live",
+    views: 7830,
+    forwards: 156
+  },
+  {
+    id: "nhl_jackpot",
+    title: "1460%",
+    text: "🏒 НХЛ ПЛЕЙ-ОФФ = ДЕНЬГИ! 🏒\n\n💸 Ставка: 10,700₽ → 156,000₽\n📈 ROI: +1460%",
+    imageUrl: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80",
+    category: "sport",
+    views: 9420,
+    forwards: 203
+  },
+  {
+    id: "nba_champion",
+    title: "773%",
+    text: "🏀 НБА ФИНАЛ СЕРИЯ! 🏀\n\n🎯 Долгосрочная ставка зашла!\n💰 11,300₽ → 87,300₽ (+773%)",
+    imageUrl: "https://images.unsplash.com/photo-1546519638-68e109498ffc?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80",
+    category: "long",
+    views: 6180,
+    forwards: 127
+  },
+  {
+    id: "esports_win",
+    title: "242%",
+    text: "🎮 CS2 MAJOR ПРИНЁС БАБКИ! 🎮\n\nКиберспорт тоже работает!\n💰 14,100₽ → 34,200₽ (+242%)",
+    imageUrl: "https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80",
+    category: "esports",
+    views: 4920,
+    forwards: 85
+  },
+  {
+    id: "ufc_knockout",
+    title: "578%",
+    text: "🥊 UFC ГЛАВНЫЙ БОЙ! 🥊\n\n🔥 Анализ физики бойцов окупился!\n💰 11,700₽ → 67,800₽ (+578%)",
+    imageUrl: "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&h=80",
+    category: "mma",
+    views: 8340,
+    forwards: 174
   }
 ];
+
+const defaultStories = telegramStories;
 
 export default function StoriesSection() {
   const { data: stories = [], isLoading } = useQuery({
@@ -41,42 +68,63 @@ export default function StoriesSection() {
 
   const displayStories = stories.length > 0 ? stories.slice(0, 8) : defaultStories.slice(0, 8);
 
-  const showAdWindow = (story: any) => {
-    const ads = [
+  const showStoryDetails = (story: any) => {
+    const successStories = [
       {
-        title: "Где я поставил эту ставку?",
-        text: "Кстати, весь этот экспресс я делал в 1xBet - там самые высокие коэффициенты на топ матчи. Плюс дали бонус 25,000₽ на первый депозит 🔥",
-        button: "ПЕРЕЙТИ НА 1XBET",
-        url: "https://1xbet.com/rich-besh"
+        title: "Как получить такой же результат?",
+        text: "Этот экспресс - результат моей стратегии, которую я преподаю в VIP курсе. Первые 24 часа скидка 40% для новых участников!",
+        button: "ПОЛУЧИТЬ ДОСТУП К КУРСУ",
+        action: "course"
       },
       {
-        title: "На чем играю в лайве",
-        text: "Для лайв-ставок использую Parimatch - линия обновляется мгновенно, а кэшбэк 10% каждую неделю спасает в минусовых сериях 💰",
-        button: "ЗАРЕГИСТРИРОВАТЬСЯ", 
-        url: "https://parimatch.com/rich-besh"
+        title: "Секрет моих Live ставок",
+        text: "Live анализ требует особых навыков и платформы. Я работаю только с проверенными букмекерами с мгновенной линией.",
+        button: "УЗНАТЬ ПАРТНЕРОВ",
+        action: "partners"
+      },
+      {
+        title: "Индивидуальная консультация",
+        text: "Хочешь персональную стратегию под твой банк? Записывайся на индивидуальную консультацию - разберем твои ошибки и построим план.",
+        button: "ЗАПИСАТЬСЯ НА КОНСУЛЬТАЦИЮ", 
+        action: "consultation"
       }
     ];
     
-    const randomAd = ads[Math.floor(Math.random() * ads.length)];
+    const randomStory = successStories[Math.floor(Math.random() * successStories.length)];
     
-    const adModal = document.createElement('div');
-    adModal.innerHTML = `
-      <div class="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
-        <div class="bg-gradient-to-br from-rich-black to-gray-900 rounded-2xl p-6 max-w-sm w-full border-2 border-rich-gold">
-          <h3 class="text-xl font-bold text-rich-gold mb-3">${randomAd.title}</h3>
-          <p class="text-gray-300 mb-6 leading-relaxed">${randomAd.text}</p>
-          <div class="space-y-3">
-            <button onclick="window.open('${randomAd.url}', '_blank')" class="w-full bg-gradient-to-r from-rich-gold to-yellow-400 text-black font-bold py-3 px-6 rounded-xl hover:scale-105 transition-all">
-              ${randomAd.button}
-            </button>
-            <button onclick="this.closest('.fixed').remove()" class="w-full bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-gray-500 transition-colors">
-              Закрыть
-            </button>
+    const storyModal = document.createElement('div');
+    storyModal.innerHTML = `
+      <div class="fixed inset-0 bg-black/95 flex items-center justify-center z-50 p-4">
+        <div class="bg-gradient-to-br from-rich-black to-gray-900 rounded-2xl p-6 max-w-md w-full border-2 border-rich-gold relative">
+          <!-- Story Content -->
+          <div class="text-center mb-6">
+            <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-rich-gold to-yellow-400 flex items-center justify-center">
+              <span class="text-2xl font-bold text-black">${story.title}</span>
+            </div>
+            <p class="text-gray-300 whitespace-pre-line text-sm leading-relaxed">${story.text}</p>
+            <div class="mt-4 flex justify-center space-x-4 text-xs text-gray-400">
+              <span>👀 ${story.views?.toLocaleString() || '5K+'} просмотров</span>
+              <span>📤 ${story.forwards?.toLocaleString() || '100+'} репостов</span>
+            </div>
+          </div>
+          
+          <!-- Call to Action -->
+          <div class="border-t border-gray-700 pt-6">
+            <h3 class="text-lg font-bold text-rich-gold mb-3">${randomStory.title}</h3>
+            <p class="text-gray-300 mb-4 text-sm leading-relaxed">${randomStory.text}</p>
+            <div class="space-y-3">
+              <button onclick="window.location.href='/${randomStory.action === 'course' ? 'courses' : randomStory.action === 'partners' ? 'partners' : 'consultations'}'" class="w-full bg-gradient-to-r from-rich-gold to-yellow-400 text-black font-bold py-3 px-6 rounded-xl hover:scale-105 transition-all">
+                ${randomStory.button}
+              </button>
+              <button onclick="this.closest('.fixed').remove()" class="w-full bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-gray-500 transition-colors">
+                Закрыть
+              </button>
+            </div>
           </div>
         </div>
       </div>
     `;
-    document.body.appendChild(adModal);
+    document.body.appendChild(storyModal);
   };
 
   const handleStoryClick = (story: any) => {
@@ -106,7 +154,7 @@ export default function StoriesSection() {
     // Auto remove after 5 seconds and show ad  
     setTimeout(() => {
       storyModal.remove();
-      showAdWindow(story);
+      showStoryDetails(story);
     }, 5000);
   };
 

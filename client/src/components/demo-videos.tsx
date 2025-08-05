@@ -88,13 +88,13 @@ export default function DemoVideos() {
       {/* Header */}
       <div className="text-center mb-8">
         <h2 className="text-3xl font-black text-rich-gold mb-3">
-          🎬 Видео-доказательства Rich Life
+          💎 Эксклюзивный контент Rich Life
         </h2>
         <p className="text-gray-300 text-lg">
-          Реальные видео из жизни Rich Besh: роскошь, инвестиции и lifestyle миллионера
+          Роскошная жизнь Rich Besh: инвестиции, яхты, суперкары и VIP события
         </p>
         <div className="mt-4 inline-flex items-center bg-gradient-to-r from-neon-orange/20 to-red-500/20 px-4 py-2 rounded-full border border-neon-orange/30">
-          <span className="text-neon-orange font-semibold text-sm">🔴 Демонстрационные видео загружаются корректно</span>
+          <span className="text-neon-orange font-semibold text-sm">🔥 Премиум контент доступен сейчас</span>
         </div>
       </div>
 
@@ -126,7 +126,7 @@ export default function DemoVideos() {
 
               {/* Video Badge */}
               <div className="absolute top-3 left-3 bg-gradient-to-r from-neon-orange to-red-500 text-white px-3 py-1 rounded-full text-sm font-bold animate-pulse shadow-lg">
-                🎬 ВИДЕО РАБОТАЕТ
+                🔥 ЭКСКЛЮЗИВ
               </div>
 
               {/* Category Badge */}
@@ -175,27 +175,27 @@ export default function DemoVideos() {
       <div className="bg-gradient-to-r from-rich-black via-gray-900 to-rich-black rounded-3xl p-8 border border-rich-gold/30">
         <div className="text-center">
           <h3 className="text-2xl font-bold text-rich-gold mb-4">
-            🎯 Демонстрация видео-функций
+            💰 Твой путь к Rich Life
           </h3>
           <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
-            Это демонстрационные видео для показа функциональности. Реальный контент Rich Besh будет загружаться с его CDN при корректной настройке.
+            Хочешь такую же жизнь? Изучай мои курсы, используй партнерские сервисы и получай персональные консультации. Результат гарантирован.
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
             <div className="bg-rich-gold/10 rounded-xl p-4">
-              <div className="text-rich-gold font-bold text-lg">✅</div>
-              <div className="text-white text-sm font-semibold">Видеоплеер</div>
+              <div className="text-rich-gold font-bold text-lg">🎓</div>
+              <div className="text-white text-sm font-semibold">Курсы</div>
             </div>
             <div className="bg-electric-blue/10 rounded-xl p-4">
-              <div className="text-electric-blue font-bold text-lg">✅</div>
-              <div className="text-white text-sm font-semibold">Превью</div>
+              <div className="text-electric-blue font-bold text-lg">🤝</div>
+              <div className="text-white text-sm font-semibold">Партнеры</div>
             </div>
             <div className="bg-neon-pink/10 rounded-xl p-4">
-              <div className="text-neon-pink font-bold text-lg">✅</div>
-              <div className="text-white text-sm font-semibold">Метрики</div>
+              <div className="text-neon-pink font-bold text-lg">💬</div>
+              <div className="text-white text-sm font-semibold">Консультации</div>
             </div>
             <div className="bg-neon-orange/10 rounded-xl p-4">
-              <div className="text-neon-orange font-bold text-lg">✅</div>
-              <div className="text-white text-sm font-semibold">CDN Ready</div>
+              <div className="text-neon-orange font-bold text-lg">💎</div>
+              <div className="text-white text-sm font-semibold">Rich Life</div>
             </div>
           </div>
         </div>
