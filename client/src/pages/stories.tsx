@@ -190,6 +190,7 @@ const Stories = () => {
         if (video.currentTime >= video.duration) {
           setShowPartnerAd(true);
           setIsPlaying(false);
+          setProgress(100);
         }
       }
     };

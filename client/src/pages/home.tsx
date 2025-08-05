@@ -11,7 +11,7 @@ const Home = () => {
       id: 'luxury-lifestyle',
       title: 'Роскошь как стиль жизни',
       videoUrl: 'https://richbesh.b-cdn.net/IG/2025-07-21_3681517492775539740.mp4',
-      thumbnail: 'https://richbesh.b-cdn.net/IG/2024-05-25_3372073464799556629.jpg',
+      thumbnail: '/attached_assets/image_1754412229756.png',
       description: 'Как я живу в Дубае и зарабатываю миллионы',
       views: '1.2M',
       duration: '02:15'
@@ -134,7 +134,7 @@ const Home = () => {
           </div>
           
           {/* Stories Section */}
-          <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide mt-8 mb-4">
+          <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide mt-4 mb-8">
             {[
               'https://richbesh.b-cdn.net/TG/9A703ADD-2C56-41CE-BA14-BFF553B28172.MP4',
               'https://richbesh.b-cdn.net/TG/circle%201.mp4',
@@ -152,7 +152,7 @@ const Home = () => {
               <button
                 key={index}
                 onClick={() => navigate('/stories')}
-                className="relative w-20 h-20 flex-shrink-0 rounded-full overflow-hidden border-4 border-yellow-400 p-0.5 hover:scale-110 transition-all duration-300"
+                className="relative w-20 h-20 flex-shrink-0 rounded-full overflow-visible border-4 border-yellow-400 p-0.5 hover:scale-110 transition-all duration-300"
               >
                 <div className="w-full h-full rounded-full overflow-hidden bg-black">
                   <video
@@ -268,9 +268,35 @@ const Home = () => {
             </div>
           ))}
         </div>
+        
+        {/* Mentorship Block */}
+        <div className="mt-16">
+          <div className="bg-gradient-to-r from-purple-900/50 to-pink-900/50 backdrop-blur-xl rounded-3xl p-8 border border-purple-500/30">
+            <div className="text-center">
+              <div className="w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Crown className="w-10 h-10 text-white" />
+              </div>
+              <h2 className="text-3xl font-black text-white mb-4">
+                Персональное менторство
+              </h2>
+              <p className="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
+                Индивидуальная работа с Rich Besh. Стратегии, которые превратят тебя в миллионера
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button 
+                  onClick={() => navigate('/consultations')}
+                  className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-lg font-bold rounded-full hover:scale-105 transform transition-all duration-300"
+                >
+                  Записаться на менторство
+                </button>
+                <button className="px-8 py-4 border-2 border-purple-400 text-purple-400 text-lg font-bold rounded-full hover:bg-purple-400 hover:text-white transition-all duration-300">
+                  Узнать больше
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-
-
 
       {/* Featured Videos */}
       <div className="px-6 py-12">
