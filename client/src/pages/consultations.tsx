@@ -1,232 +1,341 @@
-import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
-import { MessageCircle, Clock, CheckCircle, Calendar } from "lucide-react";
-import { apiRequest } from "@/lib/queryClient";
-import { useTelegram } from "@/hooks/use-telegram";
-import { useToast } from "@/hooks/use-toast";
-import BottomNavigation from "@/components/bottom-navigation";
-import Header from "@/components/header";
-import SectionIntro from "@/components/section-intro";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ArrowLeft, Crown, MessageCircle, Video, Phone, Star, Calendar, Clock, User, CheckCircle2, Zap, Target } from 'lucide-react';
+import BottomNavigation from '@/components/bottom-navigation';
 
-export default function ConsultationsPage() {
-  const { user } = useTelegram();
-  const { toast } = useToast();
-  
-  const [formData, setFormData] = useState({
-    topic: "general",
-    duration: "60",
-    date: "",
-    time: "",
-    details: ""
-  });
+const Consultations = () => {
+  const navigate = useNavigate();
+  const [selectedPackage, setSelectedPackage] = useState<string | null>(null);
 
-  const submitMutation = useMutation({
-    mutationFn: async (data: typeof formData) => {
-      await apiRequest("POST", "/api/consultations", data);
+  const consultationPackages = [
+    {
+      id: 'personal',
+      title: 'Личная консультация',
+      icon: <User className="w-8 h-8" />,
+      duration: '60 минут',
+      price: 15000,
+      originalPrice: 25000,
+      gradient: 'from-yellow-400 to-orange-500',
+      features: [
+        'Персональный разбор торгового счета',
+        'Анализ ваших ошибок и слабых мест',
+        'Индивидуальная стратегия на 3 месяца',
+        'Рекомендации по брокерам и инструментам',
+        'Запись консультации для повторного просмотра'
+      ],
+      description: 'Один на один с Rich Besh. Получите персональные рекомендации и стратегию успеха.',
+      popular: true
     },
-    onSuccess: () => {
-      toast({
-        title: "Консультация забронирована!",
-        description: "Ожидай подтверждение в Telegram",
-      });
-      setFormData({ topic: "general", duration: "60", date: "", time: "", details: "" });
+    {
+      id: 'vip',
+      title: 'VIP наставничество',
+      icon: <Crown className="w-8 h-8" />,
+      duration: '30 дней',
+      price: 49000,
+      originalPrice: 99000,
+      gradient: 'from-purple-500 to-pink-600',
+      features: [
+        'Ежедневная поддержка в Telegram',
+        '4 личные консультации по 60 минут',
+        'Разбор каждой вашей сделки',
+        'Доступ к приватному VIP каналу',
+        'Сигналы и рекомендации в реальном времени',
+        'Гарантия результата или возврат денег'
+      ],
+      description: 'Полное погружение в мир профессионального трейдинга с личным наставником.',
+      popular: false
     },
-    onError: () => {
-      toast({
-        title: "Ошибка",
-        description: "Не удалось забронировать консультацию",
-        variant: "destructive",
-      });
+    {
+      id: 'express',
+      title: 'Экспресс-анализ',
+      icon: <Zap className="w-8 h-8" />,
+      duration: '30 минут',
+      price: 7500,
+      originalPrice: 12000,
+      gradient: 'from-red-500 to-orange-600',
+      features: [
+        'Быстрый анализ вашего портфеля',
+        'Конкретные рекомендации по улучшению',
+        'Ответы на 3 главных вопроса',
+        'Письменный отчет с выводами'
+      ],
+      description: 'Быстрое решение конкретных проблем в трейдинге.',
+      popular: false
     }
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.date || !formData.time) {
-      toast({
-        title: "Заполните форму",
-        description: "Дата и время обязательны",
-        variant: "destructive",
-      });
-      return;
-    }
-    submitMutation.mutate(formData);
-  };
-
-  const topics = [
-    { id: "general", name: "Путь миллионера", price: "5,000₽", description: "Как я заработал первый миллион и как можешь ты" },
-    { id: "bankroll", name: "Управление капиталом", price: "7,500₽", description: "Инвестиции, активы и пассивный доход" },
-    { id: "analytics", name: "Психология богатства", price: "10,000₽", description: "Мышление миллионера и преодоление барьеров" },
-    { id: "custom", name: "VIP наставничество", price: "15,000₽", description: "Персональный план достижения финансовой свободы" }
   ];
 
-  const durations = [
-    { id: "30", name: "30 минут", multiplier: 0.7 },
-    { id: "60", name: "60 минут", multiplier: 1.0 },
-    { id: "90", name: "90 минут", multiplier: 1.4 }
+  const testimonials = [
+    {
+      name: 'Александр К.',
+      profit: '+240,000₽',
+      period: 'за 2 месяца',
+      text: 'После консультации с Rich Besh мой трейдинг кардинально изменился. Теперь торгую осознанно и прибыльно.',
+      avatar: '👨‍💼'
+    },
+    {
+      name: 'Мария С.',
+      profit: '+180,000₽',
+      period: 'за месяц',
+      text: 'VIP наставничество - лучшие инвестиции в мою жизнь. Rich научил меня зарабатывать стабильно.',
+      avatar: '👩‍💼'
+    },
+    {
+      name: 'Дмитрий В.',
+      profit: '+95,000₽',
+      period: 'за 3 недели',
+      text: 'Экспресс-анализ помог мне найти ошибки в стратегии. Результат не заставил себя ждать.',
+      avatar: '👨‍💻'
+    }
   ];
 
-  const features = [
-    "Персональный план развития к миллиону",
-    "Разбор источников дохода и инвестиций", 
-    "Психология успеха и преодоление барьеров",
-    "Поддержка в чате и контроль прогресса"
+  const stats = [
+    { label: 'Консультаций', value: '1,200+', icon: '👥' },
+    { label: 'Довольных клиентов', value: '98%', icon: '⭐' },
+    { label: 'Средняя прибыль', value: '+180%', icon: '📈' },
+    { label: 'Лет опыта', value: '8+', icon: '🏆' }
+  ];
+
+  const timeSlots = [
+    { time: '10:00', available: true },
+    { time: '12:00', available: false },
+    { time: '14:00', available: true },
+    { time: '16:00', available: true },
+    { time: '18:00', available: false },
+    { time: '20:00', available: true }
   ];
 
   return (
-    <div className="min-h-screen bg-rich-black text-white pb-20">
+    <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black text-white pb-20">
       {/* Header */}
-      <Header />
-      
-      {/* Section Introduction */}
-      <div className="pt-20">
-        <div className="container mx-auto px-4 py-6">
-          <SectionIntro
-            title="Личные консультации"
-            description="Персональные встречи с Rich Besh. Узнай секреты достижения миллиона и получи индивидуальный план развития."
-            coverImage="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=400&fit=crop"
-            gradient=""
-            icon="fas fa-user-tie"
-          />
+      <div className="sticky top-0 z-50 bg-black/90 backdrop-blur-xl border-b border-yellow-400/20">
+        <div className="flex items-center gap-4 p-6">
+          <button 
+            onClick={() => navigate(-1)}
+            className="p-2 rounded-full bg-yellow-400/20 hover:bg-yellow-400/30 transition-colors"
+          >
+            <ArrowLeft className="w-6 h-6 text-yellow-400" />
+          </button>
+          
+          <div>
+            <h1 className="text-2xl font-black text-white">Консультации</h1>
+            <p className="text-gray-400">Персональные рекомендации от Rich Besh</p>
+          </div>
         </div>
       </div>
 
-      <main className="container mx-auto px-4 py-6 space-y-8">
-        {/* Features */}
-        <section className="neubrutalism-card bg-gradient-to-br from-rich-black to-gray-900 p-6 rounded-2xl">
-          <h2 className="text-xl font-bold text-rich-gold mb-4">Что входит в консультацию:</h2>
-          <div className="grid md:grid-cols-2 gap-3">
-            {features.map((feature, index) => (
-              <div key={index} className="flex items-center text-gray-300">
-                <CheckCircle className="text-rich-gold mr-3" size={16} />
-                <span className="text-sm">{feature}</span>
+      <div className="p-6">
+        {/* Hero Section */}
+        <div className="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-3xl p-8 mb-8 text-center">
+          <div className="w-20 h-20 bg-black/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span className="text-3xl font-black text-black">RB</span>
+          </div>
+          
+          <h2 className="text-black text-2xl font-black mb-4">
+            Личная работа с Rich Besh
+          </h2>
+          
+          <p className="text-black/80 text-lg mb-6">
+            Получите персональные рекомендации от успешного трейдера
+            с 8-летним опытом и прибылью более 50 миллионов рублей
+          </p>
+
+          <div className="grid grid-cols-2 gap-4">
+            {stats.map((stat, index) => (
+              <div key={index} className="bg-black/20 rounded-2xl p-4">
+                <div className="text-2xl mb-1">{stat.icon}</div>
+                <div className="text-black text-xl font-black">{stat.value}</div>
+                <div className="text-black/70 text-sm">{stat.label}</div>
               </div>
             ))}
           </div>
-        </section>
-
-        {/* Booking Form */}
-        <section className="neubrutalism-card bg-gradient-to-br from-rich-black to-gray-900 p-6 rounded-2xl">
-          <h2 className="text-xl font-bold text-rich-gold mb-6">Забронировать консультацию</h2>
-          
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Topic Selection */}
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-3">
-                Тема консультации
-              </label>
-              <div className="grid md:grid-cols-2 gap-3">
-                {topics.map((topic) => (
-                  <button
-                    key={topic.id}
-                    type="button"
-                    onClick={() => setFormData({...formData, topic: topic.id})}
-                    className={`p-4 rounded-xl border text-left transition-all ${
-                      formData.topic === topic.id
-                        ? "border-rich-gold bg-rich-gold/10 text-rich-gold"
-                        : "border-gray-600 bg-white/5 text-gray-300 hover:border-rich-gold/50"
-                    }`}
-                  >
-                    <h3 className="font-semibold mb-1">{topic.name}</h3>
-                    <p className="text-xs text-gray-400 mb-2">{topic.description}</p>
-                    <span className="text-sm font-bold text-neon-green">{topic.price}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Duration */}
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-3">
-                Длительность
-              </label>
-              <div className="flex space-x-3">
-                {durations.map((duration) => (
-                  <button
-                    key={duration.id}
-                    type="button"
-                    onClick={() => setFormData({...formData, duration: duration.id})}
-                    className={`flex-1 p-3 rounded-xl border transition-all ${
-                      formData.duration === duration.id
-                        ? "border-rich-gold bg-rich-gold/10 text-rich-gold"
-                        : "border-gray-600 bg-white/5 text-gray-300 hover:border-rich-gold/50"
-                    }`}
-                  >
-                    <Clock size={16} className="mx-auto mb-1" />
-                    <div className="text-sm font-semibold">{duration.name}</div>
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Date & Time */}
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Дата *
-                </label>
-                <input
-                  type="date"
-                  value={formData.date}
-                  onChange={(e) => setFormData({...formData, date: e.target.value})}
-                  min={new Date().toISOString().split('T')[0]}
-                  className="w-full bg-white/10 rounded-lg px-4 py-3 text-white border border-gray-600 focus:border-rich-gold focus:outline-none transition-colors"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Время *
-                </label>
-                <select
-                  value={formData.time}
-                  onChange={(e) => setFormData({...formData, time: e.target.value})}
-                  className="w-full bg-white/10 rounded-lg px-4 py-3 text-white border border-gray-600 focus:border-rich-gold focus:outline-none transition-colors"
-                  required
-                >
-                  <option value="">Выберите время</option>
-                  <option value="10:00">10:00</option>
-                  <option value="12:00">12:00</option>
-                  <option value="14:00">14:00</option>
-                  <option value="16:00">16:00</option>
-                  <option value="18:00">18:00</option>
-                  <option value="20:00">20:00</option>
-                </select>
-              </div>
-            </div>
-
-            {/* Additional Details */}
-            <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">
-                Дополнительная информация
-              </label>
-              <textarea
-                value={formData.details}
-                onChange={(e) => setFormData({...formData, details: e.target.value})}
-                placeholder="Расскажи подробнее о своей ситуации..."
-                rows={3}
-                className="w-full bg-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-400 border border-gray-600 focus:border-rich-gold focus:outline-none transition-colors resize-none"
-              />
-            </div>
-
-            <button
-              type="submit"
-              disabled={submitMutation.isPending}
-              className="w-full bg-gradient-to-r from-rich-gold to-yellow-400 text-black font-bold py-4 px-6 rounded-xl hover:scale-105 transition-all duration-300 disabled:opacity-50 animate-pulse-glow"
-            >
-              {submitMutation.isPending ? "Бронируем..." : "Забронировать консультацию"}
-            </button>
-          </form>
-        </section>
-
-        {/* Pricing Info */}
-        <div className="text-center text-xs text-gray-500">
-          <p>💡 Оплата после подтверждения времени. Возможна отмена за 24 часа до встречи.</p>
         </div>
-      </main>
+
+        {/* Consultation Packages */}
+        <div className="mb-8">
+          <h3 className="text-2xl font-black text-white mb-6 text-center">
+            Выберите формат консультации
+          </h3>
+          
+          <div className="space-y-6">
+            {consultationPackages.map((pkg) => (
+              <div 
+                key={pkg.id}
+                className={`relative bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-xl rounded-3xl overflow-hidden border-2 transition-all duration-300 ${
+                  selectedPackage === pkg.id
+                    ? 'border-yellow-400 scale-105'
+                    : 'border-gray-700/50 hover:border-yellow-400/50'
+                }`}
+              >
+                {pkg.popular && (
+                  <div className="absolute top-4 right-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-3 py-1 rounded-full text-sm font-bold flex items-center gap-2">
+                    <Star className="w-4 h-4" />
+                    ПОПУЛЯРНО
+                  </div>
+                )}
+
+                <div className="p-6">
+                  <div className={`w-16 h-16 bg-gradient-to-r ${pkg.gradient} rounded-2xl flex items-center justify-center mb-4`}>
+                    {pkg.icon}
+                  </div>
+
+                  <h4 className="text-2xl font-bold text-white mb-2">{pkg.title}</h4>
+                  <p className="text-gray-300 mb-4">{pkg.description}</p>
+
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="flex items-center gap-2 text-gray-400">
+                      <Clock className="w-5 h-5" />
+                      <span>{pkg.duration}</span>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2 mb-6">
+                    {pkg.features.map((feature, index) => (
+                      <div key={index} className="flex items-center gap-3">
+                        <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0" />
+                        <span className="text-gray-300">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="flex items-center gap-3">
+                        <span className="text-3xl font-black text-white">
+                          {pkg.price.toLocaleString()}₽
+                        </span>
+                        <span className="text-gray-500 line-through text-lg">
+                          {pkg.originalPrice.toLocaleString()}₽
+                        </span>
+                      </div>
+                      <div className="text-sm text-gray-400">
+                        Скидка {Math.round((1 - pkg.price / pkg.originalPrice) * 100)}%
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={() => setSelectedPackage(pkg.id)}
+                      className={`px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 ${
+                        selectedPackage === pkg.id
+                          ? 'bg-yellow-400 text-black scale-105'
+                          : `bg-gradient-to-r ${pkg.gradient} text-white hover:scale-105`
+                      }`}
+                    >
+                      {selectedPackage === pkg.id ? 'Выбрано' : 'Выбрать'}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Booking Section */}
+        {selectedPackage && (
+          <div className="mb-8">
+            <div className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-xl rounded-3xl p-6 border border-gray-700/50">
+              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-3">
+                <Calendar className="w-6 h-6 text-yellow-400" />
+                Выберите удобное время
+              </h3>
+
+              <div className="grid grid-cols-3 gap-3 mb-6">
+                {timeSlots.map((slot, index) => (
+                  <button
+                    key={index}
+                    disabled={!slot.available}
+                    className={`p-4 rounded-xl font-bold transition-all ${
+                      slot.available
+                        ? 'bg-yellow-400/20 text-yellow-400 hover:bg-yellow-400/30 border border-yellow-400/50'
+                        : 'bg-gray-800/50 text-gray-500 border border-gray-700/50 cursor-not-allowed'
+                    }`}
+                  >
+                    {slot.time}
+                  </button>
+                ))}
+              </div>
+
+              <button className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-black py-4 rounded-2xl font-bold text-lg hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3">
+                <MessageCircle className="w-6 h-6" />
+                Забронировать консультацию
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Testimonials */}
+        <div className="mb-8">
+          <h3 className="text-2xl font-black text-white mb-6 text-center">
+            Результаты учеников
+          </h3>
+          
+          <div className="space-y-4">
+            {testimonials.map((testimonial, index) => (
+              <div 
+                key={index}
+                className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-xl rounded-2xl p-6 border border-gray-700/50"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-xl">
+                    {testimonial.avatar}
+                  </div>
+                  
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-2">
+                      <h4 className="font-bold text-white">{testimonial.name}</h4>
+                      <span className="text-green-400 font-bold">{testimonial.profit}</span>
+                      <span className="text-gray-400 text-sm">{testimonial.period}</span>
+                    </div>
+                    
+                    <p className="text-gray-300 leading-relaxed">
+                      "{testimonial.text}"
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* FAQ */}
+        <div className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-xl rounded-3xl p-6 border border-gray-700/50">
+          <h3 className="text-xl font-bold text-white mb-4">
+            Часто задаваемые вопросы
+          </h3>
+          
+          <div className="space-y-4">
+            <div>
+              <h4 className="text-yellow-400 font-bold mb-2">
+                Как проходят консультации?
+              </h4>
+              <p className="text-gray-300">
+                Консультации проходят в Zoom. Вы получите персональные рекомендации и разбор вашего портфеля.
+              </p>
+            </div>
+            
+            <div>
+              <h4 className="text-yellow-400 font-bold mb-2">
+                Есть ли гарантии результата?
+              </h4>
+              <p className="text-gray-300">
+                На VIP наставничество предоставляется гарантия результата или возврат денег.
+              </p>
+            </div>
+            
+            <div>
+              <h4 className="text-yellow-400 font-bold mb-2">
+                Можно ли перенести консультацию?
+              </h4>
+              <p className="text-gray-300">
+                Да, консультацию можно перенести за 24 часа до назначенного времени.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <BottomNavigation />
     </div>
   );
-}
+};
+
+export default Consultations;

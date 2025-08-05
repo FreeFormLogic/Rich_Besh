@@ -207,6 +207,83 @@ const Home = () => {
         </div>
       </div>
 
+      {/* Rich Besh Stories */}
+      <div className="px-6 py-12">
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-4xl font-black text-white">
+            Stories от Rich Besh
+          </h2>
+          <button 
+            onClick={() => navigate('/stories')}
+            className="text-yellow-400 hover:text-white transition-colors font-semibold flex items-center gap-2"
+          >
+            Смотреть все
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* Stories Preview */}
+        <div className="grid grid-cols-4 gap-4 mb-8">
+          {[
+            { title: 'Выигрыш +180K₽', category: 'trading', gradient: 'from-green-500 to-emerald-600' },
+            { title: 'Новый Lambo', category: 'lifestyle', gradient: 'from-yellow-400 to-orange-500' },
+            { title: '+95K бинарные', category: 'trading', gradient: 'from-red-500 to-pink-600' },
+            { title: 'Жизнь в Дубае', category: 'lifestyle', gradient: 'from-purple-500 to-indigo-600' }
+          ].map((story, index) => (
+            <button
+              key={index}
+              onClick={() => navigate('/stories')}
+              className={`relative aspect-[9/16] bg-gradient-to-br ${story.gradient} rounded-2xl overflow-hidden group hover:scale-105 transition-all duration-300`}
+            >
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
+              <div className="absolute top-3 left-3 w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
+                <Play className="w-4 h-4 text-white" />
+              </div>
+              <div className="absolute bottom-3 left-3 right-3">
+                <p className="text-white text-xs font-bold text-left leading-tight">
+                  {story.title}
+                </p>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Brand Partnerships */}
+      <div className="px-6 py-12">
+        <h2 className="text-4xl font-black text-white mb-8 text-center">
+          Партнеры и спонсоры
+        </h2>
+        
+        <div className="grid grid-cols-2 gap-6 mb-12">
+          <div className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-xl rounded-3xl p-6 border border-gray-700/50">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-black text-white">IQ</span>
+              </div>
+              <h3 className="text-white font-bold text-lg mb-2">IQ Option</h3>
+              <p className="text-gray-400 text-sm mb-4">Официальный партнер по бинарным опционам</p>
+              <button className="w-full bg-blue-500 text-white py-3 rounded-xl font-bold hover:bg-blue-600 transition-colors">
+                Начать торговать
+              </button>
+            </div>
+          </div>
+
+          <div className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-xl rounded-3xl p-6 border border-gray-700/50">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-black text-white">FX</span>
+              </div>
+              <h3 className="text-white font-bold text-lg mb-2">ForexClub</h3>
+              <p className="text-gray-400 text-sm mb-4">Эксклюзивные условия для учеников</p>
+              <button className="w-full bg-orange-500 text-white py-3 rounded-xl font-bold hover:bg-orange-600 transition-colors">
+                Получить бонус
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Featured Videos */}
       <div className="px-6 py-12">
         <div className="flex items-center justify-between mb-8">
