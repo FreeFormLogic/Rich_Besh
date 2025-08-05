@@ -134,7 +134,7 @@ const Home = () => {
           </div>
           
           {/* Stories Section */}
-          <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide mt-12 mb-8">
+          <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide mt-8 mb-4">
             {[
               'https://richbesh.b-cdn.net/TG/9A703ADD-2C56-41CE-BA14-BFF553B28172.MP4',
               'https://richbesh.b-cdn.net/TG/circle%201.mp4',
@@ -154,7 +154,7 @@ const Home = () => {
                 onClick={() => navigate('/stories')}
                 className="relative w-20 h-20 flex-shrink-0 rounded-full overflow-hidden border-4 border-yellow-400 p-0.5 hover:scale-110 transition-all duration-300"
               >
-                <div className="w-full h-full rounded-full overflow-hidden bg-gray-800">
+                <div className="w-full h-full rounded-full overflow-hidden bg-black">
                   <video
                     src={videoUrl}
                     className="w-full h-full object-cover"
@@ -288,15 +288,18 @@ const Home = () => {
         </div>
         
         <div className="space-y-6">
-          {featuredVideos.map((video, index) => (
+          {featuredVideos.slice(0, 3).map((video, index) => (
             <div 
               key={video.id}
               className="group relative bg-gradient-to-r from-gray-900/90 to-gray-800/90 backdrop-blur-xl rounded-3xl overflow-hidden border border-gray-700/50 hover:border-yellow-400/50 transition-all duration-300 cursor-pointer"
-              onClick={() => {
-                // Navigate to specific video content based on video ID
-                if (video.id === 'luxury-lifestyle') {
+              onClick={(e) => {
+                // Check if click was on the play button (video area)
+                const target = e.target as HTMLElement;
+                if (target.closest('.video-play-area')) {
+                  // Open video player
                   window.open(video.videoUrl, '_blank');
                 } else {
+                  // Navigate to content page
                   navigate('/exclusive-content');
                 }
               }}
@@ -308,7 +311,13 @@ const Home = () => {
                     alt={video.title}
                     className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+                  <div 
+                    className="video-play-area absolute inset-0 bg-black/50 flex items-center justify-center cursor-pointer"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.open(video.videoUrl, '_blank');
+                    }}
+                  >
                     <div className="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-2xl">
                       <Play className="w-8 h-8 text-black ml-1" />
                     </div>

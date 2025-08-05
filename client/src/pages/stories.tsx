@@ -22,6 +22,7 @@ const Stories = () => {
   const [progress, setProgress] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(false);
+  const [showPartnerAd, setShowPartnerAd] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const progressIntervalRef = useRef<NodeJS.Timeout>();
 
@@ -187,7 +188,8 @@ const Stories = () => {
         setProgress(progressPercent);
         
         if (video.currentTime >= video.duration) {
-          nextStory();
+          setShowPartnerAd(true);
+          setIsPlaying(false);
         }
       }
     };
@@ -239,9 +241,11 @@ const Stories = () => {
   }, [isPlaying, isMuted, currentStory]);
 
   const nextStory = () => {
+    setShowPartnerAd(false);
     if (currentStory < stories.length - 1) {
       setCurrentStory(currentStory + 1);
       setProgress(0);
+      setIsPlaying(true);
     } else {
       navigate('/');
     }
@@ -356,26 +360,13 @@ const Stories = () => {
           />
         )}
 
-        {/* Video Controls */}
-        <div className="absolute bottom-32 left-4 right-4 z-20">
-          <div className={`bg-gradient-to-r ${getCategoryColor(currentStoryData.category)} rounded-2xl p-4 backdrop-blur-xl`}>
-            <div className="flex items-center gap-2 mb-2">
-              <span className="text-2xl">{getCategoryIcon(currentStoryData.category)}</span>
-              {currentStoryData.winAmount && (
-                <span className="text-white font-black text-xl">{currentStoryData.winAmount}</span>
-              )}
-            </div>
-            
-            <h2 className="text-white text-xl font-bold mb-2">
-              {currentStoryData.title}
-            </h2>
-            
-            <p className="text-white/90 text-sm mb-4 leading-relaxed">
-              {currentStoryData.description}
-            </p>
-
-            {/* Partner Offers - Show after watching */}
-            {progress > 90 && (
+        {/* Partner Offers - Show only when ad should show */}
+        {showPartnerAd && (
+          <div className="absolute bottom-32 left-4 right-4 z-20">
+            <div className="bg-black/80 backdrop-blur-xl rounded-2xl p-4">
+              <h3 className="text-white text-lg font-bold mb-4 text-center">
+                Начни зарабатывать как Rich Besh!
+              </h3>
               <div className="space-y-3">
                 <div className="bg-gradient-to-r from-blue-600 to-cyan-500 rounded-xl p-4">
                   <div className="flex items-center gap-3 mb-3">
@@ -413,9 +404,9 @@ const Stories = () => {
                   </button>
                 </div>
               </div>
-            )}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Control Buttons */}
         <div className="absolute bottom-8 left-4 right-4 z-20 flex justify-center gap-4">
