@@ -11,7 +11,7 @@ const Home = () => {
       id: 'luxury-lifestyle',
       title: 'Роскошь как стиль жизни',
       videoUrl: 'https://richbesh.b-cdn.net/IG/2025-07-21_3681517492775539740.mp4',
-      thumbnail: '/attached_assets/image_1754412229756.png',
+      thumbnail: 'https://richbesh.b-cdn.net/TG/photo_2025-08-06_00-02-59.jpg',
       description: 'Как я живу в Дубае и зарабатываю миллионы',
       views: '1.2M',
       duration: '02:15'
@@ -134,7 +134,7 @@ const Home = () => {
           </div>
           
           {/* Stories Section */}
-          <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide mt-4 mb-8">
+          <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide mt-4 mb-8 overflow-visible">
             {[
               'https://richbesh.b-cdn.net/TG/9A703ADD-2C56-41CE-BA14-BFF553B28172.MP4',
               'https://richbesh.b-cdn.net/TG/circle%201.mp4',
@@ -152,7 +152,7 @@ const Home = () => {
               <button
                 key={index}
                 onClick={() => navigate('/stories')}
-                className="relative w-20 h-20 flex-shrink-0 rounded-full overflow-visible border-4 border-yellow-400 p-0.5 hover:scale-110 transition-all duration-300"
+                className="relative w-20 h-20 flex-shrink-0 rounded-full border-4 border-yellow-400 p-0.5 hover:scale-110 transition-all duration-300 overflow-visible"
               >
                 <div className="w-full h-full rounded-full overflow-hidden bg-black">
                   <video
@@ -325,8 +325,8 @@ const Home = () => {
                   // Open video player
                   window.open(video.videoUrl, '_blank');
                 } else {
-                  // Navigate to content page
-                  navigate('/exclusive-content');
+                  // Navigate to specific video
+                  navigate(`/exclusive-content?video=${video.id}`);
                 }
               }}
             >
@@ -416,6 +416,7 @@ const Home = () => {
         </div>
       </div>
 
+      <div className="h-24"></div>
       <BottomNavigation />
     </div>
   );

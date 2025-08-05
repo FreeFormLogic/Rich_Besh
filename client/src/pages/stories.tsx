@@ -191,6 +191,10 @@ const Stories = () => {
           setShowPartnerAd(true);
           setIsPlaying(false);
           setProgress(100);
+          // Hide ad after 8 seconds
+          setTimeout(() => {
+            setShowPartnerAd(false);
+          }, 8000);
         }
       }
     };

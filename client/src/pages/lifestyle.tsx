@@ -73,10 +73,73 @@ const Lifestyle = () => {
       id: 6,
       image: 'https://richbesh.b-cdn.net/IG/2024-05-25_3372073464799556661.jpg',
       caption: 'Роллс-Ройс Ghost - символ элегантности и статуса. Каждая деталь этой машины говорит о качестве и совершенстве! 🚗👑',
-      likes: 24560,
-      comments: 945,
+      likes: 22580,
+      comments: 567,
       category: 'cars',
-      location: 'London',
+      location: 'Monaco',
+      isVideo: false
+    },
+    {
+      id: 7,
+      image: 'https://richbesh.b-cdn.net/IG/posts_images/18058854934553838.jpg',
+      video: 'https://richbesh.b-cdn.net/IG/2025-04-26_3619375607072811190.mp4',
+      caption: 'Трейдинг с яхты - вот как выглядит финансовая свобода! Заработал $50K пока наслаждался закатом на Мальдивах 🛥️💰',
+      likes: 19420,
+      comments: 1423,
+      category: 'lifestyle',
+      location: 'Maldives',
+      isVideo: true
+    },
+    {
+      id: 8,
+      image: 'https://richbesh.b-cdn.net/IG/posts_images/17992802301729616.jpg',
+      caption: 'Шопинг в Париже - инвестиции в свой имидж. Качественные вещи от Chanel и Louis Vuitton - это не трата, а вложение! 🛍️✨',
+      likes: 23760,
+      comments: 876,
+      category: 'luxury',
+      location: 'Paris, France',
+      isVideo: false
+    },
+    {
+      id: 9,
+      image: 'https://richbesh.b-cdn.net/IG/posts_images/18249395479016885.jpg',
+      video: 'https://richbesh.b-cdn.net/IG/2025-07-23_3683192790368544979.mp4',
+      caption: 'Спортзал уровня VIP - тело это храм души, а здоровье - основа богатства. Тренировка в самом дорогом фитнес-клубе Дубая 💪⚡',
+      likes: 14280,
+      comments: 234,
+      category: 'lifestyle',
+      location: 'Dubai, UAE',
+      isVideo: true
+    },
+    {
+      id: 10,
+      image: 'https://richbesh.b-cdn.net/IG/posts_images/17901443982736477.jpg',
+      caption: 'Ужин на крыше с видом на весь Дубай. Моменты, за которые стоит жить и работать. Жизнь прекрасна, когда ты успешен! 🌃🥂',
+      likes: 27010,
+      comments: 1201,
+      category: 'lifestyle',
+      location: 'Dubai Marina',
+      isVideo: false
+    },
+    {
+      id: 11,
+      image: 'https://richbesh.b-cdn.net/IG/posts_images/18072548320403661.jpg',
+      video: 'https://richbesh.b-cdn.net/IG/2025-07-21_3681517492775539740.mp4',
+      caption: 'Крипто-инвестиции - мой путь к первому миллиону. Показываю как я заработал на Bitcoin и почему это только начало! ₿🚀',
+      likes: 38700,
+      comments: 2873,
+      category: 'crypto',
+      location: 'Dubai Office',
+      isVideo: true
+    },
+    {
+      id: 12,
+      image: 'https://richbesh.b-cdn.net/IG/posts_images/17984556112852396.jpg',
+      caption: 'Элитная недвижимость - покупка второй квартиры в Майами. Диверсификация активов и инвестиции в будущее! 🏙️💎',
+      likes: 29340,
+      comments: 1156,
+      category: 'luxury',
+      location: 'Miami, FL',
       isVideo: false
     }
   ];
@@ -86,7 +149,7 @@ const Lifestyle = () => {
     : instagramPosts.filter(post => post.category === selectedCategory);
 
   return (
-    <div className="pb-20 bg-gradient-to-b from-black via-gray-900 to-black min-h-screen">
+    <div className="pb-32 bg-gradient-to-b from-black via-gray-900 to-black min-h-screen">
       {/* Header */}
       <div className="relative bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 p-6">
         <div className="absolute inset-0 bg-black/20"></div>
