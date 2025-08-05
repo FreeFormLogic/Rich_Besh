@@ -134,7 +134,7 @@ const Home = () => {
           </div>
           
           {/* Stories Section */}
-          <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide mt-6">
+          <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide mt-12 mb-8">
             {[
               'https://richbesh.b-cdn.net/TG/9A703ADD-2C56-41CE-BA14-BFF553B28172.MP4',
               'https://richbesh.b-cdn.net/TG/circle%201.mp4',
@@ -292,7 +292,14 @@ const Home = () => {
             <div 
               key={video.id}
               className="group relative bg-gradient-to-r from-gray-900/90 to-gray-800/90 backdrop-blur-xl rounded-3xl overflow-hidden border border-gray-700/50 hover:border-yellow-400/50 transition-all duration-300 cursor-pointer"
-              onClick={() => navigate('/exclusive-content')}
+              onClick={() => {
+                // Navigate to specific video content based on video ID
+                if (video.id === 'luxury-lifestyle') {
+                  window.open(video.videoUrl, '_blank');
+                } else {
+                  navigate('/exclusive-content');
+                }
+              }}
             >
               <div className="flex">
                 <div className="relative w-40 h-28 flex-shrink-0">

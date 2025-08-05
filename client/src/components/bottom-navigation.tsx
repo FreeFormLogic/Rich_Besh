@@ -29,10 +29,10 @@ const BottomNavigation = () => {
       gradient: 'from-green-500 to-emerald-500'
     },
     {
-      id: 'profile',
-      label: 'Профиль',
+      id: 'lifestyle',
+      label: 'Лайфстайл',
       icon: User,
-      path: '/profile',
+      path: '/lifestyle',
       gradient: 'from-purple-500 to-indigo-500'
     }
   ];

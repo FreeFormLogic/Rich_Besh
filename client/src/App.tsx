@@ -15,7 +15,7 @@ import Consultations from "@/pages/consultations";
 import Partners from "@/pages/partners";
 import Purchases from "@/pages/purchases";
 import Support from "@/pages/support";
-import Profile from "@/pages/profile";
+import Lifestyle from "@/pages/lifestyle";
 import NotFound from "@/pages/not-found";
 
 function AppRouter() {
@@ -33,7 +33,7 @@ function AppRouter() {
         <Route path="/partners" element={<Partners />} />
         <Route path="/purchases" element={<Purchases />} />
         <Route path="/support" element={<Support />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/lifestyle" element={<Lifestyle />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

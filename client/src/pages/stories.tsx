@@ -169,6 +169,37 @@ const Stories = () => {
   const currentStoryData = stories[currentStory];
 
   useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Reset video when story changes
+    video.currentTime = 0;
+    setProgress(0);
+    video.src = currentStoryData.url; // Set new video source
+    
+    if (isPlaying) {
+      video.play().catch(console.error);
+    }
+
+    const handleTimeUpdate = () => {
+      if (video.duration) {
+        const progressPercent = (video.currentTime / video.duration) * 100;
+        setProgress(progressPercent);
+        
+        if (video.currentTime >= video.duration) {
+          nextStory();
+        }
+      }
+    };
+
+    video.addEventListener('timeupdate', handleTimeUpdate);
+
+    return () => {
+      video.removeEventListener('timeupdate', handleTimeUpdate);
+    };
+  }, [currentStory, isPlaying]);
+
+  useEffect(() => {
     if (isPlaying && currentStoryData) {
       const duration = currentStoryData.duration || 15;
       const interval = 100; // Update every 100ms

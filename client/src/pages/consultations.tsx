@@ -9,13 +9,53 @@ const Consultations = () => {
 
   const consultationPackages = [
     {
+      id: 'coaching',
+      title: 'Коучинг/Наставничество',
+      icon: <Target className="w-8 h-8" />,
+      duration: '3 месяца',
+      price: 150000,
+      originalPrice: 300000,
+      gradient: 'from-blue-500 to-purple-600',
+      features: [
+        'Еженедельные персональные сессии по 90 минут',
+        'Разработка индивидуальной торговой стратегии',
+        'Анализ и коррекция психологии трейдера',
+        'Доступ к закрытому сообществу учеников',
+        'Помощь в постановке и достижении финансовых целей',
+        'Круглосуточная поддержка в Telegram',
+        'Гарантированный результат или возврат 100% средств'
+      ],
+      description: 'Полная трансформация вашего подхода к трейдингу и финансам под руководством Rich Besh.',
+      popular: true
+    },
+    {
+      id: 'trust-management',
+      title: 'Доверительное управление',
+      icon: <Crown className="w-8 h-8" />,
+      duration: 'от 6 месяцев',
+      price: 500000,
+      originalPrice: null,
+      gradient: 'from-yellow-400 to-orange-500',
+      features: [
+        'Минимальная сумма для управления: 500,000₽',
+        'Целевая доходность: 15-25% в месяц',
+        'Полная прозрачность всех операций',
+        'Еженедельная отчетность по результатам',
+        'Страхование депозита до 1,000,000₽',
+        'Возможность вывода средств в любое время',
+        'Комиссия только с прибыли (30%)'
+      ],
+      description: 'Rich Besh лично управляет вашими средствами, применяя профессиональные стратегии.',
+      popular: false
+    },
+    {
       id: 'personal',
       title: 'Личная консультация',
       icon: <User className="w-8 h-8" />,
       duration: '60 минут',
       price: 15000,
       originalPrice: 25000,
-      gradient: 'from-yellow-400 to-orange-500',
+      gradient: 'from-emerald-500 to-green-600',
       features: [
         'Персональный разбор торгового счета',
         'Анализ ваших ошибок и слабых мест',
@@ -24,25 +64,6 @@ const Consultations = () => {
         'Запись консультации для повторного просмотра'
       ],
       description: 'Один на один с Rich Besh. Получите персональные рекомендации и стратегию успеха.',
-      popular: true
-    },
-    {
-      id: 'vip',
-      title: 'VIP наставничество',
-      icon: <Crown className="w-8 h-8" />,
-      duration: '30 дней',
-      price: 49000,
-      originalPrice: 99000,
-      gradient: 'from-purple-500 to-pink-600',
-      features: [
-        'Ежедневная поддержка в Telegram',
-        '4 личные консультации по 60 минут',
-        'Разбор каждой вашей сделки',
-        'Доступ к приватному VIP каналу',
-        'Сигналы и рекомендации в реальном времени',
-        'Гарантия результата или возврат денег'
-      ],
-      description: 'Полное погружение в мир профессионального трейдинга с личным наставником.',
       popular: false
     },
     {
@@ -203,13 +224,17 @@ const Consultations = () => {
                         <span className="text-3xl font-black text-white">
                           {pkg.price.toLocaleString()}₽
                         </span>
-                        <span className="text-gray-500 line-through text-lg">
-                          {pkg.originalPrice.toLocaleString()}₽
-                        </span>
+                        {pkg.originalPrice && (
+                          <span className="text-gray-500 line-through text-lg">
+                            {pkg.originalPrice.toLocaleString()}₽
+                          </span>
+                        )}
                       </div>
-                      <div className="text-sm text-gray-400">
-                        Скидка {Math.round((1 - pkg.price / pkg.originalPrice) * 100)}%
-                      </div>
+                      {pkg.originalPrice && (
+                        <div className="text-sm text-gray-400">
+                          Скидка {Math.round((1 - pkg.price / pkg.originalPrice) * 100)}%
+                        </div>
+                      )}
                     </div>
 
                     <button
