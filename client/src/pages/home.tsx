@@ -98,9 +98,9 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Stories Section - Фиксированная позиция под профилем */}
+        {/* Stories Section - Между профилем и заголовком */}
         <div className="absolute top-28 left-6 right-6 z-40">
-          <div className="flex gap-3 overflow-x-auto py-2 scrollbar-hide">
+          <div className="flex gap-3 overflow-x-auto py-1 scrollbar-hide">
             {[
               'https://richbesh.b-cdn.net/TG/9A703ADD-2C56-41CE-BA14-BFF553B28172.MP4',
               'https://richbesh.b-cdn.net/TG/circle%201.mp4',
