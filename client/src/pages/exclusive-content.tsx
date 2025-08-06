@@ -261,7 +261,7 @@ const ExclusiveContent = () => {
       <div className="sticky top-0 z-50 bg-black/90 backdrop-blur-xl border-b border-yellow-400/20">
         <div className="flex items-center gap-4 p-6">
           <button 
-            onClick={() => navigate(-1)}
+            onClick={() => navigate('/')}
             className="p-2 rounded-full bg-yellow-400/20 hover:bg-yellow-400/30 transition-colors"
           >
             <ArrowLeft className="w-6 h-6 text-yellow-400" />
