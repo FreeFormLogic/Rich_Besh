@@ -58,15 +58,12 @@ const Lifestyle = () => {
       {/* Hero Section */}
       <div className="relative h-64 overflow-hidden">
         <div className="absolute inset-0">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
+          <img 
+            src="https://richbesh.b-cdn.net/IG/2025-06-04_3647526713313247480.jpg"
+            alt="Rich Besh Lifestyle"
             className="w-full h-full object-cover"
-            src="https://richbesh.b-cdn.net/TG/circle%201.mp4"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
         </div>
         
         <div className="absolute bottom-8 left-6 right-6">

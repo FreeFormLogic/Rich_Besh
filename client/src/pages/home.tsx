@@ -18,7 +18,8 @@ const VideoThumbnail = ({ videoUrl, title, className }: { videoUrl: string; titl
     if (!video || !canvas) return;
 
     let currentAttempt = 0;
-    const timePoints = [2, 4, 6, 8, 1, 0.5]; // Попробуем разные моменты времени
+    // Попробуем разные моменты времени для разных типов видео
+    const timePoints = [3, 5, 7, 2, 10, 1, 0.5, 4, 6, 8];
     
     const generateThumbnail = () => {
       const ctx = canvas.getContext('2d');
@@ -26,14 +27,35 @@ const VideoThumbnail = ({ videoUrl, title, className }: { videoUrl: string; titl
       
       // Проверяем, что видео загружено и имеет размеры
       if (video.videoWidth === 0 || video.videoHeight === 0) {
-        tryNextTimePoint();
+        setTimeout(() => tryNextTimePoint(), 100);
         return;
       }
       
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-      setThumbnailGenerated(true);
+      
+      try {
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        
+        // Проверяем, что кадр не черный (пустой)
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imageData.data;
+        let brightness = 0;
+        for (let i = 0; i < data.length; i += 4) {
+          brightness += (data[i] + data[i + 1] + data[i + 2]) / 3;
+        }
+        brightness = brightness / (data.length / 4);
+        
+        // Если кадр слишком темный, пробуем следующую временную точку
+        if (brightness < 10 && currentAttempt < timePoints.length - 1) {
+          setTimeout(() => tryNextTimePoint(), 100);
+          return;
+        }
+        
+        setThumbnailGenerated(true);
+      } catch (error) {
+        setTimeout(() => tryNextTimePoint(), 100);
+      }
     };
 
     const tryNextTimePoint = () => {
