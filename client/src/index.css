@@ -106,7 +106,8 @@
     justify-content: center;
   }
 
-  .story-ring img {
+  .story-ring img,
+  .story-ring video {
     width: 64px;
     height: 64px;
     border-radius: 50%;
@@ -122,6 +123,15 @@
   
   .achievement-glow {
     filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.7));
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 }
 

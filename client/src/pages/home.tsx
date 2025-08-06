@@ -114,24 +114,28 @@ const Home = () => {
               'https://richbesh.b-cdn.net/TG/IMG_6817.MP4',
               'https://richbesh.b-cdn.net/TG/IMG_8764.MOV'
             ].filter(url => url.endsWith('.MP4') || url.endsWith('.MOV') || url.endsWith('.mp4')).map((videoUrl, index) => (
-              <button
+              <div
                 key={`story-${index}-${Date.now()}`}
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
                   console.log(`Клик на Stories #${index}, переход на /stories?video=${index}`);
                   navigate(`/stories?video=${index}`);
                 }}
-                className="relative w-16 h-16 flex-shrink-0 rounded-full border-3 border-yellow-400 p-0.5 hover:scale-105 transition-all duration-300"
-                style={{ position: 'relative', transformOrigin: 'center' }}
+                className="relative flex-shrink-0 hover:scale-110 transition-all duration-300 cursor-pointer"
+                style={{ position: 'relative', transformOrigin: 'center', userSelect: 'none' }}
               >
-                <div className="w-full h-full rounded-full overflow-hidden bg-black">
+                <div className="story-ring">
                   <video
                     src={videoUrl}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover rounded-full pointer-events-none"
                     muted
                     playsInline
+                    loop
+                    onLoadedData={() => console.log(`Video ${index} loaded`)}
                   />
                 </div>
-              </button>
+              </div>
             ))}
           </div>
         </div>
