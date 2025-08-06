@@ -24,7 +24,9 @@ const Stories = () => {
   const [progress, setProgress] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
+  const [showPartnerAd, setShowPartnerAd] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const stories: Story[] = [
     {
@@ -129,6 +131,40 @@ const Stories = () => {
       ctaLink: 'https://forexclub.com/richbesh',
       winAmount: '+95,000₽',
       category: 'trading'
+    },
+    {
+      id: 10,
+      type: 'video',
+      url: 'https://richbesh.b-cdn.net/TG/E97D113E-0D7D-4268-B08B-CB647C4EAA65.MOV',
+      title: 'Результаты учеников',
+      description: 'Показываю результаты моих учеников - они тоже начали зарабатывать!',
+      duration: 21,
+      ctaText: 'Стать учеником',
+      ctaLink: '/consultations',
+      category: 'course'
+    },
+    {
+      id: 11,
+      type: 'video',
+      url: 'https://richbesh.b-cdn.net/TG/IMG_6817.MP4',
+      title: 'Дневной заработок',
+      description: 'Обычный торговый день - показываю все сделки от начала до конца',
+      duration: 17,
+      ctaText: 'Начать торговать',
+      ctaLink: 'https://iqoption.com/richbesh',
+      winAmount: '+115,000₽',
+      category: 'trading'
+    },
+    {
+      id: 12,
+      type: 'video',
+      url: 'https://richbesh.b-cdn.net/TG/IMG_8764.MOV',
+      title: 'Финансовая свобода',
+      description: 'Что значит быть финансово свободным и как этого достичь через трейдинг',
+      duration: 23,
+      ctaText: 'Достичь свободы',
+      ctaLink: '/consultations',
+      category: 'lifestyle'
     }
   ];
 
@@ -140,6 +176,7 @@ const Stories = () => {
 
     video.currentTime = 0;
     setProgress(0);
+    setShowPartnerAd(false);
     video.src = currentStoryData.url;
     
     if (isPlaying) {
@@ -150,11 +187,13 @@ const Stories = () => {
       if (video.duration) {
         const progressPercent = (video.currentTime / video.duration) * 100;
         setProgress(progressPercent);
+        
+        // Убираем показ рекламы во время видео
       }
     };
 
     const handleVideoEnd = () => {
-      // Автоматически переходим к следующему Stories через 1 секунду
+      // Автоматически переходим к следующему Stories без показа рекламы
       setTimeout(() => {
         nextStory();
       }, 1000);
@@ -167,12 +206,13 @@ const Stories = () => {
       video.removeEventListener('timeupdate', handleTimeUpdate);
       video.removeEventListener('ended', handleVideoEnd);
     };
-  }, [currentStory, isPlaying]);
+  }, [currentStory, isPlaying, showPartnerAd]);
 
   const nextStory = () => {
     if (currentStory < stories.length - 1) {
       setCurrentStory(currentStory + 1);
       setProgress(0);
+      setShowPartnerAd(false);
     } else {
       navigate('/');
     }
@@ -182,6 +222,7 @@ const Stories = () => {
     if (currentStory > 0) {
       setCurrentStory(currentStory - 1);
       setProgress(0);
+      setShowPartnerAd(false);
     }
   };
 
@@ -198,14 +239,36 @@ const Stories = () => {
     }
   };
 
-  const handleClose = () => {
-    navigate('/');
-  };
+  // Партнерские предложения
+  const partnerOffers = [
+    {
+      id: 1,
+      title: 'IQ Option',
+      subtitle: 'Начни торговать как Rich Besh',
+      description: 'Получи бонус 100% на депозит и торгуй теми же инструментами, что и я',
+      bonus: 'Бонус 100%',
+      action: 'Получить бонус',
+      link: 'https://iqoption.com/richbesh',
+      color: 'from-green-500 to-emerald-600'
+    },
+    {
+      id: 2,
+      title: 'ForexClub',
+      subtitle: 'Профессиональный трейдинг',
+      description: 'Торгуй на Форекс с минимальными спредами и максимальным кредитным плечом',
+      bonus: 'Без комиссий',
+      action: 'Начать торговлю',
+      link: 'https://forexclub.com/richbesh',
+      color: 'from-blue-500 to-cyan-600'
+    }
+  ];
+
+  const randomOffer = partnerOffers[Math.floor(Math.random() * partnerOffers.length)];
 
   return (
     <div className="fixed inset-0 bg-black z-50 flex flex-col">
       {/* Progress bars */}
-      <div className="flex gap-1 p-2 z-50">
+      <div className="flex gap-1 p-2">
         {stories.map((_, index) => (
           <div key={index} className="flex-1 h-1 bg-white/30 rounded-full overflow-hidden">
             <div 
@@ -220,7 +283,7 @@ const Stories = () => {
       </div>
 
       {/* Header */}
-      <div className="absolute top-12 left-0 right-0 z-50 flex items-center justify-between p-4">
+      <div className="absolute top-12 left-0 right-0 z-10 flex items-center justify-between p-4">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 flex items-center justify-center">
             <Crown className="w-6 h-6 text-black" />
@@ -239,11 +302,10 @@ const Stories = () => {
             {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
           </button>
           <button 
-            onClick={handleClose}
-            className="p-3 rounded-full bg-black/80 text-white hover:bg-black/90 transition-colors z-50"
-            style={{ backgroundColor: 'rgba(0,0,0,0.8)' }}
+            onClick={() => navigate('/')}
+            className="p-3 rounded-full bg-black/70 text-white hover:bg-black/90 transition-colors z-50"
           >
-            <X className="w-7 h-7" />
+            <X className="w-6 h-6" />
           </button>
         </div>
       </div>
@@ -259,7 +321,7 @@ const Stories = () => {
         />
         
         {/* Play/Pause overlay */}
-        {!isPlaying && (
+        {!isPlaying && !showPartnerAd && (
           <div className="absolute inset-0 flex items-center justify-center bg-black/30">
             <button 
               onClick={handlePlayPause}
@@ -282,10 +344,10 @@ const Stories = () => {
         />
       </div>
 
-      {/* Story info - FIXED: Always at bottom */}
-      <div className="absolute bottom-0 left-0 right-0 z-50 bg-gradient-to-t from-black via-black/95 to-transparent p-4 pb-6">
+      {/* Story info - Always visible at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black via-black/80 to-transparent">
         <h2 className="text-white text-lg font-bold mb-2">{currentStoryData.title}</h2>
-        <p className="text-white/90 text-sm mb-3 leading-relaxed">{currentStoryData.description}</p>
+        <p className="text-white/90 text-sm mb-3">{currentStoryData.description}</p>
         
         {currentStoryData.winAmount && (
           <div className="bg-green-500/20 border border-green-500 rounded-lg p-2 mb-3">
@@ -295,19 +357,15 @@ const Stories = () => {
         )}
 
         <button 
-          onClick={() => {
-            if (currentStoryData.ctaLink.startsWith('http')) {
-              window.open(currentStoryData.ctaLink, '_blank');
-            } else {
-              navigate(currentStoryData.ctaLink);
-            }
-          }}
-          className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 hover:scale-105 transition-transform text-sm"
+          onClick={() => window.open(currentStoryData.ctaLink, '_blank')}
+          className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 hover:scale-105 transition-transform text-sm"
         >
           {currentStoryData.ctaText}
           <ExternalLink className="w-4 h-4" />
         </button>
       </div>
+
+      {/* Убираем модальную рекламу - реклама теперь всегда внизу */}
     </div>
   );
 };

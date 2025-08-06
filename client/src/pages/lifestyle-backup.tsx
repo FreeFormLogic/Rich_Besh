@@ -16,7 +16,7 @@ const Lifestyle = () => {
     { id: 'lifestyle', label: 'Жизнь', icon: MapPin }
   ];
 
-  // ИСПРАВЛЕНО: Используем ВСЕ реальные данные Instagram, а не только 12
+  // Используем ВСЕ реальные данные Instagram
   const baseInstagramPosts = getInstagramPostsByCategory('all').map(post => ({
     id: post.id,
     image: post.thumbnail,
@@ -29,7 +29,7 @@ const Lifestyle = () => {
     isVideo: post.type === 'video'
   }));
 
-  // ПОКАЗЫВАЕМ ВСЕ ПОСТЫ
+  // ПОКАЗЫВАЕМ ВСЕ ПОСТЫ, а не только 12
   const filteredPosts = selectedCategory === 'all' 
     ? baseInstagramPosts 
     : baseInstagramPosts.filter(post => post.category === selectedCategory);
@@ -76,12 +76,12 @@ const Lifestyle = () => {
             <span className="text-yellow-400">Rich Besh</span>
           </h2>
           <p className="text-white/80 text-lg">
-            Все {baseInstagramPosts.length} постов Instagram с роскошной жизни миллионера
+            Эксклюзивные моменты из жизни миллионера
           </p>
         </div>
       </div>
 
-      {/* Stats - ИСПРАВЛЕНО: показываем реальное количество постов */}
+      {/* Stats */}
       <div className="px-4 -mt-8 relative z-10">
         <div className="bg-gray-900/90 backdrop-blur-xl rounded-2xl p-6 border border-gray-700/50 mt-6">
           <div className="grid grid-cols-3 gap-4 text-center">
@@ -124,10 +124,10 @@ const Lifestyle = () => {
         </div>
       </div>
 
-      {/* Posts Grid - ИСПРАВЛЕНО: показываем ВСЕ посты */}
+      {/* Posts Grid - ВСЕ ПОСТЫ */}
       <div className="px-4 pb-6">
         <div className="text-white mb-4 text-center">
-          <p className="text-gray-400">Показано {filteredPosts.length} из {baseInstagramPosts.length} постов Instagram</p>
+          <p className="text-gray-400">Показано {filteredPosts.length} из {baseInstagramPosts.length} постов</p>
         </div>
         
         <div className="grid grid-cols-1 gap-6">
