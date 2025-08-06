@@ -70,7 +70,7 @@ const Home = () => {
               <div className="relative">
                 <div className="w-16 h-16 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 p-1">
                   <img 
-                    src="https://richbesh.b-cdn.net/TG/photo_2025-08-06_00-02-59.jpg"
+                    src="/attached_assets/Avatar_1754480043650.jpg"
                     alt="Rich Besh"
                     className="w-full h-full rounded-full object-cover"
                   />
