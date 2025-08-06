@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Play, Crown, Zap, TrendingUp, Sparkles, ChevronRight, Star } from 'lucide-react';
 import BottomNavigation from '@/components/bottom-navigation';
 import { instagramData } from '@shared/instagram-data';
+import avatarImage from '@assets/Avatar_1754480043650.jpg';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -70,7 +71,7 @@ const Home = () => {
               <div className="relative">
                 <div className="w-16 h-16 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 p-1">
                   <img 
-                    src="/attached_assets/Avatar_1754480043650.jpg"
+                    src={avatarImage}
                     alt="Rich Besh"
                     className="w-full h-full rounded-full object-cover"
                   />
