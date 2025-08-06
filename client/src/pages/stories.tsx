@@ -303,9 +303,9 @@ const Stories = () => {
           </button>
           <button 
             onClick={() => navigate('/')}
-            className="p-2 rounded-full bg-black/50 text-white"
+            className="p-3 rounded-full bg-black/70 text-white hover:bg-black/90 transition-colors z-50"
           >
-            <X className="w-5 h-5" />
+            <X className="w-6 h-6" />
           </button>
         </div>
       </div>
@@ -344,24 +344,24 @@ const Stories = () => {
         />
       </div>
 
-      {/* Story info - Always visible */}
-      <div className="absolute bottom-20 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent">
-        <h2 className="text-white text-xl font-bold mb-2">{currentStoryData.title}</h2>
-        <p className="text-white/90 mb-4">{currentStoryData.description}</p>
+      {/* Story info - Always visible at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black via-black/80 to-transparent">
+        <h2 className="text-white text-lg font-bold mb-2">{currentStoryData.title}</h2>
+        <p className="text-white/90 text-sm mb-3">{currentStoryData.description}</p>
         
         {currentStoryData.winAmount && (
-          <div className="bg-green-500/20 border border-green-500 rounded-lg p-3 mb-4">
-            <div className="text-green-400 font-bold text-lg">{currentStoryData.winAmount}</div>
-            <div className="text-green-300 text-sm">Результат за сессию</div>
+          <div className="bg-green-500/20 border border-green-500 rounded-lg p-2 mb-3">
+            <div className="text-green-400 font-bold text-sm">{currentStoryData.winAmount}</div>
+            <div className="text-green-300 text-xs">Результат за сессию</div>
           </div>
         )}
 
         <button 
           onClick={() => window.open(currentStoryData.ctaLink, '_blank')}
-          className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold py-3 px-6 rounded-xl flex items-center justify-center gap-2 hover:scale-105 transition-transform"
+          className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold py-2 px-4 rounded-lg flex items-center justify-center gap-2 hover:scale-105 transition-transform text-sm"
         >
           {currentStoryData.ctaText}
-          <ExternalLink className="w-5 h-5" />
+          <ExternalLink className="w-4 h-4" />
         </button>
       </div>
 

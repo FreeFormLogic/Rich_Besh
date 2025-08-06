@@ -15,22 +15,30 @@ const ExclusiveContent = () => {
     // Создаем ОЧЕНЬ короткий заголовок - максимум 2 слова
     let shortTitle = 'Эксклюзивный контент';
     
-    // Специальные правила для проблемных постов
+    // Специальные правила для проблемных постов - ОЧЕНЬ короткие заголовки
     if (post.description.includes('Honored to be Invited')) {
       shortTitle = 'VIP встреча';
+    } else if (post.description.toLowerCase().includes('мотоцикл')) {
+      shortTitle = 'Мотоцикл';
+    } else if (post.description.toLowerCase().includes('aqua')) {
+      shortTitle = 'Aqua';
+    } else if (post.description.toLowerCase().includes('remember')) {
+      shortTitle = 'Remember';
     } else if (post.description.toLowerCase().includes('tesla') || post.description.toLowerCase().includes('автомобиль')) {
-      shortTitle = 'Luxury авто';
+      shortTitle = 'Авто';
     } else if (post.description.toLowerCase().includes('дом') || post.description.toLowerCase().includes('house')) {
-      shortTitle = 'Недвижимость';
+      shortTitle = 'Дом';
     } else if (post.description.toLowerCase().includes('trade') || post.description.toLowerCase().includes('торг')) {
       shortTitle = 'Торговля';
     } else if (post.description.toLowerCase().includes('дубай') || post.description.toLowerCase().includes('dubai')) {
       shortTitle = 'Дубай';
     } else {
-      // Берем только первое значимое слово
-      const words = post.description.split(' ').filter(word => word.length > 3);
+      // Берем только ОДНО короткое слово
+      const words = post.description.split(' ').filter(word => word.length > 2 && word.length < 10);
       if (words.length > 0) {
-        shortTitle = words[0].length > 15 ? words[0].substring(0, 15) + '...' : words[0];
+        shortTitle = words[0];
+      } else {
+        shortTitle = `Контент #${index + 1}`;
       }
     }
     
@@ -158,11 +166,11 @@ const ExclusiveContent = () => {
                 
                 {/* Video Info */}
                 <div className="flex-1 p-6">
-                  <h3 className="text-white font-bold text-lg mb-2 group-hover:text-yellow-400 transition-colors">
+                  <h3 className="text-white font-bold text-base mb-2 group-hover:text-yellow-400 transition-colors truncate">
                     {video.title}
                   </h3>
                   
-                  <p className="text-gray-300 text-sm mb-4 leading-relaxed line-clamp-2">
+                  <p className="text-gray-300 text-xs mb-3 leading-relaxed line-clamp-2 overflow-hidden">
                     {video.description}
                   </p>
 
