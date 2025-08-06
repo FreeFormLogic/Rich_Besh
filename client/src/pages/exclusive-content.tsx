@@ -7,7 +7,7 @@ import { getInstagramPostsByCategory } from '@shared/instagram-data';
 // Кеш для превью
 const thumbnailCache = new Map<string, string>();
 
-// Компонент для создания превью из видео с кешированием
+// Улучшенный компонент для создания превью из конкретного видео
 const VideoThumbnail = ({ videoUrl, title, className }: { videoUrl: string; title: string; className?: string }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -15,7 +15,7 @@ const VideoThumbnail = ({ videoUrl, title, className }: { videoUrl: string; titl
   const [cachedDataUrl, setCachedDataUrl] = useState<string | null>(null);
 
   useEffect(() => {
-    // Проверяем кеш сначала
+    // Проверяем кеш для конкретного видео
     const cached = thumbnailCache.get(videoUrl);
     if (cached) {
       setCachedDataUrl(cached);
@@ -30,7 +30,8 @@ const VideoThumbnail = ({ videoUrl, title, className }: { videoUrl: string; titl
 
     let currentAttempt = 0;
     let isGenerating = false;
-    const timePoints = [2, 4, 1, 6, 3, 8, 0.5, 5];
+    // Разные точки времени для разных видео
+    const timePoints = [3, 5, 2, 7, 1, 4, 6, 8];
     
     const generateThumbnail = () => {
       if (isGenerating) return;
@@ -44,7 +45,7 @@ const VideoThumbnail = ({ videoUrl, title, className }: { videoUrl: string; titl
       
       if (video.videoWidth === 0 || video.videoHeight === 0 || video.readyState < 2) {
         isGenerating = false;
-        setTimeout(() => tryNextTimePoint(), 200);
+        setTimeout(() => tryNextTimePoint(), 300);
         return;
       }
       
@@ -54,22 +55,24 @@ const VideoThumbnail = ({ videoUrl, title, className }: { videoUrl: string; titl
       try {
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
         
-        // Проверяем, что кадр не пустой
-        const imageData = ctx.getImageData(0, 0, Math.min(canvas.width, 50), Math.min(canvas.height, 50));
+        // Проверяем качество кадра
+        const imageData = ctx.getImageData(0, 0, Math.min(canvas.width, 100), Math.min(canvas.height, 100));
         const data = imageData.data;
-        let hasContent = false;
+        let totalBrightness = 0;
+        let pixelCount = 0;
         
         for (let i = 0; i < data.length; i += 4) {
           const brightness = (data[i] + data[i + 1] + data[i + 2]) / 3;
-          if (brightness > 15) {
-            hasContent = true;
-            break;
-          }
+          totalBrightness += brightness;
+          pixelCount++;
         }
         
-        if (!hasContent && currentAttempt < timePoints.length - 1) {
+        const avgBrightness = totalBrightness / pixelCount;
+        
+        // Если кадр слишком темный или слишком светлый, пробуем другое время
+        if ((avgBrightness < 20 || avgBrightness > 240) && currentAttempt < timePoints.length - 1) {
           isGenerating = false;
-          setTimeout(() => tryNextTimePoint(), 200);
+          setTimeout(() => tryNextTimePoint(), 300);
           return;
         }
         
