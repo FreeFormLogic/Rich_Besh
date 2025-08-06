@@ -24,6 +24,11 @@ const VideoPlayer = ({ videoUrl }: { videoUrl: string }) => {
     } else {
       setAspectRatio('square');
     }
+
+    // Автовоспроизведение после загрузки метаданных
+    video.play().catch(error => {
+      console.log('Autoplay prevented:', error);
+    });
   };
 
   return (
@@ -36,6 +41,8 @@ const VideoPlayer = ({ videoUrl }: { videoUrl: string }) => {
         ref={videoRef}
         src={videoUrl}
         controls
+        autoPlay
+        muted
         className="w-full h-full object-cover"
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}

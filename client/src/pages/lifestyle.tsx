@@ -135,7 +135,10 @@ const Lifestyle = () => {
           {filteredPosts.map((post) => (
             <div
               key={post.id}
-              onClick={() => navigate(`/exclusive-content/${post.id}`)}
+              onClick={() => {
+                console.log(`Navigating to exclusive content: ${post.id}`);
+                navigate(`/exclusive-content/${post.id}`);
+              }}
               className="bg-gray-900/80 backdrop-blur-sm rounded-2xl overflow-hidden hover:scale-105 transition-all duration-300 cursor-pointer border border-gray-700/50 hover:border-yellow-400/50"
             >
               {/* Media */}
@@ -149,7 +152,7 @@ const Lifestyle = () => {
                       playsInline
                     />
                     <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                      <div className="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center">
+                      <div className="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
                         <Play className="w-8 h-8 text-black ml-1" />
                       </div>
                     </div>
