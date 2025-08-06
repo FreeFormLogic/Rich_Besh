@@ -373,11 +373,13 @@ const Home = () => {
             <div className="space-y-4 max-w-md mx-auto">
               <button 
                 onClick={() => navigate('/predictions')}
-                className="w-full bg-black text-yellow-400 py-5 rounded-2xl font-bold text-lg flex items-center justify-center gap-3 hover:bg-gray-900 transition-colors shadow-2xl"
+                className="w-full bg-black text-yellow-400 py-5 rounded-2xl font-bold text-lg flex items-center justify-center hover:bg-gray-900 transition-colors shadow-2xl relative"
               >
-                <Zap className="w-6 h-6" />
-                Начать зарабатывать сейчас
-                <ChevronRight className="w-6 h-6" />
+                <span className="flex items-center gap-2">
+                  <Zap className="w-5 h-5" />
+                  Начать зарабатывать сейчас
+                </span>
+                <ChevronRight className="w-5 h-5 absolute right-4" />
               </button>
               
               <button 
