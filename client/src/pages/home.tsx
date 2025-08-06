@@ -63,8 +63,8 @@ const Home = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/90"></div>
         </div>
 
-        {/* Header с профилем */}
-        <div className="relative z-20 p-6">
+        {/* Header с профилем и Stories */}
+        <div className="relative z-20 p-6 space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <div className="relative">
@@ -96,11 +96,9 @@ const Home = () => {
               </span>
             </div>
           </div>
-        </div>
 
-        {/* Stories Section - Между профилем и заголовком */}
-        <div className="absolute top-28 left-6 right-6 z-40">
-          <div className="flex gap-3 overflow-x-auto py-1 scrollbar-hide">
+          {/* Stories Section - Сразу после профиля */}
+          <div className="flex gap-3 overflow-x-auto scrollbar-hide">
             {[
               'https://richbesh.b-cdn.net/TG/9A703ADD-2C56-41CE-BA14-BFF553B28172.MP4',
               'https://richbesh.b-cdn.net/TG/circle%201.mp4',
