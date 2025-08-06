@@ -154,40 +154,46 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Stories Section - Сразу после профиля */}
-          <div className="flex gap-3 overflow-x-auto scrollbar-hide pl-6 pr-6">
-            {[
-              'https://richbesh.b-cdn.net/TG/9A703ADD-2C56-41CE-BA14-BFF553B28172.MP4',
-              'https://richbesh.b-cdn.net/TG/circle%201.mp4',
-              'https://richbesh.b-cdn.net/TG/circle%202.mp4',
-              'https://richbesh.b-cdn.net/TG/circle%203.mp4',
-              'https://richbesh.b-cdn.net/TG/circle%204.mp4',
-              'https://richbesh.b-cdn.net/TG/circle%205.mp4',
-              'https://richbesh.b-cdn.net/TG/circle%206.mp4',
-              'https://richbesh.b-cdn.net/TG/circle%207.mp4',
-              'https://richbesh.b-cdn.net/TG/circle%208.mp4',
-              'https://richbesh.b-cdn.net/TG/E97D113E-0D7D-4268-B08B-CB647C4EAA65.MOV',
-              'https://richbesh.b-cdn.net/TG/IMG_6817.MP4',
-              'https://richbesh.b-cdn.net/TG/IMG_8764.MOV'
-            ].filter(url => url.endsWith('.MP4') || url.endsWith('.MOV') || url.endsWith('.mp4')).slice(0, 6).map((videoUrl, index) => (
-              <button
-                key={`story-${index}-${videoUrl.slice(-20)}`}
-                type="button"
-                onClick={() => {
-                  console.log(`Stories click #${index} -> /stories?video=${index}`);
-                  navigate(`/stories?video=${index}`);
-                }}
-                className="story-ring hover:scale-[1.03] transition-transform cursor-pointer shrink-0"
-              >
-                <video
-                  src={videoUrl}
-                  className="w-full h-full object-cover rounded-full"
-                  muted
-                  playsInline
-                  preload="metadata"
-                />
-              </button>
-            ))}
+          {/* Stories Section - С градиентом по краям */}
+          <div className="relative">
+            <div className="flex gap-3 overflow-x-auto scrollbar-hide px-6">
+              {[
+                'https://richbesh.b-cdn.net/TG/9A703ADD-2C56-41CE-BA14-BFF553B28172.MP4',
+                'https://richbesh.b-cdn.net/TG/circle%201.mp4',
+                'https://richbesh.b-cdn.net/TG/circle%202.mp4',
+                'https://richbesh.b-cdn.net/TG/circle%203.mp4',
+                'https://richbesh.b-cdn.net/TG/circle%204.mp4',
+                'https://richbesh.b-cdn.net/TG/circle%205.mp4',
+                'https://richbesh.b-cdn.net/TG/circle%206.mp4',
+                'https://richbesh.b-cdn.net/TG/circle%207.mp4',
+                'https://richbesh.b-cdn.net/TG/circle%208.mp4',
+                'https://richbesh.b-cdn.net/TG/E97D113E-0D7D-4268-B08B-CB647C4EAA65.MOV',
+                'https://richbesh.b-cdn.net/TG/IMG_6817.MP4',
+                'https://richbesh.b-cdn.net/TG/IMG_8764.MOV'
+              ].filter(url => url.endsWith('.MP4') || url.endsWith('.MOV') || url.endsWith('.mp4')).slice(0, 6).map((videoUrl, index) => (
+                <button
+                  key={`story-${index}-${videoUrl.slice(-20)}`}
+                  type="button"
+                  onClick={() => {
+                    console.log(`Stories click #${index} -> /stories?video=${index}`);
+                    navigate(`/stories?video=${index}`);
+                  }}
+                  className="story-ring hover:scale-[1.03] transition-transform cursor-pointer shrink-0"
+                >
+                  <video
+                    src={videoUrl}
+                    className="w-full h-full object-cover rounded-full"
+                    muted
+                    playsInline
+                    preload="metadata"
+                  />
+                </button>
+              ))}
+            </div>
+            
+            {/* Градиентная маска по краям */}
+            <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-black/70 to-transparent pointer-events-none z-10"></div>
+            <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-black/70 to-transparent pointer-events-none z-10"></div>
           </div>
         </div>
 
