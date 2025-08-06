@@ -70,7 +70,7 @@ export default function Profile() {
           <div className="flex items-center space-x-4 mb-6">
             <div className="story-ring">
               <img 
-                src="/attached_assets/Avatar_1754480043650.jpg" 
+                src="attached_assets/Avatar_1754480043650.jpg" 
                 alt="Rich Besh"
                 className="w-16 h-16 rounded-full object-cover"
               />
