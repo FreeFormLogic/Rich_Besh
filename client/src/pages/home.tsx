@@ -63,9 +63,8 @@ const Home = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/90"></div>
         </div>
 
-        {/* Header */}
-        <div className="relative z-10 p-6">
-          {/* Profile Section */}
+        {/* Header с профилем */}
+        <div className="relative z-20 p-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <div className="relative">
@@ -97,43 +96,43 @@ const Home = () => {
               </span>
             </div>
           </div>
-          
-          {/* Stories Section - С отступом от профиля и запасом для hover */}
-          <div className="absolute top-32 left-6 right-6 z-30">
-            <div className="flex gap-3 overflow-x-auto py-6 px-2 scrollbar-hide" style={{ overflowY: 'visible', margin: '4px 0' }}>
-              {[
-                'https://richbesh.b-cdn.net/TG/9A703ADD-2C56-41CE-BA14-BFF553B28172.MP4',
-                'https://richbesh.b-cdn.net/TG/circle%201.mp4',
-                'https://richbesh.b-cdn.net/TG/circle%202.mp4',
-                'https://richbesh.b-cdn.net/TG/circle%203.mp4',
-                'https://richbesh.b-cdn.net/TG/circle%204.mp4',
-                'https://richbesh.b-cdn.net/TG/circle%205.mp4',
-                'https://richbesh.b-cdn.net/TG/circle%206.mp4',
-                'https://richbesh.b-cdn.net/TG/circle%207.mp4',
-                'https://richbesh.b-cdn.net/TG/circle%208.mp4',
-                'https://richbesh.b-cdn.net/TG/E97D113E-0D7D-4268-B08B-CB647C4EAA65.MOV',
-                'https://richbesh.b-cdn.net/TG/IMG_6817.MP4',
-                'https://richbesh.b-cdn.net/TG/IMG_8764.MOV'
-              ].filter(url => url.endsWith('.MP4') || url.endsWith('.MOV') || url.endsWith('.mp4')).slice(0, 6).map((videoUrl, index) => (
-                <button
-                  key={`story-${index}-${videoUrl.slice(-20)}`}
-                  type="button"
-                  onClick={() => {
-                    console.log(`Stories click #${index} -> /stories?video=${index}`);
-                    navigate(`/stories?video=${index}`);
-                  }}
-                  className="story-ring hover:scale-[1.03] transition-transform cursor-pointer shrink-0"
-                >
-                  <video
-                    src={videoUrl}
-                    className="w-full h-full object-cover rounded-full"
-                    muted
-                    playsInline
-                    preload="metadata"
-                  />
-                </button>
-              ))}
-            </div>
+        </div>
+
+        {/* Stories Section - Отдельный слой между профилем и контентом */}
+        <div className="relative z-30 px-6 mt-4 mb-8">
+          <div className="flex gap-3 overflow-x-auto py-2 scrollbar-hide">
+            {[
+              'https://richbesh.b-cdn.net/TG/9A703ADD-2C56-41CE-BA14-BFF553B28172.MP4',
+              'https://richbesh.b-cdn.net/TG/circle%201.mp4',
+              'https://richbesh.b-cdn.net/TG/circle%202.mp4',
+              'https://richbesh.b-cdn.net/TG/circle%203.mp4',
+              'https://richbesh.b-cdn.net/TG/circle%204.mp4',
+              'https://richbesh.b-cdn.net/TG/circle%205.mp4',
+              'https://richbesh.b-cdn.net/TG/circle%206.mp4',
+              'https://richbesh.b-cdn.net/TG/circle%207.mp4',
+              'https://richbesh.b-cdn.net/TG/circle%208.mp4',
+              'https://richbesh.b-cdn.net/TG/E97D113E-0D7D-4268-B08B-CB647C4EAA65.MOV',
+              'https://richbesh.b-cdn.net/TG/IMG_6817.MP4',
+              'https://richbesh.b-cdn.net/TG/IMG_8764.MOV'
+            ].filter(url => url.endsWith('.MP4') || url.endsWith('.MOV') || url.endsWith('.mp4')).slice(0, 6).map((videoUrl, index) => (
+              <button
+                key={`story-${index}-${videoUrl.slice(-20)}`}
+                type="button"
+                onClick={() => {
+                  console.log(`Stories click #${index} -> /stories?video=${index}`);
+                  navigate(`/stories?video=${index}`);
+                }}
+                className="story-ring hover:scale-[1.03] transition-transform cursor-pointer shrink-0"
+              >
+                <video
+                  src={videoUrl}
+                  className="w-full h-full object-cover rounded-full"
+                  muted
+                  playsInline
+                  preload="metadata"
+                />
+              </button>
+            ))}
           </div>
         </div>
 
