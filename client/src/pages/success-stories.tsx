@@ -33,7 +33,7 @@ const SuccessStories = () => {
       category: 'business',
       story: 'Открыла сеть beauty-салонов премиум класса',
       videoUrl: 'https://richbesh.b-cdn.net/IG/2025-07-23_3683192790368544979.mp4',
-      image: 'https://images.unsplash.com/photo-1494790108755-2616b612b29e?w=300&h=300&fit=crop',
+      image: 'https://images.unsplash.com/photo-1494790108755-2616b612b29e?w=300&h=300&fit=crop&crop=face',
       achievement: '30x рост дохода'
     },
     {

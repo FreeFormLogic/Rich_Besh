@@ -236,23 +236,23 @@ const Home = () => {
       </div>
 
       {/* Premium Stats */}
-      <div className="relative mt-16 mx-4 sm:mx-6 z-30">
-        <div className="bg-black/90 backdrop-blur-xl rounded-3xl border border-yellow-400/30 p-4 sm:p-8 shadow-2xl">
-          <div className="grid grid-cols-3 gap-2 sm:gap-8">
-            <div className="text-center">
-              <div className="text-2xl sm:text-4xl font-black bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent mb-1 sm:mb-2">
+      <div className="relative mt-16 mx-2 sm:mx-4 z-30">
+        <div className="bg-black/90 backdrop-blur-xl rounded-3xl border border-yellow-400/30 p-3 sm:p-6 shadow-2xl">
+          <div className="grid grid-cols-3 gap-1 sm:gap-4">
+            <div className="text-center px-1">
+              <div className="text-xl sm:text-3xl font-black bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent mb-1">
                 25K+
               </div>
               <div className="text-gray-300 text-xs sm:text-sm font-medium leading-tight">Учеников в элите</div>
             </div>
             <div className="text-center border-x border-gray-700/50 px-1">
-              <div className="text-2xl sm:text-4xl font-black bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent mb-1 sm:mb-2">
+              <div className="text-xl sm:text-3xl font-black bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent mb-1">
                 94%
               </div>
               <div className="text-gray-300 text-xs sm:text-sm font-medium leading-tight">Успешных результатов</div>
             </div>
-            <div className="text-center">
-              <div className="text-2xl sm:text-4xl font-black bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent mb-1 sm:mb-2">
+            <div className="text-center px-1">
+              <div className="text-xl sm:text-3xl font-black bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent mb-1">
                 $5M+
               </div>
               <div className="text-gray-300 text-xs sm:text-sm font-medium leading-tight">Заработано учениками</div>
@@ -456,7 +456,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="h-24"></div>
+      <div className="h-32"></div>
       <BottomNavigation />
     </div>
   );
