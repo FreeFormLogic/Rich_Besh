@@ -13,8 +13,8 @@ const ExclusiveContent = () => {
   
   const exclusiveVideos = baseInstagramPosts.slice(0, 12).map((post, index) => ({
     id: post.id,
-    title: post.description.split('.')[0].substring(0, 40) || `Эксклюзивный контент #${index + 1}`,
-    description: post.description.length > 60 ? `${post.description.substring(0, 60)}...` : post.description,
+    title: post.description.split('.')[0].substring(0, 50) || `Эксклюзивный контент #${index + 1}`,
+    description: post.description.length > 80 ? `${post.description.substring(0, 80)}...` : post.description,
     thumbnail: post.thumbnail,
     videoUrl: post.videoUrl || `https://richbesh.b-cdn.net/TG/circle%20${index + 1}.mp4`,
     duration: `${Math.floor(Math.random() * 20) + 5}:${Math.floor(Math.random() * 60).toString().padStart(2, '0')}`,
@@ -24,6 +24,98 @@ const ExclusiveContent = () => {
     uploadDate: `${Math.floor(Math.random() * 7) + 1} ${Math.random() > 0.5 ? 'дней' : 'недель'} назад`,
     profit: index % 3 === 0 ? `+${Math.floor(Math.random() * 500) + 100}K₽` : 'Премиум'
   }));
+    {
+      id: 2,
+      title: 'Анализ крипторынка на 2025',
+      description: 'Прогноз движения Bitcoin, Ethereum и альткоинов. Где будут деньги в следующем году',
+      thumbnail: 'https://richbesh.b-cdn.net/TG/photo_2025-08-06_00-03-14.jpg',
+      videoUrl: 'https://richbesh.b-cdn.net/TG/circle%201.mp4',
+      duration: '42:15',
+      views: '89.7K',
+      premium: true,
+      category: 'crypto',
+      uploadDate: '1 неделя назад',
+      profit: '+5.1M₽'
+    },
+    {
+      id: 3,
+      title: 'Психология миллионера',
+      description: 'Как я изменил свое мышление и начал зарабатывать миллионы. Личный опыт',
+      thumbnail: 'https://richbesh.b-cdn.net/TG/photo_2025-08-06_00-02-59.jpg',
+      videoUrl: 'https://richbesh.b-cdn.net/TG/circle%202.mp4',
+      duration: '35:20',
+      views: '124K',
+      premium: false,
+      category: 'mindset',
+      uploadDate: '3 дня назад',
+      profit: 'Безценно'
+    },
+    {
+      id: 4,
+      title: 'Разбор убыточных сделок',
+      description: 'Показываю свои ошибки и убытки. Учимся на моих промахах, чтобы не повторять их',
+      thumbnail: 'https://richbesh.b-cdn.net/TG/photo_2025-08-06_00-03-14.jpg',
+      videoUrl: 'https://richbesh.b-cdn.net/TG/circle%203.mp4',
+      duration: '19:33',
+      views: '67.8K',
+      premium: true,
+      category: 'education',
+      uploadDate: '5 дней назад',
+      profit: '-450K₽'
+    },
+    {
+      id: 5,
+      title: 'Мой торговый день',
+      description: 'Полный день торговли от пробуждения до закрытия позиций. Все сделки в реальном времени',
+      thumbnail: 'https://richbesh.b-cdn.net/TG/photo_2025-08-06_00-02-59.jpg',
+      videoUrl: 'https://richbesh.b-cdn.net/TG/circle%204.mp4',
+      duration: '1:15:22',
+      views: '156K',
+      premium: true,
+      category: 'daily',
+      uploadDate: '1 день назад',
+      profit: '+780K₽'
+    },
+    {
+      id: 6,
+      title: 'Как выбрать брокера',
+      description: 'Критерии выбора надежного брокера. Сравниваю топ-10 площадок для торговли',
+      thumbnail: 'https://richbesh.b-cdn.net/TG/photo_2025-08-06_00-03-14.jpg',
+      videoUrl: 'https://richbesh.b-cdn.net/TG/circle%205.mp4',
+      duration: '24:17',
+      views: '78.3K',
+      premium: false,
+      category: 'education',
+      uploadDate: '1 неделя назад',
+      profit: 'Обучение'
+    },
+    {
+      id: 7,
+      title: 'Инвестиции в недвижимость',
+      description: 'Мои инвестиции в недвижимость Дубая. Показываю объекты и доходность',
+      thumbnail: 'https://richbesh.b-cdn.net/TG/photo_2025-08-06_00-02-59.jpg',
+      videoUrl: 'https://richbesh.b-cdn.net/TG/circle%206.mp4',
+      duration: '31:45',
+      views: '92.1K',
+      premium: true,
+      category: 'investment',
+      uploadDate: '4 дня назад',
+      profit: '+12M₽'
+    },
+    {
+      id: 8,
+      title: 'Ошибки начинающих трейдеров',
+      description: 'Топ-15 ошибок, которые делают 99% новичков. Как их избежать с самого начала',
+      thumbnail: 'https://richbesh.b-cdn.net/TG/photo_2025-08-06_00-03-14.jpg',
+      videoUrl: 'https://richbesh.b-cdn.net/TG/circle%207.mp4',
+      duration: '26:33',
+      views: '203K',
+      premium: false,
+      category: 'education',
+      uploadDate: '2 недели назад',
+      profit: 'Обучение'
+    }
+  ];
 
   const categories = [
     { id: 'all', name: 'Все', icon: '🔥', count: exclusiveVideos.length },
@@ -46,7 +138,7 @@ const ExclusiveContent = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black text-white pb-32">
+    <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black text-white pb-20">
       {/* Header */}
       <div className="sticky top-0 z-50 bg-black/90 backdrop-blur-xl border-b border-yellow-400/20">
         <div className="flex items-center gap-4 p-6">
@@ -57,25 +149,32 @@ const ExclusiveContent = () => {
             <ArrowLeft className="w-6 h-6 text-yellow-400" />
           </button>
           
-          <div className="flex-1">
-            <h1 className="text-2xl font-bold text-white">Эксклюзивный контент</h1>
-            <p className="text-gray-400 text-sm">Закрытые материалы от Rich Besh</p>
-          </div>
-          
-          <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-4 py-2 rounded-full text-sm font-bold">
-            VIP
+          <div>
+            <h1 className="text-2xl font-black text-white">Эксклюзивный контент</h1>
+            <p className="text-gray-400">Закрытые материалы от Rich Besh</p>
           </div>
         </div>
       </div>
 
-      <div className="px-6 py-8">
+      <div className="p-6">
+        {/* Premium Banner */}
+        <div className="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-3xl p-6 mb-8">
+          <div className="flex items-center gap-4">
+            <Crown className="w-12 h-12 text-black" />
+            <div>
+              <h2 className="text-black text-xl font-black mb-2">VIP контент</h2>
+              <p className="text-black/80">Эксклюзивные материалы, которых нет в открытом доступе</p>
+            </div>
+          </div>
+        </div>
+
         {/* Categories */}
-        <div className="flex gap-3 overflow-x-auto pb-6 scrollbar-hide">
-          {categories.map((category) => (
+        <div className="flex gap-3 overflow-x-auto pb-4 mb-8">
+          {categories.map(category => (
             <button
               key={category.id}
               onClick={() => setSelectedCategory(category.id)}
-              className={`flex items-center gap-2 px-4 py-3 rounded-full whitespace-nowrap font-medium transition-all ${
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl whitespace-nowrap font-bold transition-all ${
                 selectedCategory === category.id
                   ? 'bg-yellow-400 text-black scale-105'
                   : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700/50'
@@ -109,9 +208,6 @@ const ExclusiveContent = () => {
                     src={video.thumbnail}
                     alt={video.title}
                     className="w-full h-full object-cover"
-                    onError={(e) => {
-                      e.currentTarget.src = 'https://richbesh.b-cdn.net/TG/photo_2025-08-06_00-02-59.jpg';
-                    }}
                   />
                   <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                     <div className="w-16 h-16 bg-yellow-400/90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-2xl">
@@ -135,12 +231,12 @@ const ExclusiveContent = () => {
                 
                 {/* Video Info */}
                 <div className="flex-1 p-6">
-                  <h3 className="text-white font-bold text-lg mb-2 group-hover:text-yellow-400 transition-colors line-clamp-2">
+                  <h3 className="text-white font-bold text-xl mb-2 group-hover:text-yellow-400 transition-colors">
                     {video.title}
                   </h3>
                   
                   <p className="text-gray-300 text-sm mb-4 leading-relaxed line-clamp-2">
-                    {video.description}
+                    {video.description.length > 80 ? `${video.description.substring(0, 80)}...` : video.description}
                   </p>
 
                   <div className="flex items-center justify-between">
@@ -180,7 +276,7 @@ const ExclusiveContent = () => {
                         e.stopPropagation();
                         navigate('/courses');
                       }}
-                      className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-6 py-3 rounded-xl font-bold hover:scale-105 transition-transform"
+                      className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-6 py-3 rounded-xl font-bold hover:scale-105 transition-all"
                     >
                       Получить доступ
                     </button>
@@ -191,38 +287,33 @@ const ExclusiveContent = () => {
           ))}
         </div>
 
-        {/* Premium Subscription Banner */}
-        <div className="mt-12 bg-gradient-to-r from-purple-900/50 to-pink-900/50 backdrop-blur-xl rounded-3xl p-8 border border-purple-500/30">
-          <div className="text-center">
-            <div className="w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Crown className="w-10 h-10 text-white" />
-            </div>
-            <h2 className="text-3xl font-black text-white mb-4">
-              Станьте VIP участником
+        {/* Bottom CTA */}
+        <div className="mt-12 text-center">
+          <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl p-8">
+            <h2 className="text-white text-2xl font-black mb-4">
+              Хочешь доступ ко всем материалам?
             </h2>
-            <p className="text-purple-200 text-lg mb-8">
-              Получите доступ ко всем эксклюзивным материалам и персональному менторству
+            <p className="text-white/90 mb-6">
+              Получи неограниченный доступ к закрытому контенту
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="space-y-3">
               <button 
                 onClick={() => navigate('/courses')}
-                className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-8 py-4 rounded-xl font-bold text-lg hover:scale-105 transition-transform"
+                className="w-full bg-white text-purple-600 py-4 rounded-2xl font-bold text-lg hover:bg-gray-100 transition-colors"
               >
-                Оформить подписку
+                VIP подписка - 9,999₽/месяц
               </button>
               
-              <button 
-                onClick={() => navigate('/consultations')}
-                className="border-2 border-yellow-400 text-yellow-400 px-8 py-4 rounded-xl font-bold text-lg hover:bg-yellow-400 hover:text-black transition-colors"
-              >
-                Персональная консультация
-              </button>
+              <p className="text-white/70 text-sm">
+                Все эксклюзивные материалы + личная поддержка
+              </p>
             </div>
           </div>
         </div>
       </div>
 
+      <div className="h-24"></div>
       <BottomNavigation />
     </div>
   );

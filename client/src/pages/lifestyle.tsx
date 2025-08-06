@@ -83,18 +83,18 @@ const Lifestyle = () => {
 
       {/* Stats */}
       <div className="px-4 -mt-8 relative z-10">
-        <div className="bg-gray-900/90 backdrop-blur-xl rounded-2xl p-6 border border-gray-700/50">
+        <div className="bg-gray-900/90 backdrop-blur-xl rounded-2xl p-6 border border-gray-700/50 mt-6">
           <div className="grid grid-cols-3 gap-4 text-center">
             <div>
-              <div className="text-2xl font-bold text-yellow-400">12</div>
+              <div className="text-2xl font-bold text-yellow-400">{baseInstagramPosts.length}</div>
               <div className="text-gray-400 text-sm">постов</div>
             </div>
             <div>
-              <div className="text-2xl font-bold text-green-400">1.2M</div>
+              <div className="text-2xl font-bold text-green-400">{Math.floor(baseInstagramPosts.reduce((sum, post) => sum + post.likes, 0) / 1000)}K</div>
               <div className="text-gray-400 text-sm">лайков</div>
             </div>
             <div>
-              <div className="text-2xl font-bold text-purple-400">25K</div>
+              <div className="text-2xl font-bold text-purple-400">{baseInstagramPosts.reduce((sum, post) => sum + post.comments, 0)}</div>
               <div className="text-gray-400 text-sm">комментариев</div>
             </div>
           </div>

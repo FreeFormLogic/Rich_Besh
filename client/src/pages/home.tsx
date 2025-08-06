@@ -116,7 +116,7 @@ const Home = () => {
             ].filter(url => url.endsWith('.MP4') || url.endsWith('.MOV') || url.endsWith('.mp4')).map((videoUrl, index) => (
               <button
                 key={index}
-                onClick={() => navigate('/stories')}
+                onClick={() => navigate(`/stories?video=${index}`)}
                 className="relative w-20 h-20 flex-shrink-0 rounded-full border-4 border-yellow-400 p-0.5 hover:scale-110 transition-all duration-300 z-20"
                 style={{ position: 'relative', transformOrigin: 'center' }}
               >

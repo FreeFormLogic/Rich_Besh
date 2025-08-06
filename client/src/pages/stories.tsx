@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { X, ChevronLeft, ChevronRight, Play, Volume2, VolumeX, ExternalLink, Crown } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 interface Story {
   id: number;
@@ -18,7 +18,10 @@ interface Story {
 
 const Stories = () => {
   const navigate = useNavigate();
-  const [currentStory, setCurrentStory] = useState(0);
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const videoIndex = parseInt(searchParams.get('video') || '0', 10);
+  const [currentStory, setCurrentStory] = useState(videoIndex);
   const [progress, setProgress] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(false);
