@@ -8,6 +8,32 @@ const Lifestyle = () => {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState('all');
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const categories = [
+    { id: 'all', label: 'Все', icon: Sparkles },
+    { id: 'luxury', label: 'Роскошь', icon: Crown },
+    { id: 'cars', label: 'Авто', icon: Car },
+    { id: 'travel', label: 'Путешествия', icon: Plane },
+    { id: 'lifestyle', label: 'Жизнь', icon: MapPin }
+  ];
+
+  // ИСПРАВЛЕНО: Используем ВСЕ реальные данные Instagram, а не только 12
+  const baseInstagramPosts = getInstagramPostsByCategory('all').map(post => ({
+    id: post.id,
+    image: post.thumbnail,
+    video: post.type === 'video' ? post.videoUrl : '',
+    caption: post.description,
+    likes: post.likes,
+    comments: post.comments,
+    category: post.category,
+    location: 'Dubai, UAE',
+    isVideo: post.type === 'video'
+  }));
+
+  // ПОКАЗЫВАЕМ ВСЕ ПОСТЫ
+  const filteredPosts = selectedCategory === 'all' 
+    ? baseInstagramPosts 
+    : baseInstagramPosts.filter(post => post.category === selectedCategory);
   
   // Восстанавливаем позицию скролла при возврате
   useEffect(() => {
@@ -37,32 +63,6 @@ const Lifestyle = () => {
       clearTimeout(timer);
     };
   }, [filteredPosts]);
-
-  const categories = [
-    { id: 'all', label: 'Все', icon: Sparkles },
-    { id: 'luxury', label: 'Роскошь', icon: Crown },
-    { id: 'cars', label: 'Авто', icon: Car },
-    { id: 'travel', label: 'Путешествия', icon: Plane },
-    { id: 'lifestyle', label: 'Жизнь', icon: MapPin }
-  ];
-
-  // ИСПРАВЛЕНО: Используем ВСЕ реальные данные Instagram, а не только 12
-  const baseInstagramPosts = getInstagramPostsByCategory('all').map(post => ({
-    id: post.id,
-    image: post.thumbnail,
-    video: post.type === 'video' ? post.videoUrl : '',
-    caption: post.description,
-    likes: post.likes,
-    comments: post.comments,
-    category: post.category,
-    location: 'Dubai, UAE',
-    isVideo: post.type === 'video'
-  }));
-
-  // ПОКАЗЫВАЕМ ВСЕ ПОСТЫ
-  const filteredPosts = selectedCategory === 'all' 
-    ? baseInstagramPosts 
-    : baseInstagramPosts.filter(post => post.category === selectedCategory);
 
   return (
     <div className="pb-32 bg-gradient-to-b from-black via-gray-900 to-black min-h-screen">
