@@ -155,10 +155,6 @@ const Home = () => {
           </div>
 
           {/* Stories Section - Сразу после профиля */}
-        </div>
-        
-        {/* Stories Section - от края до края экрана */}
-        <div className="relative z-20 mt-4 -mx-6">
           <div className="flex gap-3 overflow-x-auto scrollbar-hide pl-6 pr-6">
             {[
               'https://richbesh.b-cdn.net/TG/9A703ADD-2C56-41CE-BA14-BFF553B28172.MP4',
