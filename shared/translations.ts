@@ -68,7 +68,32 @@ export const translations = {
       aqua: 'Lifestyle и роскошь',
       royal: 'Lamborghini Yacht Experience',
       starting: 'Оцените это видео'
-    }
+    },
+    
+    // Home page content
+    pathToWealth: 'ПУТЬ К',
+    wealth: 'БОГАТСТВУ',
+    wealthDescription: 'Узнай секреты luxury lifestyle и научись зарабатывать',
+    millions: 'миллионы',
+    asIdo: 'как я',
+    startEarning: 'Начать зарабатывать',
+    vipCourses: 'VIP курсы',
+    studentsInElite: 'Учеников в элите',
+    successfulResults: 'Успешных результатов',
+    earnedByStudents: 'Заработано учениками',
+    whyChoose: 'Почему выбирают',
+    richBesh: 'Rich Besh',
+    exclusiveOpportunities: 'Эксклюзивные возможности для избранных',
+    
+    // Features
+    vipPredictions: 'VIP Прогнозы',
+    vipPredictionsDesc: 'Точные торговые сигналы с вероятностью успеха 94%',
+    coursesByRichBesh: 'Курсы от Rich Besh',
+    coursesByRichBeshDesc: 'Эксклюзивное обучение трейдингу и инвестициям',
+    lifestyleContentTitle: 'Lifestyle контент',
+    lifestyleContentDesc: 'Роскошная жизнь миллионера в Дубае',
+    tradingResultsTitle: 'Торговые результаты',
+    tradingResultsDesc: 'Реальные сделки и доходы в прямом эфире'
   },
   
   en: {
@@ -138,7 +163,32 @@ export const translations = {
       aqua: 'Lifestyle & Luxury',
       royal: 'Lamborghini Yacht Experience',
       starting: 'Rate this Video'
-    }
+    },
+    
+    // Home page content
+    pathToWealth: 'PATH TO',
+    wealth: 'WEALTH',
+    wealthDescription: 'Learn the secrets of luxury lifestyle and earn',
+    millions: 'millions',
+    asIdo: 'like me',
+    startEarning: 'Start Earning',
+    vipCourses: 'VIP Courses',
+    studentsInElite: 'Elite Students',
+    successfulResults: 'Success Rate',
+    earnedByStudents: 'Earned by Students',
+    whyChoose: 'Why Choose',
+    richBesh: 'Rich Besh',
+    exclusiveOpportunities: 'Exclusive opportunities for the chosen ones',
+    
+    // Features
+    vipPredictions: 'VIP Predictions',
+    vipPredictionsDesc: 'Precise trading signals with 94% success probability',
+    coursesByRichBesh: 'Rich Besh Courses',
+    coursesByRichBeshDesc: 'Exclusive trading and investment education',
+    lifestyleContentTitle: 'Lifestyle Content',
+    lifestyleContentDesc: 'Millionaire luxury life in Dubai',
+    tradingResultsTitle: 'Trading Results',
+    tradingResultsDesc: 'Real trades and profits live'
   }
 };
 

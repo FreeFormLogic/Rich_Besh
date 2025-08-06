@@ -139,26 +139,26 @@ const Home = () => {
   const features = [
     {
       icon: <TrendingUp className="w-8 h-8" />,
-      title: 'VIP Прогнозы',
-      description: 'Точные торговые сигналы с вероятностью успеха 94%',
+      title: t('vipPredictions'),
+      description: t('vipPredictionsDesc'),
       color: 'from-green-500 to-emerald-600'
     },
     {
       icon: <Crown className="w-8 h-8" />,
-      title: 'Курсы от Rich Besh',
-      description: 'Эксклюзивное обучение трейдингу и инвестициям',
+      title: t('coursesByRichBesh'),
+      description: t('coursesByRichBeshDesc'),
       color: 'from-yellow-500 to-orange-600'
     },
     {
       icon: <Sparkles className="w-8 h-8" />,
-      title: 'Lifestyle контент',
-      description: 'Роскошная жизнь миллионера в Дубае',
+      title: t('lifestyleContentTitle'),
+      description: t('lifestyleContentDesc'),
       color: 'from-purple-500 to-pink-600'
     },
     {
       icon: <Zap className="w-8 h-8" />,
-      title: 'Торговые результаты',
-      description: 'Реальные сделки и доходы в прямом эфире',
+      title: t('tradingResultsTitle'),
+      description: t('tradingResultsDesc'),
       color: 'from-blue-500 to-cyan-600'
     }
   ];
@@ -265,16 +265,16 @@ const Home = () => {
         <div className="absolute top-48 left-0 right-0 p-6 z-10">
           <div className="max-w-2xl">
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white mb-6 leading-none tracking-tight">
-              ПУТЬ К
+              {t('pathToWealth')}
               <br/>
               <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent animate-pulse">
-                БОГАТСТВУ
+                {t('wealth')}
               </span>
             </h1>
             
             <p className="text-white/90 text-lg sm:text-xl mb-8 font-medium leading-relaxed">
-              Узнай секреты luxury lifestyle и научись зарабатывать 
-              <span className="text-yellow-400 font-bold"> миллионы</span> как я
+              {t('wealthDescription')} 
+              <span className="text-yellow-400 font-bold"> {t('millions')}</span> {t('asIdo')}
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
@@ -283,7 +283,7 @@ const Home = () => {
                 className="group bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-6 sm:px-8 py-4 sm:py-5 rounded-2xl font-bold text-base sm:text-lg flex items-center justify-center gap-3 shadow-2xl transform hover:scale-105 transition-all duration-300 hover:shadow-yellow-400/25"
               >
                 <Play className="w-5 h-5 sm:w-6 sm:h-6 group-hover:scale-110 transition-transform" />
-                Начать зарабатывать
+                {t('startEarning')}
                 <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-1 transition-transform" />
               </button>
               
@@ -292,7 +292,7 @@ const Home = () => {
                 className="group bg-black/60 backdrop-blur-md text-white px-6 sm:px-8 py-4 sm:py-5 rounded-2xl font-bold text-base sm:text-lg flex items-center justify-center gap-3 border border-yellow-400/50 hover:border-yellow-400 transition-all duration-300"
               >
                 <Crown className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400" />
-                VIP курсы
+                {t('vipCourses')}
               </button>
             </div>
           </div>
@@ -307,19 +307,19 @@ const Home = () => {
               <div className="text-xl sm:text-3xl font-black bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent mb-1">
                 25K+
               </div>
-              <div className="text-gray-300 text-xs sm:text-sm font-medium leading-tight">Учеников в элите</div>
+              <div className="text-gray-300 text-xs sm:text-sm font-medium leading-tight">{t('studentsInElite')}</div>
             </div>
             <div className="text-center border-x border-gray-700/50 px-1">
               <div className="text-xl sm:text-3xl font-black bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent mb-1">
                 94%
               </div>
-              <div className="text-gray-300 text-xs sm:text-sm font-medium leading-tight">Успешных результатов</div>
+              <div className="text-gray-300 text-xs sm:text-sm font-medium leading-tight">{t('successfulResults')}</div>
             </div>
             <div className="text-center px-1">
               <div className="text-xl sm:text-3xl font-black bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent mb-1">
                 $5M+
               </div>
-              <div className="text-gray-300 text-xs sm:text-sm font-medium leading-tight">Заработано учениками</div>
+              <div className="text-gray-300 text-xs sm:text-sm font-medium leading-tight">{t('earnedByStudents')}</div>
             </div>
           </div>
         </div>
@@ -328,11 +328,11 @@ const Home = () => {
       {/* Features Section */}
       <div className="px-6 py-16">
         <h2 className="text-4xl font-black text-white mb-4 text-center">
-          Почему выбирают
-          <span className="text-yellow-400"> Rich Besh</span>
+          {t('whyChoose')}
+          <span className="text-yellow-400"> {t('richBesh')}</span>
         </h2>
         <p className="text-gray-400 text-center mb-12 text-lg">
-          Эксклюзивные возможности для избранных
+          {t('exclusiveOpportunities')}
         </p>
         
         <div className="space-y-6 max-w-4xl mx-auto">

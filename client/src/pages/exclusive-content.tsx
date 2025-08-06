@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Play, Crown, Eye, TrendingUp, Calendar, Clock, Lock, Star } from 'lucide-react';
 import BottomNavigation from '@/components/bottom-navigation';
+import { useLanguage } from '@/contexts/language-context';
 import { getInstagramPostsByCategory } from '@shared/instagram-data';
 
 // Кеш для превью
@@ -185,6 +186,7 @@ const VideoThumbnail = ({ videoUrl, title, className }: { videoUrl: string; titl
 
 const ExclusiveContent = () => {
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState('all');
 
   // Используем ТОЛЬКО видео контент для эксклюзивного контента
@@ -237,12 +239,12 @@ const ExclusiveContent = () => {
   });
 
   const categories = [
-    { id: 'all', name: 'Все', icon: '🔥', count: exclusiveVideos.length },
-    { id: 'luxury', name: 'Роскошь', icon: '💎', count: exclusiveVideos.filter(v => v.category === 'luxury').length },
-    { id: 'cars', name: 'Авто', icon: '🏎️', count: exclusiveVideos.filter(v => v.category === 'cars').length },
-    { id: 'daily', name: 'Трейдинг', icon: '📊', count: exclusiveVideos.filter(v => v.category === 'daily').length },
-    { id: 'education', name: 'Обучение', icon: '🎓', count: exclusiveVideos.filter(v => v.category === 'education').length },
-    { id: 'lifestyle', name: 'Лайфстайл', icon: '✨', count: exclusiveVideos.filter(v => v.category === 'lifestyle').length }
+    { id: 'all', name: t('categories.all'), icon: '🔥', count: exclusiveVideos.length },
+    { id: 'luxury', name: t('categories.luxury'), icon: '💎', count: exclusiveVideos.filter(v => v.category === 'luxury').length },
+    { id: 'cars', name: t('categories.cars'), icon: '🏎️', count: exclusiveVideos.filter(v => v.category === 'cars').length },
+    { id: 'daily', name: t('categories.strategies'), icon: '📊', count: exclusiveVideos.filter(v => v.category === 'daily').length },
+    { id: 'education', name: t('categories.education'), icon: '🎓', count: exclusiveVideos.filter(v => v.category === 'education').length },
+    { id: 'lifestyle', name: t('categories.lifestyle'), icon: '✨', count: exclusiveVideos.filter(v => v.category === 'lifestyle').length }
   ];
 
   const filteredVideos = selectedCategory === 'all' 
@@ -268,8 +270,8 @@ const ExclusiveContent = () => {
           </button>
           
           <div className="flex-1">
-            <h1 className="text-2xl font-bold text-white">Эксклюзивный контент</h1>
-            <p className="text-gray-400 text-sm">Закрытые материалы от Rich Besh</p>
+            <h1 className="text-2xl font-bold text-white">{t('exclusiveContent')}</h1>
+            <p className="text-gray-400 text-sm">{t('exclusiveOpportunities')}</p>
           </div>
           
           <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-4 py-2 rounded-full text-sm font-bold">
