@@ -190,14 +190,12 @@ const Stories = () => {
         const progressPercent = (video.currentTime / video.duration) * 100;
         setProgress(progressPercent);
         
-        if (video.currentTime >= video.duration) {
-          setShowPartnerAd(true);
-          setIsPlaying(false);
-          setProgress(100);
-          // Keep ad visible until user dismisses
-          // setTimeout(() => {
-          //   setShowPartnerAd(false);
-          // }, 8000);
+        if (video.currentTime >= video.duration && !showPartnerAd) {
+          setTimeout(() => {
+            setShowPartnerAd(true);
+            setIsPlaying(false);
+            setProgress(100);
+          }, 500);
         }
       }
     };

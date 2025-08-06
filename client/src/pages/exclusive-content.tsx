@@ -11,19 +11,25 @@ const ExclusiveContent = () => {
   // Используем реальные Instagram данные для эксклюзивного контента
   const baseInstagramPosts = getInstagramPostsByCategory('all');
   
-  const exclusiveVideos = baseInstagramPosts.slice(0, 12).map((post, index) => ({
-    id: post.id,
-    title: post.description.split('.')[0].substring(0, 40) || `Эксклюзивный контент #${index + 1}`,
-    description: post.description.length > 60 ? `${post.description.substring(0, 60)}...` : post.description,
+  const exclusiveVideos = baseInstagramPosts.slice(0, 12).map((post, index) => {
+    // Создаем короткий заголовок из первых слов
+    const titleWords = post.description.split(' ').slice(0, 4).join(' ');
+    const shortTitle = titleWords.length > 35 ? `${titleWords.substring(0, 35)}...` : titleWords;
+    
+    return {
+      id: post.id,
+      title: shortTitle || `Эксклюзивный контент #${index + 1}`,
+      description: post.description.length > 60 ? `${post.description.substring(0, 60)}...` : post.description,
     thumbnail: post.thumbnail,
     videoUrl: post.videoUrl || `https://richbesh.b-cdn.net/TG/circle%20${index + 1}.mp4`,
     duration: `${Math.floor(Math.random() * 20) + 5}:${Math.floor(Math.random() * 60).toString().padStart(2, '0')}`,
     views: `${Math.floor(post.likes / 1000)}K`,
     premium: index % 2 === 0,
-    category: post.category,
-    uploadDate: `${Math.floor(Math.random() * 7) + 1} ${Math.random() > 0.5 ? 'дней' : 'недель'} назад`,
-    profit: index % 3 === 0 ? `+${Math.floor(Math.random() * 500) + 100}K₽` : 'Премиум'
-  }));
+      category: post.category,
+      uploadDate: `${Math.floor(Math.random() * 7) + 1} ${Math.random() > 0.5 ? 'дней' : 'недель'} назад`,
+      profit: index % 3 === 0 ? `+${Math.floor(Math.random() * 500) + 100}K₽` : 'Премиум'
+    };
+  });
 
   const categories = [
     { id: 'all', name: 'Все', icon: '🔥', count: exclusiveVideos.length },
