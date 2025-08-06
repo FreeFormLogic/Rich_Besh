@@ -12,32 +12,14 @@ const ExclusiveContent = () => {
   const baseInstagramPosts = getInstagramPostsByCategory('all');
   
   const exclusiveVideos = baseInstagramPosts.slice(0, 12).map((post, index) => {
-    // Создаем ОЧЕНЬ короткий заголовок 
-    let shortTitle = 'Эксклюзивный контент';
-    
-    // Берем только первые 2-3 значимых слова
-    const words = post.description.split(' ').filter(word => word.length > 2);
-    if (words.length > 0) {
-      if (words[0].includes('Honored')) {
-        shortTitle = 'VIP встреча';
-      } else if (words.some(w => w.toLowerCase().includes('tesla') || w.toLowerCase().includes('автомобиль'))) {
-        shortTitle = 'Новый автомобиль';
-      } else if (words.some(w => w.toLowerCase().includes('дом') || w.toLowerCase().includes('house'))) {
-        shortTitle = 'Luxury недвижимость';
-      } else if (words.some(w => w.toLowerCase().includes('trade') || w.toLowerCase().includes('торг'))) {
-        shortTitle = 'Торговые результаты';
-      } else {
-        shortTitle = words.slice(0, 2).join(' ');
-        if (shortTitle.length > 20) {
-          shortTitle = shortTitle.substring(0, 20) + '...';
-        }
-      }
-    }
+    // Создаем короткий заголовок из первых слов
+    const titleWords = post.description.split(' ').slice(0, 4).join(' ');
+    const shortTitle = titleWords.length > 35 ? `${titleWords.substring(0, 35)}...` : titleWords;
     
     return {
       id: post.id,
-      title: shortTitle,
-      description: post.description.length > 50 ? `${post.description.substring(0, 50)}...` : post.description,
+      title: shortTitle || `Эксклюзивный контент #${index + 1}`,
+      description: post.description.length > 60 ? `${post.description.substring(0, 60)}...` : post.description,
       thumbnail: post.thumbnail,
       videoUrl: post.videoUrl || `https://richbesh.b-cdn.net/TG/circle%20${index + 1}.mp4`,
       duration: `${Math.floor(Math.random() * 20) + 5}:${Math.floor(Math.random() * 60).toString().padStart(2, '0')}`,
@@ -51,11 +33,12 @@ const ExclusiveContent = () => {
 
   const categories = [
     { id: 'all', name: 'Все', icon: '🔥', count: exclusiveVideos.length },
-    { id: 'luxury', name: 'Роскошь', icon: '💎', count: exclusiveVideos.filter(v => v.category === 'luxury').length },
-    { id: 'cars', name: 'Авто', icon: '🏎️', count: exclusiveVideos.filter(v => v.category === 'cars').length },
+    { id: 'strategy', name: 'Стратегии', icon: '🎯', count: exclusiveVideos.filter(v => v.category === 'strategy').length },
+    { id: 'crypto', name: 'Крипто', icon: '₿', count: exclusiveVideos.filter(v => v.category === 'crypto').length },
     { id: 'daily', name: 'Торговля', icon: '📊', count: exclusiveVideos.filter(v => v.category === 'daily').length },
     { id: 'education', name: 'Обучение', icon: '🎓', count: exclusiveVideos.filter(v => v.category === 'education').length },
-    { id: 'lifestyle', name: 'Лайфстайл', icon: '✨', count: exclusiveVideos.filter(v => v.category === 'lifestyle').length }
+    { id: 'mindset', name: 'Мышление', icon: '🧠', count: exclusiveVideos.filter(v => v.category === 'mindset').length },
+    { id: 'investment', name: 'Инвестиции', icon: '🏢', count: exclusiveVideos.filter(v => v.category === 'investment').length }
   ];
 
   const filteredVideos = selectedCategory === 'all' 
@@ -158,7 +141,7 @@ const ExclusiveContent = () => {
                 
                 {/* Video Info */}
                 <div className="flex-1 p-6">
-                  <h3 className="text-white font-bold text-lg mb-2 group-hover:text-yellow-400 transition-colors">
+                  <h3 className="text-white font-bold text-lg mb-2 group-hover:text-yellow-400 transition-colors line-clamp-2">
                     {video.title}
                   </h3>
                   

@@ -16,7 +16,7 @@ const Lifestyle = () => {
     { id: 'lifestyle', label: 'Жизнь', icon: MapPin }
   ];
 
-  // Используем ВСЕ реальные данные Instagram
+  // Используем реальные данные Instagram
   const baseInstagramPosts = getInstagramPostsByCategory('all').map(post => ({
     id: post.id,
     image: post.thumbnail,
@@ -29,7 +29,6 @@ const Lifestyle = () => {
     isVideo: post.type === 'video'
   }));
 
-  // ПОКАЗЫВАЕМ ВСЕ ПОСТЫ, а не только 12
   const filteredPosts = selectedCategory === 'all' 
     ? baseInstagramPosts 
     : baseInstagramPosts.filter(post => post.category === selectedCategory);
@@ -64,14 +63,15 @@ const Lifestyle = () => {
             loop
             playsInline
             className="w-full h-full object-cover"
-            src="https://richbesh.b-cdn.net/TG/circle%201.mp4"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+          >
+            <source src="https://richbesh.b-cdn.net/IG/2025-07-21_3681517492775539740.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
         </div>
         
-        <div className="absolute bottom-8 left-6 right-6">
-          <h2 className="text-4xl font-black text-white mb-4 leading-tight">
-            Эксклюзивные моменты из жизни
+        <div className="absolute bottom-0 left-0 right-0 p-6">
+          <h2 className="text-4xl font-black text-white mb-2">
+            Роскошная жизнь
             <br />
             <span className="text-yellow-400">Rich Besh</span>
           </h2>
@@ -124,12 +124,8 @@ const Lifestyle = () => {
         </div>
       </div>
 
-      {/* Posts Grid - ВСЕ ПОСТЫ */}
+      {/* Posts Grid */}
       <div className="px-4 pb-6">
-        <div className="text-white mb-4 text-center">
-          <p className="text-gray-400">Показано {filteredPosts.length} из {baseInstagramPosts.length} постов</p>
-        </div>
-        
         <div className="grid grid-cols-1 gap-6">
           {filteredPosts.map((post) => (
             <div
@@ -210,6 +206,7 @@ const Lifestyle = () => {
         </div>
       </div>
 
+      <div className="h-24"></div>
       <BottomNavigation />
     </div>
   );

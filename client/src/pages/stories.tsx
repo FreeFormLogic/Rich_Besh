@@ -4,12 +4,11 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 interface Story {
   id: number;
-  type: 'video' | 'image';
+  type: 'video';
   url: string;
-  thumbnail?: string;
   title: string;
   description: string;
-  duration?: number;
+  duration: number;
   ctaText: string;
   ctaLink: string;
   winAmount?: string;
@@ -24,92 +23,91 @@ const Stories = () => {
   const [currentStory, setCurrentStory] = useState(videoIndex);
   const [progress, setProgress] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
   const [showPartnerAd, setShowPartnerAd] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const progressIntervalRef = useRef<NodeJS.Timeout>();
+  const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const stories: Story[] = [
     {
       id: 1,
       type: 'video',
       url: 'https://richbesh.b-cdn.net/TG/9A703ADD-2C56-41CE-BA14-BFF553B28172.MP4',
-      title: 'Заработок на форексе',
-      description: 'Показываю реальную сделку с прибылью. Смотри как я зарабатываю деньги прямо сейчас!',
-      duration: 20,
-      ctaText: 'Начать торговать на Forex',
-      ctaLink: 'https://forexclub.com/richbesh',
-      winAmount: '+125,000₽',
+      title: 'Торговые результаты',
+      description: 'Показываю реальные результаты торговли на форекс - миллионы в прибыли!',
+      duration: 15,
+      ctaText: 'Начать торговлю',
+      ctaLink: 'https://iqoption.com/richbesh',
+      winAmount: '+1,250,000₽',
       category: 'trading'
     },
     {
       id: 2,
       type: 'video',
       url: 'https://richbesh.b-cdn.net/TG/circle%201.mp4',
-      title: 'Бинарные опционы',
-      description: 'Быстрый заработок на бинарных опционах. Показываю точки входа и стратегию.',
-      duration: 15,
-      ctaText: 'Попробовать IQ Option',
-      ctaLink: 'https://iqoption.com/richbesh',
-      winAmount: '+85,000₽',
-      category: 'trading'
+      title: 'Luxury жизнь',
+      description: 'Мой день в Дубае - частный джет, яхты, дорогие рестораны',
+      duration: 18,
+      ctaText: 'Узнать секреты',
+      ctaLink: '/courses',
+      category: 'lifestyle'
     },
     {
       id: 3,
       type: 'video',
       url: 'https://richbesh.b-cdn.net/TG/circle%202.mp4',
-      title: 'Роскошная жизнь',
-      description: 'Результаты моего трейдинга - новая машина и квартира в Дубае',
-      duration: 18,
-      ctaText: 'Изучить мой курс',
-      ctaLink: '/courses',
-      category: 'lifestyle'
+      title: 'Крипто прогноз',
+      description: 'Bitcoin достигнет 150,000$ в 2025. Разбираю почему и как заработать',
+      duration: 20,
+      ctaText: 'Изучить крипто',
+      ctaLink: 'https://forexclub.com/richbesh',
+      winAmount: '+850,000₽',
+      category: 'trading'
     },
     {
       id: 4,
       type: 'video',
       url: 'https://richbesh.b-cdn.net/TG/circle%203.mp4',
-      title: 'Криптовалюты',
-      description: 'Торгую криптой и показываю свои позиции. Большие возможности для заработка!',
-      duration: 22,
-      ctaText: 'Торговать криптой',
-      ctaLink: 'https://binance.com/richbesh',
-      winAmount: '+200,000₽',
-      category: 'trading'
+      title: 'Мой офис',
+      description: 'Экскурсия по моему трейдинг офису в центре Москвы стоимостью 50 млн',
+      duration: 16,
+      ctaText: 'Стать успешным',
+      ctaLink: '/consultations',
+      category: 'lifestyle'
     },
     {
       id: 5,
       type: 'video',
       url: 'https://richbesh.b-cdn.net/TG/circle%204.mp4',
-      title: 'Успех в трейдинге',
-      description: 'Делюсь секретами прибыльной торговли и психологией успешного трейдера',
-      duration: 25,
-      ctaText: 'Записаться на консультацию',
-      ctaLink: '/consultations',
-      category: 'course'
+      title: 'Стратегия дня',
+      description: 'Разбираю сделки которые принесли мне 500,000₽ за один день',
+      duration: 22,
+      ctaText: 'Освоить стратегию',
+      ctaLink: '/courses',
+      winAmount: '+500,000₽',
+      category: 'trading'
     },
     {
       id: 6,
       type: 'video',
       url: 'https://richbesh.b-cdn.net/TG/circle%205.mp4',
-      title: 'Личный брендинг',
-      description: 'Как я построил свой бренд в трейдинге и стал зарабатывать миллионы',
-      duration: 16,
-      ctaText: 'Получить VIP доступ',
-      ctaLink: '/courses',
+      title: 'Новый автомобиль',
+      description: 'Покупаю новый Lamborghini на деньги от трейдинга - мечта сбылась!',
+      duration: 13,
+      ctaText: 'Заработать на авто',
+      ctaLink: 'https://iqoption.com/richbesh',
       category: 'lifestyle'
     },
     {
       id: 7,
       type: 'video',
       url: 'https://richbesh.b-cdn.net/TG/circle%206.mp4',
-      title: 'Инвестиции',
-      description: 'Показываю свой инвестиционный портфель и стратегии долгосрочного заработка',
+      title: 'Обучение учеников',
+      description: 'Провожу закрытую сессию для VIP учеников - делюсь секретами прибыли',
       duration: 19,
-      ctaText: 'Начать инвестировать',
-      ctaLink: 'https://tinkoff.com/richbesh',
-      winAmount: '+350,000₽',
-      category: 'trading'
+      ctaText: 'Стать VIP учеником',
+      ctaLink: '/courses',
+      category: 'course'
     },
     {
       id: 8,
@@ -176,10 +174,10 @@ const Stories = () => {
     const video = videoRef.current;
     if (!video) return;
 
-    // Reset video when story changes
     video.currentTime = 0;
     setProgress(0);
-    video.src = currentStoryData.url; // Set new video source
+    setShowPartnerAd(false);
+    video.src = currentStoryData.url;
     
     if (isPlaying) {
       video.play().catch(console.error);
@@ -190,68 +188,34 @@ const Stories = () => {
         const progressPercent = (video.currentTime / video.duration) * 100;
         setProgress(progressPercent);
         
-        if (video.currentTime >= video.duration && !showPartnerAd) {
-          setTimeout(() => {
-            setShowPartnerAd(true);
-            setIsPlaying(false);
-            setProgress(100);
-          }, 500);
+        // Показываем рекламу в конце видео
+        if (progressPercent >= 99 && !showPartnerAd) {
+          setShowPartnerAd(true);
+          setIsPlaying(false);
         }
       }
     };
 
+    const handleVideoEnd = () => {
+      setShowPartnerAd(true);
+      setIsPlaying(false);
+      setProgress(100);
+    };
+
     video.addEventListener('timeupdate', handleTimeUpdate);
+    video.addEventListener('ended', handleVideoEnd);
 
     return () => {
       video.removeEventListener('timeupdate', handleTimeUpdate);
+      video.removeEventListener('ended', handleVideoEnd);
     };
-  }, [currentStory, isPlaying]);
-
-  useEffect(() => {
-    if (isPlaying && currentStoryData) {
-      const duration = currentStoryData.duration || 15;
-      const interval = 100; // Update every 100ms
-      const increment = (interval / (duration * 1000)) * 100;
-
-      progressIntervalRef.current = setInterval(() => {
-        setProgress(prev => {
-          if (prev >= 100) {
-            nextStory();
-            return 0;
-          }
-          return prev + increment;
-        });
-      }, interval);
-    } else {
-      if (progressIntervalRef.current) {
-        clearInterval(progressIntervalRef.current);
-      }
-    }
-
-    return () => {
-      if (progressIntervalRef.current) {
-        clearInterval(progressIntervalRef.current);
-      }
-    };
-  }, [isPlaying, currentStory]);
-
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.muted = isMuted;
-      if (isPlaying) {
-        videoRef.current.play();
-      } else {
-        videoRef.current.pause();
-      }
-    }
-  }, [isPlaying, isMuted, currentStory]);
+  }, [currentStory, isPlaying, showPartnerAd]);
 
   const nextStory = () => {
-    setShowPartnerAd(false);
     if (currentStory < stories.length - 1) {
       setCurrentStory(currentStory + 1);
       setProgress(0);
-      setIsPlaying(true);
+      setShowPartnerAd(false);
     } else {
       navigate('/');
     }
@@ -261,43 +225,57 @@ const Stories = () => {
     if (currentStory > 0) {
       setCurrentStory(currentStory - 1);
       setProgress(0);
+      setShowPartnerAd(false);
     }
   };
 
-  const togglePlayPause = () => {
-    setIsPlaying(!isPlaying);
-  };
+  const handlePlayPause = () => {
+    const video = videoRef.current;
+    if (!video) return;
 
-  const toggleMute = () => {
-    setIsMuted(!isMuted);
-  };
-
-  const getCategoryColor = (category: string) => {
-    switch (category) {
-      case 'trading': return 'from-green-500 to-emerald-600';
-      case 'lifestyle': return 'from-yellow-400 to-orange-500';
-      case 'course': return 'from-purple-500 to-pink-600';
-      default: return 'from-gray-500 to-gray-600';
+    if (isPlaying) {
+      video.pause();
+      setIsPlaying(false);
+    } else {
+      video.play();
+      setIsPlaying(true);
     }
   };
 
-  const getCategoryIcon = (category: string) => {
-    switch (category) {
-      case 'trading': return '📈';
-      case 'lifestyle': return '💎';
-      case 'course': return '🎓';
-      default: return '⭐';
+  // Партнерские предложения
+  const partnerOffers = [
+    {
+      id: 1,
+      title: 'IQ Option',
+      subtitle: 'Начни торговать как Rich Besh',
+      description: 'Получи бонус 100% на депозит и торгуй теми же инструментами, что и я',
+      bonus: 'Бонус 100%',
+      action: 'Получить бонус',
+      link: 'https://iqoption.com/richbesh',
+      color: 'from-green-500 to-emerald-600'
+    },
+    {
+      id: 2,
+      title: 'ForexClub',
+      subtitle: 'Профессиональный трейдинг',
+      description: 'Торгуй на Форекс с минимальными спредами и максимальным кредитным плечом',
+      bonus: 'Без комиссий',
+      action: 'Начать торговлю',
+      link: 'https://forexclub.com/richbesh',
+      color: 'from-blue-500 to-cyan-600'
     }
-  };
+  ];
+
+  const randomOffer = partnerOffers[Math.floor(Math.random() * partnerOffers.length)];
 
   return (
-    <div className="fixed inset-0 z-50 bg-black">
-      {/* Progress Bars */}
-      <div className="absolute top-0 left-0 right-0 z-20 flex gap-1 p-4">
+    <div className="fixed inset-0 bg-black z-50 flex flex-col">
+      {/* Progress bars */}
+      <div className="flex gap-1 p-2">
         {stories.map((_, index) => (
           <div key={index} className="flex-1 h-1 bg-white/30 rounded-full overflow-hidden">
             <div 
-              className="h-full bg-white rounded-full transition-all duration-100 ease-linear"
+              className="h-full bg-white transition-all duration-300"
               style={{ 
                 width: index < currentStory ? '100%' : 
                        index === currentStory ? `${progress}%` : '0%' 
@@ -308,151 +286,132 @@ const Stories = () => {
       </div>
 
       {/* Header */}
-      <div className="absolute top-12 left-0 right-0 z-20 flex items-center justify-between p-4">
+      <div className="absolute top-12 left-0 right-0 z-10 flex items-center justify-between p-4">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 flex items-center justify-center">
-            <span className="text-lg font-bold text-black">RB</span>
+            <Crown className="w-6 h-6 text-black" />
           </div>
           <div>
-            <h3 className="text-white font-bold">Rich Besh</h3>
-            <p className="text-white/70 text-sm">Только что</p>
+            <h3 className="text-white font-semibold">Rich Besh</h3>
+            <p className="text-white/70 text-sm">{currentStoryData.title}</p>
           </div>
         </div>
         
-        <button 
-          onClick={() => navigate('/')}
-          className="p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
-        >
-          <X className="w-6 h-6" />
-        </button>
+        <div className="flex items-center gap-2">
+          <button 
+            onClick={() => setIsMuted(!isMuted)}
+            className="p-2 rounded-full bg-black/50 text-white"
+          >
+            {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+          </button>
+          <button 
+            onClick={() => navigate('/')}
+            className="p-2 rounded-full bg-black/50 text-white"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
       </div>
 
-      {/* Navigation Areas */}
-      <button 
-        onClick={prevStory}
-        className="absolute left-0 top-0 w-1/3 h-full z-10 flex items-center justify-start pl-4"
-        disabled={currentStory === 0}
-      >
-        {currentStory > 0 && (
-          <ChevronLeft className="w-8 h-8 text-white/70" />
-        )}
-      </button>
-
-      <button 
-        onClick={nextStory}
-        className="absolute right-0 top-0 w-1/3 h-full z-10 flex items-center justify-end pr-4"
-      >
-        <ChevronRight className="w-8 h-8 text-white/70" />
-      </button>
-
-      {/* Main Content */}
-      <div className="relative w-full h-full flex items-center justify-center">
-        {currentStoryData.type === 'video' ? (
-          <video
-            ref={videoRef}
-            className="w-full h-full object-cover"
-            loop
-            playsInline
-            muted={isMuted}
-            onLoadedData={() => setProgress(0)}
-          >
-            <source src={currentStoryData.url} type="video/mp4" />
-          </video>
-        ) : (
-          <img 
-            src={currentStoryData.url} 
-            alt={currentStoryData.title}
-            className="w-full h-full object-cover"
-          />
-        )}
-
-        {/* Partner Offers - Show only when ad should show */}
-        {showPartnerAd && (
-          <div className="absolute bottom-32 left-4 right-4 z-20">
-            <div className="bg-black/80 backdrop-blur-xl rounded-2xl p-4">
-              <h3 className="text-white text-lg font-bold mb-4 text-center">
-                Начни зарабатывать как Rich Besh!
-              </h3>
-              <div className="space-y-3">
-                <div className="bg-gradient-to-r from-blue-600 to-cyan-500 rounded-xl p-4">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-                      <span className="text-blue-600 text-sm font-black">IQ</span>
-                    </div>
-                    <div>
-                      <h4 className="text-white font-bold text-sm">IQ Option</h4>
-                      <p className="text-blue-100 text-xs">Депозит от 10$</p>
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => {
-                      window.open('https://iqoption.com/richbesh');
-                      setShowPartnerAd(false);
-                    }}
-                    className="w-full bg-white text-blue-600 py-2 rounded-lg font-bold text-sm hover:scale-105 transition-all"
-                  >
-                    Начать торговать
-                  </button>
-                </div>
-
-                <div className="bg-gradient-to-r from-orange-600 to-red-500 rounded-xl p-4">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-                      <span className="text-orange-600 text-sm font-black">FX</span>
-                    </div>
-                    <div>
-                      <h4 className="text-white font-bold text-sm">ForexClub</h4>
-                      <p className="text-orange-100 text-xs">Бонус $100</p>
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => {
-                      window.open('https://forexclub.com/richbesh');
-                      setShowPartnerAd(false);
-                    }}
-                    className="w-full bg-white text-orange-600 py-2 rounded-lg font-bold text-sm hover:scale-105 transition-all"
-                  >
-                    Получить бонус
-                  </button>
-                  
-                  <button
-                    onClick={() => setShowPartnerAd(false)}
-                    className="mt-4 w-full bg-gray-600 text-white py-2 rounded-lg font-bold text-sm hover:bg-gray-700 transition-all"
-                  >
-                    Пропустить
-                  </button>
-                </div>
-              </div>
-            </div>
+      {/* Video */}
+      <div className="flex-1 relative bg-black flex items-center justify-center">
+        <video
+          ref={videoRef}
+          className="w-full h-full object-cover"
+          muted={isMuted}
+          playsInline
+          onClick={handlePlayPause}
+        />
+        
+        {/* Play/Pause overlay */}
+        {!isPlaying && !showPartnerAd && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+            <button 
+              onClick={handlePlayPause}
+              className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm"
+            >
+              <Play className="w-10 h-10 text-white ml-1" />
+            </button>
           </div>
         )}
 
-        {/* Control Buttons */}
-        <div className="absolute bottom-8 left-4 right-4 z-20 flex justify-center gap-4">
-          <button
-            onClick={togglePlayPause}
-            className="p-3 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
-          >
-            {isPlaying ? (
-              <div className="w-4 h-4 flex gap-1">
-                <div className="w-1 h-4 bg-white rounded"></div>
-                <div className="w-1 h-4 bg-white rounded"></div>
-              </div>
-            ) : (
-              <Play className="w-4 h-4" />
-            )}
-          </button>
-
-          {currentStoryData.type === 'video' && (
-            <button
-              onClick={toggleMute}
-              className="p-3 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
-            >
-              {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-            </button>
-          )}
-        </div>
+        {/* Navigation areas */}
+        <button 
+          onClick={prevStory}
+          className="absolute left-0 top-0 w-1/3 h-full z-10"
+          disabled={currentStory === 0}
+        />
+        <button 
+          onClick={nextStory}
+          className="absolute right-0 top-0 w-1/3 h-full z-10"
+        />
       </div>
+
+      {/* Story info */}
+      <div className="absolute bottom-20 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
+        <h2 className="text-white text-xl font-bold mb-2">{currentStoryData.title}</h2>
+        <p className="text-white/90 mb-4">{currentStoryData.description}</p>
+        
+        {currentStoryData.winAmount && (
+          <div className="bg-green-500/20 border border-green-500 rounded-lg p-3 mb-4">
+            <div className="text-green-400 font-bold text-lg">{currentStoryData.winAmount}</div>
+            <div className="text-green-300 text-sm">Результат за сессию</div>
+          </div>
+        )}
+
+        <button 
+          onClick={() => window.open(currentStoryData.ctaLink, '_blank')}
+          className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-black font-bold py-3 px-6 rounded-xl flex items-center justify-center gap-2 hover:scale-105 transition-transform"
+        >
+          {currentStoryData.ctaText}
+          <ExternalLink className="w-5 h-5" />
+        </button>
+      </div>
+
+      {/* Partner Advertisement Modal */}
+      {showPartnerAd && (
+        <div className="absolute inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center p-6 z-50">
+          <div className="bg-gray-900 rounded-3xl p-8 max-w-md w-full border border-gray-700">
+            <div className="text-center mb-6">
+              <div className={`w-20 h-20 rounded-full bg-gradient-to-r ${randomOffer.color} flex items-center justify-center mx-auto mb-4`}>
+                <Crown className="w-10 h-10 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-2">{randomOffer.title}</h3>
+              <p className="text-yellow-400 font-semibold">{randomOffer.subtitle}</p>
+            </div>
+
+            <div className="mb-6">
+              <p className="text-gray-300 text-center leading-relaxed mb-4">
+                {randomOffer.description}
+              </p>
+              
+              <div className="bg-green-500/20 border border-green-500 rounded-lg p-4 text-center">
+                <div className="text-green-400 font-bold text-lg">{randomOffer.bonus}</div>
+                <div className="text-green-300 text-sm">Эксклюзивное предложение</div>
+              </div>
+            </div>
+
+            <div className="space-y-3">
+              <button 
+                onClick={() => window.open(randomOffer.link, '_blank')}
+                className={`w-full bg-gradient-to-r ${randomOffer.color} text-white font-bold py-4 px-6 rounded-xl hover:scale-105 transition-transform`}
+              >
+                {randomOffer.action}
+              </button>
+              
+              <button 
+                onClick={() => {
+                  setShowPartnerAd(false);
+                  nextStory();
+                }}
+                className="w-full bg-gray-800 text-gray-300 font-medium py-3 px-6 rounded-xl hover:bg-gray-700 transition-colors"
+              >
+                Продолжить просмотр
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
