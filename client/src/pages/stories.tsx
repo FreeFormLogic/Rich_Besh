@@ -188,18 +188,15 @@ const Stories = () => {
         const progressPercent = (video.currentTime / video.duration) * 100;
         setProgress(progressPercent);
         
-        // Показываем рекламу в конце видео
-        if (progressPercent >= 99 && !showPartnerAd) {
-          setShowPartnerAd(true);
-          setIsPlaying(false);
-        }
+        // Убираем показ рекламы во время видео
       }
     };
 
     const handleVideoEnd = () => {
-      setShowPartnerAd(true);
-      setIsPlaying(false);
-      setProgress(100);
+      // Автоматически переходим к следующему Stories без показа рекламы
+      setTimeout(() => {
+        nextStory();
+      }, 1000);
     };
 
     video.addEventListener('timeupdate', handleTimeUpdate);
@@ -347,8 +344,8 @@ const Stories = () => {
         />
       </div>
 
-      {/* Story info */}
-      <div className="absolute bottom-20 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent">
+      {/* Story info - Always visible */}
+      <div className="absolute bottom-20 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent">
         <h2 className="text-white text-xl font-bold mb-2">{currentStoryData.title}</h2>
         <p className="text-white/90 mb-4">{currentStoryData.description}</p>
         
@@ -368,50 +365,7 @@ const Stories = () => {
         </button>
       </div>
 
-      {/* Partner Advertisement Modal */}
-      {showPartnerAd && (
-        <div className="absolute inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center p-6 z-50">
-          <div className="bg-gray-900 rounded-3xl p-8 max-w-md w-full border border-gray-700">
-            <div className="text-center mb-6">
-              <div className={`w-20 h-20 rounded-full bg-gradient-to-r ${randomOffer.color} flex items-center justify-center mx-auto mb-4`}>
-                <Crown className="w-10 h-10 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold text-white mb-2">{randomOffer.title}</h3>
-              <p className="text-yellow-400 font-semibold">{randomOffer.subtitle}</p>
-            </div>
-
-            <div className="mb-6">
-              <p className="text-gray-300 text-center leading-relaxed mb-4">
-                {randomOffer.description}
-              </p>
-              
-              <div className="bg-green-500/20 border border-green-500 rounded-lg p-4 text-center">
-                <div className="text-green-400 font-bold text-lg">{randomOffer.bonus}</div>
-                <div className="text-green-300 text-sm">Эксклюзивное предложение</div>
-              </div>
-            </div>
-
-            <div className="space-y-3">
-              <button 
-                onClick={() => window.open(randomOffer.link, '_blank')}
-                className={`w-full bg-gradient-to-r ${randomOffer.color} text-white font-bold py-4 px-6 rounded-xl hover:scale-105 transition-transform`}
-              >
-                {randomOffer.action}
-              </button>
-              
-              <button 
-                onClick={() => {
-                  setShowPartnerAd(false);
-                  nextStory();
-                }}
-                className="w-full bg-gray-800 text-gray-300 font-medium py-3 px-6 rounded-xl hover:bg-gray-700 transition-colors"
-              >
-                Продолжить просмотр
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Убираем модальную рекламу - реклама теперь всегда внизу */}
     </div>
   );
 };

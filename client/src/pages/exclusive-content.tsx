@@ -12,25 +12,25 @@ const ExclusiveContent = () => {
   const baseInstagramPosts = getInstagramPostsByCategory('all');
   
   const exclusiveVideos = baseInstagramPosts.slice(0, 12).map((post, index) => {
-    // Создаем ОЧЕНЬ короткий заголовок 
+    // Создаем ОЧЕНЬ короткий заголовок - максимум 2 слова
     let shortTitle = 'Эксклюзивный контент';
     
-    // Берем только первые 2-3 значимых слова
-    const words = post.description.split(' ').filter(word => word.length > 2);
-    if (words.length > 0) {
-      if (words[0].includes('Honored')) {
-        shortTitle = 'VIP встреча';
-      } else if (words.some(w => w.toLowerCase().includes('tesla') || w.toLowerCase().includes('автомобиль'))) {
-        shortTitle = 'Новый автомобиль';
-      } else if (words.some(w => w.toLowerCase().includes('дом') || w.toLowerCase().includes('house'))) {
-        shortTitle = 'Luxury недвижимость';
-      } else if (words.some(w => w.toLowerCase().includes('trade') || w.toLowerCase().includes('торг'))) {
-        shortTitle = 'Торговые результаты';
-      } else {
-        shortTitle = words.slice(0, 2).join(' ');
-        if (shortTitle.length > 20) {
-          shortTitle = shortTitle.substring(0, 20) + '...';
-        }
+    // Специальные правила для проблемных постов
+    if (post.description.includes('Honored to be Invited')) {
+      shortTitle = 'VIP встреча';
+    } else if (post.description.toLowerCase().includes('tesla') || post.description.toLowerCase().includes('автомобиль')) {
+      shortTitle = 'Luxury авто';
+    } else if (post.description.toLowerCase().includes('дом') || post.description.toLowerCase().includes('house')) {
+      shortTitle = 'Недвижимость';
+    } else if (post.description.toLowerCase().includes('trade') || post.description.toLowerCase().includes('торг')) {
+      shortTitle = 'Торговля';
+    } else if (post.description.toLowerCase().includes('дубай') || post.description.toLowerCase().includes('dubai')) {
+      shortTitle = 'Дубай';
+    } else {
+      // Берем только первое значимое слово
+      const words = post.description.split(' ').filter(word => word.length > 3);
+      if (words.length > 0) {
+        shortTitle = words[0].length > 15 ? words[0].substring(0, 15) + '...' : words[0];
       }
     }
     
