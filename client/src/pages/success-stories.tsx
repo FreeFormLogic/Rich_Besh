@@ -6,6 +6,7 @@ import BottomNavigation from '@/components/bottom-navigation';
 const SuccessStories = () => {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [imageErrors, setImageErrors] = useState<Record<number, boolean>>({});
 
   const successStories = [
     {
@@ -19,7 +20,7 @@ const SuccessStories = () => {
       category: 'trading',
       story: 'Работал обычным менеджером, теперь торгую на международных рынках',
       videoUrl: 'https://richbesh.b-cdn.net/IG/2025-07-21_3681517492775539740.mp4',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop',
+      image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&h=300&fit=crop&crop=face',
       achievement: '55x рост дохода'
     },
     {
@@ -33,7 +34,7 @@ const SuccessStories = () => {
       category: 'business',
       story: 'Открыла сеть beauty-салонов премиум класса',
       videoUrl: 'https://richbesh.b-cdn.net/IG/2025-07-23_3683192790368544979.mp4',
-      image: 'https://images.unsplash.com/photo-1494790108755-2616b612b29e?w=300&h=300&fit=crop&crop=face',
+      image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop&crop=face',
       achievement: '30x рост дохода'
     },
     {
@@ -47,7 +48,7 @@ const SuccessStories = () => {
       category: 'crypto',
       story: 'Создал успешный крипто-фонд с управлением $50M',
       videoUrl: 'https://richbesh.b-cdn.net/IG/2025-04-26_3619375607072811190.mp4',
-      image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop',
+      image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=300&h=300&fit=crop&crop=face',
       achievement: '91x рост дохода'
     }
   ];
@@ -160,18 +161,19 @@ const SuccessStories = () => {
             {/* Story Content */}
             <div className="p-6">
               <div className="flex items-start gap-4 mb-6">
-                <div className="relative w-16 h-16 rounded-full border-2 border-yellow-400 overflow-hidden bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center">
-                  <img 
-                    src={story.image}
-                    alt={story.name}
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      e.currentTarget.style.display = 'none';
-                    }}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center text-black font-bold text-lg">
-                    {story.name.charAt(0)}
-                  </div>
+                <div className="relative w-16 h-16 rounded-full border-2 border-yellow-400 overflow-hidden bg-gray-700">
+                  {!imageErrors[story.id] ? (
+                    <img 
+                      src={story.image}
+                      alt={story.name}
+                      className="w-full h-full object-cover"
+                      onError={() => setImageErrors(prev => ({ ...prev, [story.id]: true }))}
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-black font-bold text-lg">
+                      {story.name.charAt(0)}
+                    </div>
+                  )}
                 </div>
                 
                 <div className="flex-1">
