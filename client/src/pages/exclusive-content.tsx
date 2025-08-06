@@ -4,13 +4,25 @@ import { ArrowLeft, Play, Crown, Eye, TrendingUp, Calendar, Clock, Lock, Star } 
 import BottomNavigation from '@/components/bottom-navigation';
 import { getInstagramPostsByCategory } from '@shared/instagram-data';
 
-// Компонент для создания превью из видео
+// Кеш для превью
+const thumbnailCache = new Map<string, string>();
+
+// Компонент для создания превью из видео с кешированием
 const VideoThumbnail = ({ videoUrl, title, className }: { videoUrl: string; title: string; className?: string }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [thumbnailGenerated, setThumbnailGenerated] = useState(false);
+  const [cachedDataUrl, setCachedDataUrl] = useState<string | null>(null);
 
   useEffect(() => {
+    // Проверяем кеш сначала
+    const cached = thumbnailCache.get(videoUrl);
+    if (cached) {
+      setCachedDataUrl(cached);
+      setThumbnailGenerated(true);
+      return;
+    }
+
     const video = videoRef.current;
     const canvas = canvasRef.current;
     
@@ -60,6 +72,11 @@ const VideoThumbnail = ({ videoUrl, title, className }: { videoUrl: string; titl
           setTimeout(() => tryNextTimePoint(), 200);
           return;
         }
+        
+        // Сохраняем в кеш
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+        thumbnailCache.set(videoUrl, dataUrl);
+        setCachedDataUrl(dataUrl);
         
         setThumbnailGenerated(true);
         isGenerating = false;
@@ -134,10 +151,18 @@ const VideoThumbnail = ({ videoUrl, title, className }: { videoUrl: string; titl
         className="hidden"
         crossOrigin="anonymous"
       />
-      <canvas
-        ref={canvasRef}
-        className={`w-full h-full object-cover ${!thumbnailGenerated ? 'hidden' : ''}`}
-      />
+      {cachedDataUrl ? (
+        <img 
+          src={cachedDataUrl}
+          alt={title}
+          className="w-full h-full object-cover"
+        />
+      ) : (
+        <canvas
+          ref={canvasRef}
+          className={`w-full h-full object-cover ${!thumbnailGenerated ? 'hidden' : ''}`}
+        />
+      )}
       {!thumbnailGenerated && (
         <div className="relative w-full h-full bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900">
           <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 via-orange-500/5 to-purple-600/10" />

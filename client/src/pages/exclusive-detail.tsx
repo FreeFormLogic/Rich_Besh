@@ -62,7 +62,6 @@ const ExclusiveDetail = () => {
             <div className="relative aspect-video">
               <video
                 src={post.videoUrl}
-                poster={post.thumbnail}
                 controls
                 className="w-full h-full object-cover"
                 onPlay={() => setIsPlaying(true)}
