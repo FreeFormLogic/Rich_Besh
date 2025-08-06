@@ -98,8 +98,8 @@ const Home = () => {
             </div>
           </div>
           
-          {/* Stories Section - ИСПРАВЛЕНО: не перекрываем заголовок */}
-          <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide mt-12 mb-16" style={{ overflowY: 'visible', position: 'relative', zIndex: 30 }}>
+          {/* Stories Section */}
+          <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide mt-4 mb-8" style={{ overflowY: 'visible' }}>
             {[
               'https://richbesh.b-cdn.net/TG/9A703ADD-2C56-41CE-BA14-BFF553B28172.MP4',
               'https://richbesh.b-cdn.net/TG/circle%201.mp4',
@@ -115,13 +115,10 @@ const Home = () => {
               'https://richbesh.b-cdn.net/TG/IMG_8764.MOV'
             ].filter(url => url.endsWith('.MP4') || url.endsWith('.MOV') || url.endsWith('.mp4')).map((videoUrl, index) => (
               <button
-                key={`story-${index}-${Date.now()}`}
-                onClick={() => {
-                  console.log(`Клик на Stories #${index}, переход на /stories?video=${index}`);
-                  navigate(`/stories?video=${index}`);
-                }}
-                className="relative w-20 h-20 flex-shrink-0 rounded-full border-4 border-yellow-400 p-0.5 hover:scale-110 transition-all duration-300"
-                style={{ position: 'relative', transformOrigin: 'center', zIndex: 30 }}
+                key={index}
+                onClick={() => navigate(`/stories?video=${index}`)}
+                className="relative w-20 h-20 flex-shrink-0 rounded-full border-4 border-yellow-400 p-0.5 hover:scale-110 transition-all duration-300 z-20"
+                style={{ position: 'relative', transformOrigin: 'center' }}
               >
                 <div className="w-full h-full rounded-full overflow-hidden bg-black">
                   <video
@@ -139,7 +136,7 @@ const Home = () => {
         {/* Main Content */}
         <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
           <div className="max-w-2xl">
-            <h1 className="text-5xl font-black text-white mb-6 leading-none tracking-tight" style={{ zIndex: 10 }}>
+            <h1 className="text-6xl font-black text-white mb-6 leading-none tracking-tight">
               ПУТЬ К
               <br/>
               <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent animate-pulse">
