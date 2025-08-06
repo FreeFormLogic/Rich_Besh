@@ -84,10 +84,10 @@ const ExclusiveDetail = () => {
         <div className="text-center">
           <h2 className="text-2xl font-bold mb-4">Контент не найден</h2>
           <button 
-            onClick={() => navigate('/exclusive-content')}
+            onClick={() => navigate('/lifestyle')}
             className="bg-yellow-400 text-black px-6 py-3 rounded-lg font-bold"
           >
-            Вернуться к контенту
+            Вернуться к лайфстайл
           </button>
         </div>
       </div>
@@ -100,7 +100,7 @@ const ExclusiveDetail = () => {
       <div className="sticky top-0 z-50 bg-black/90 backdrop-blur-sm border-b border-gray-800">
         <div className="flex items-center justify-between p-4">
           <button 
-            onClick={() => navigate('/')}
+            onClick={() => navigate(-1)}
             className="flex items-center gap-3 text-white hover:text-yellow-400 transition-colors"
           >
             <ArrowLeft className="w-6 h-6" />
