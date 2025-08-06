@@ -135,7 +135,7 @@ const Home = () => {
         </div>
 
         {/* Main Content - Основной заголовок в нижней части */}
-        <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
+        <div className="absolute bottom-8 left-0 right-0 p-6 z-10">
           <div className="max-w-2xl">
             <h1 className="text-5xl font-black text-white mb-6 leading-none tracking-tight">
               ПУТЬ К
