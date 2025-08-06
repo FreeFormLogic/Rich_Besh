@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ArrowLeft, Play, Heart, MessageCircle, Share, Sparkles, Crown, Car, Plane, MapPin } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import BottomNavigation from '@/components/bottom-navigation';
@@ -7,6 +7,22 @@ import { getInstagramPostsByCategory } from '@shared/instagram-data';
 const Lifestyle = () => {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  
+  // Восстанавливаем позицию скролла при возврате
+  useEffect(() => {
+    const savedScrollPosition = localStorage.getItem('lifestyle-scroll-position');
+    if (savedScrollPosition && scrollContainerRef.current) {
+      setTimeout(() => {
+        window.scrollTo(0, parseInt(savedScrollPosition));
+      }, 100);
+    }
+    
+    // Очищаем сохраненную позицию после использования
+    return () => {
+      localStorage.removeItem('lifestyle-scroll-position');
+    };
+  }, []);
 
   const categories = [
     { id: 'all', label: 'Все', icon: Sparkles },
@@ -126,7 +142,7 @@ const Lifestyle = () => {
       </div>
 
       {/* Posts Grid - АДАПТИВНАЯ СЕТКА */}
-      <div className="px-4 pb-6">
+      <div ref={scrollContainerRef} className="px-4 pb-6">
         <div className="text-white mb-4 text-center">
           <p className="text-gray-400">Показано {filteredPosts.length} из {baseInstagramPosts.length} постов Instagram</p>
         </div>
@@ -136,7 +152,9 @@ const Lifestyle = () => {
             <div
               key={post.id}
               onClick={() => {
-                console.log(`Navigating to exclusive content: ${post.id}`);
+                // Сохраняем текущую позицию скролла
+                localStorage.setItem('lifestyle-scroll-position', window.scrollY.toString());
+                console.log(`Navigating to exclusive content: ${post.id}, scroll position: ${window.scrollY}`);
                 navigate(`/exclusive-content/${post.id}`);
               }}
               className="bg-gray-900/80 backdrop-blur-sm rounded-2xl overflow-hidden hover:scale-105 transition-all duration-300 cursor-pointer border border-gray-700/50 hover:border-yellow-400/50"
