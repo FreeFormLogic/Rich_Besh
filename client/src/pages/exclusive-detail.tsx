@@ -27,8 +27,8 @@ const VideoPlayer = ({ videoUrl }: { videoUrl: string }) => {
   };
 
   return (
-    <div className={`relative ${
-      aspectRatio === 'vertical' ? 'aspect-[9/16] max-h-[70vh]' : 
+    <div className={`relative mx-auto ${
+      aspectRatio === 'vertical' ? 'aspect-[9/16] max-h-[70vh] max-w-[400px]' : 
       aspectRatio === 'square' ? 'aspect-square' : 
       'aspect-video'
     }`}>
@@ -110,11 +110,10 @@ const ExclusiveDetail = () => {
 
       {/* Main Content */}
       <div className="px-4 py-6">
-        {/* Video/Image Section */}
-        <div className="relative rounded-2xl overflow-hidden mb-6 bg-gray-900">
+        {/* Video/Image Section - адаптивный контейнер */}
+        <div className="relative rounded-2xl overflow-hidden mb-6 bg-gray-900 flex justify-center">
           {post.type === 'video' ? (
             <VideoPlayer videoUrl={post.videoUrl} />
-          
           ) : (
             <img 
               src={(post as any).imageUrl || post.thumbnail}
