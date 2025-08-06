@@ -198,9 +198,9 @@ const Home = () => {
         </div>
 
         {/* Main Content - Основной заголовок ниже Stories */}
-        <div className="absolute top-56 left-0 right-0 p-6 z-10">
+        <div className="absolute top-48 left-0 right-0 p-6 z-10">
           <div className="max-w-2xl">
-            <h1 className="text-4xl sm:text-5xl font-black text-white mb-6 leading-none tracking-tight">
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white mb-6 leading-none tracking-tight">
               ПУТЬ К
               <br/>
               <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent animate-pulse">
