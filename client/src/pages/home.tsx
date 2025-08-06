@@ -199,7 +199,7 @@ const Home = () => {
                 <p className="text-yellow-400 text-sm font-medium">Миллионер • Ментор • Lifestyle</p>
                 <div className="flex items-center text-xs text-gray-300 mt-1">
                   <Star className="w-3 h-3 text-yellow-400 mr-1" />
-                  <span>4.9 • 25K подписчиков</span>
+                  <span>4.9 • 3.3M подписчиков</span>
                 </div>
               </div>
             </div>
@@ -299,7 +299,7 @@ const Home = () => {
           <div className="grid grid-cols-3 gap-1 sm:gap-4">
             <div className="text-center px-1">
               <div className="text-xl sm:text-3xl font-black bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent mb-1">
-                25K+
+                3.3M+
               </div>
               <div className="text-gray-300 text-xs sm:text-sm font-medium leading-tight">Учеников в элите</div>
             </div>

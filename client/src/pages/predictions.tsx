@@ -68,7 +68,7 @@ const Predictions = () => {
   const stats = [
     { label: 'Точность', value: '94%', color: 'text-green-400' },
     { label: 'Прибыль', value: '+1.2M₽', color: 'text-yellow-400' },
-    { label: 'Клиентов', value: '25K+', color: 'text-blue-400' }
+    { label: 'Клиентов', value: '3.3M+', color: 'text-blue-400' }
   ];
 
   const getStatusColor = (status: string) => {

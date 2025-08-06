@@ -19,6 +19,8 @@ Preferred communication style: Simple, everyday language.
 - Исправлены VideoThumbnail компоненты для стабильной генерации превью из видео
 - Сделана адаптивная сетка для страницы lifestyle (1-4 колонки в зависимости от ширины экрана)
 - Заменены нерабочие видео URL на проверенные рабочие ссылки из richbesh.b-cdn.net/IG/
+- Исправлено отображение вертикальных видео в exclusive-detail с ограничением ширины и центрированием
+- Обновлено количество подписчиков с 25K на 3.3M для отражения реального масштаба аудитории
 
 ### Rich Besh Integration Requirements
 - **Primary Goal**: Create app that showcases Rich Besh's wealth and luxury lifestyle
