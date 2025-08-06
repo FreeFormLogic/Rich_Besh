@@ -160,11 +160,19 @@ const SuccessStories = () => {
             {/* Story Content */}
             <div className="p-6">
               <div className="flex items-start gap-4 mb-6">
-                <img 
-                  src={story.image}
-                  alt={story.name}
-                  className="w-16 h-16 rounded-full object-cover border-2 border-yellow-400"
-                />
+                <div className="relative w-16 h-16 rounded-full border-2 border-yellow-400 overflow-hidden bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center">
+                  <img 
+                    src={story.image}
+                    alt={story.name}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                    }}
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center text-black font-bold text-lg">
+                    {story.name.charAt(0)}
+                  </div>
+                </div>
                 
                 <div className="flex-1">
                   <h3 className="text-xl font-bold text-white mb-1">{story.name}</h3>
