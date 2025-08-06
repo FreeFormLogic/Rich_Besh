@@ -155,8 +155,8 @@ const Home = () => {
           </div>
 
           {/* Stories Section - С градиентом по краям */}
-          <div className="relative">
-            <div className="flex gap-3 overflow-x-auto scrollbar-hide px-6">
+          <div className="relative -mx-6">
+            <div className="flex gap-3 overflow-x-auto scrollbar-hide pl-6 pr-6">
               {[
                 'https://richbesh.b-cdn.net/TG/9A703ADD-2C56-41CE-BA14-BFF553B28172.MP4',
                 'https://richbesh.b-cdn.net/TG/circle%201.mp4',
@@ -191,9 +191,9 @@ const Home = () => {
               ))}
             </div>
             
-            {/* Градиентная маска по краям */}
-            <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-black/70 to-transparent pointer-events-none z-10"></div>
-            <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-black/70 to-transparent pointer-events-none z-10"></div>
+            {/* Градиентная маска по краям - от самых краев экрана */}
+            <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-black via-black/50 to-transparent pointer-events-none z-10"></div>
+            <div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-black via-black/50 to-transparent pointer-events-none z-10"></div>
           </div>
         </div>
 
