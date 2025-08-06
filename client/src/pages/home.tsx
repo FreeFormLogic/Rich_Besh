@@ -395,7 +395,10 @@ const Home = () => {
               <span className="text-yellow-400"> контент</span>
             </h2>
             <button 
-              onClick={() => navigate('/exclusive-content')}
+              onClick={() => {
+                navigate('/exclusive-content');
+                setTimeout(() => window.scrollTo(0, 0), 100);
+              }}
               className="text-yellow-400 hover:text-white transition-colors font-semibold flex items-center gap-1 text-xs sm:text-sm ml-2 flex-shrink-0"
             >
               Смотреть все

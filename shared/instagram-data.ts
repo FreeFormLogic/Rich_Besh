@@ -26,14 +26,14 @@ export const instagramData = [
   },
   {
     id: "3619375607072811190",
-    filename: "2025-04-26_3619375607072811190.mp4",
+    filename: "2025-04-26_3619375607072811190.jpg",
     description: "🏍️ Мотоцикл для настоящих ценителей скорости",
     likes: 31553,
     comments: 36,
     views: 0,
-    type: 'video' as const,
+    type: 'image' as const,
     thumbnail: 'https://richbesh.b-cdn.net/TG/photo_2025-08-06_00-03-03.jpg',
-    videoUrl: 'https://richbesh.b-cdn.net/IG/2025-04-26_3619375607072811190.mp4',
+    imageUrl: 'https://richbesh.b-cdn.net/TG/photo_2025-08-06_00-03-03.jpg',
     category: 'cars'
   },
   {
@@ -86,40 +86,40 @@ export const instagramData = [
   },
   {
     id: "3538026678901545863",
-    filename: "2025-01-04_3538026678901545863.mp4",
+    filename: "2025-01-04_3538026678901545863.jpg",
     description: "Starting year properly 🥊 - новый год с боксом",
     likes: 6519,
     comments: 26,
     views: 0,
-    type: 'video' as const,
+    type: 'image' as const,
     thumbnail: 'https://richbesh.b-cdn.net/IG/posts_images/18072548320403661.jpg',
-    videoUrl: 'https://richbesh.b-cdn.net/IG/2025-01-04_3538026678901545863.mp4',
+    imageUrl: 'https://richbesh.b-cdn.net/IG/posts_images/18072548320403661.jpg',
     category: 'lifestyle'
   },
 
   {
     id: "3680433559831940339",
-    filename: "2025-07-19_3680433559831940339.mp4",
+    filename: "2025-07-19_3680433559831940339.jpg",
     description: "Aqua Rich 🌊 - морские приключения",
     likes: 10044,
     comments: 89,
     views: 0,
-    type: 'video' as const,
+    type: 'image' as const,
     thumbnail: 'https://richbesh.b-cdn.net/IG/posts_images/18071725017407920.jpg',
-    videoUrl: 'https://richbesh.b-cdn.net/IG/2025-07-19_3680433559831940339.mp4',
+    imageUrl: 'https://richbesh.b-cdn.net/IG/posts_images/18071725017407920.jpg',
     category: 'travel'
   },
 
   {
     id: "3666258138442819116",
-    filename: "2025-06-30_3666258138442819116.mp4",
+    filename: "2025-06-30_3666258138442819116.jpg",
     description: "Royal blood doesn't need a crown to rule 🦁",
     likes: 10706,
     comments: 167,
     views: 0,
-    type: 'video' as const,
+    type: 'image' as const,
     thumbnail: 'https://richbesh.b-cdn.net/IG/posts_images/18047416523569147.jpg',
-    videoUrl: 'https://richbesh.b-cdn.net/IG/2025-06-30_3666258138442819116.mp4',
+    imageUrl: 'https://richbesh.b-cdn.net/IG/posts_images/18047416523569147.jpg',
     category: 'luxury'
   }
 ];

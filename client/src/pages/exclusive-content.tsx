@@ -139,15 +139,19 @@ const VideoThumbnail = ({ videoUrl, title, className }: { videoUrl: string; titl
         className={`w-full h-full object-cover ${!thumbnailGenerated ? 'hidden' : ''}`}
       />
       {!thumbnailGenerated && (
-        <div className="relative w-full h-full">
-          <img 
-            src="https://richbesh.b-cdn.net/TG/photo_2025-08-06_00-02-59.jpg"
-            alt={title}
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-            <Play className="w-8 h-8 text-white" />
+        <div className="relative w-full h-full bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900">
+          <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 via-orange-500/5 to-purple-600/10" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-r from-yellow-400/20 to-orange-500/20 rounded-full flex items-center justify-center mb-3 mx-auto backdrop-blur-sm border border-yellow-400/30">
+                <Play className="w-8 h-8 text-yellow-400" />
+              </div>
+              <div className="text-white/60 text-xs font-medium px-3 leading-tight">
+                {title}
+              </div>
+            </div>
           </div>
+          <div className="absolute top-2 right-2 w-3 h-3 bg-yellow-400 rounded-full animate-pulse" />
         </div>
       )}
     </div>
