@@ -1,9 +1,65 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Play, Crown, Zap, TrendingUp, Sparkles, ChevronRight, Star } from 'lucide-react';
 import BottomNavigation from '@/components/bottom-navigation';
 import { instagramData } from '@shared/instagram-data';
 import avatarImage from '@assets/Avatar_1754480043650.jpg';
+
+// Компонент для создания превью из видео
+const VideoThumbnail = ({ videoUrl, title, className }: { videoUrl: string; title: string; className?: string }) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    const canvas = canvasRef.current;
+    
+    if (!video || !canvas) return;
+
+    const generateThumbnail = () => {
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+      
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    };
+
+    const handleLoadedData = () => {
+      video.currentTime = 1; // Получаем кадр через 1 секунду
+    };
+
+    const handleSeeked = () => {
+      generateThumbnail();
+    };
+
+    video.addEventListener('loadeddata', handleLoadedData);
+    video.addEventListener('seeked', handleSeeked);
+
+    return () => {
+      video.removeEventListener('loadeddata', handleLoadedData);
+      video.removeEventListener('seeked', handleSeeked);
+    };
+  }, [videoUrl]);
+
+  return (
+    <div className={className}>
+      <video
+        ref={videoRef}
+        src={videoUrl}
+        muted
+        playsInline
+        preload="metadata"
+        className="hidden"
+        crossOrigin="anonymous"
+      />
+      <canvas
+        ref={canvasRef}
+        className="w-full h-full object-cover"
+      />
+    </div>
+  );
+};
 
 const Home = () => {
   const navigate = useNavigate();
@@ -299,25 +355,23 @@ const Home = () => {
                   }
                 }}
               >
-                <div className="relative w-full h-44">
-                  <img 
-                    src={video.thumbnail}
-                    alt={video.title}
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      // Fallback к соответствующему видео изображению
-                      const videoId = video.id;
-                      if (videoId === "3683192790368544979") {
+                <div className="relative w-full h-44 bg-gray-800">
+                  {video.videoUrl ? (
+                    <VideoThumbnail 
+                      videoUrl={video.videoUrl}
+                      title={video.title}
+                      className="w-full h-full"
+                    />
+                  ) : (
+                    <img 
+                      src={video.thumbnail}
+                      alt={video.title}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
                         e.currentTarget.src = 'https://richbesh.b-cdn.net/TG/photo_2025-08-06_00-02-59.jpg';
-                      } else if (videoId === "3681517492775539740") {
-                        e.currentTarget.src = 'https://richbesh.b-cdn.net/TG/photo_2025-08-06_00-03-14.jpg';
-                      } else if (videoId === "3619375607072811190") {
-                        e.currentTarget.src = 'https://richbesh.b-cdn.net/TG/photo_2025-08-06_00-03-03.jpg';
-                      } else {
-                        e.currentTarget.src = 'https://richbesh.b-cdn.net/TG/photo_2025-08-06_00-02-59.jpg';
-                      }
-                    }}
-                  />
+                      }}
+                    />
+                  )}
                   <div 
                     className="video-play-area absolute inset-0 bg-black/50 flex items-center justify-center cursor-pointer"
                     onClick={(e) => {
