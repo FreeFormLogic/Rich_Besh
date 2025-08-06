@@ -109,18 +109,7 @@ export const instagramData = [
     videoUrl: 'https://richbesh.b-cdn.net/IG/2025-07-19_3680433559831940339.mp4',
     category: 'travel'
   },
-  {
-    id: "3659229603258279473",
-    filename: "2025-06-20_3659229603258279473.mp4",
-    description: "The car was just washed! 😅 - забота о суперкаре",
-    likes: 7777,
-    comments: 109,
-    views: 0,
-    type: 'video' as const,
-    thumbnail: 'https://richbesh.b-cdn.net/IG/2025-06-20_3659229603258279473.mp4', // Извлекаем кадр из видео
-    videoUrl: 'https://richbesh.b-cdn.net/IG/2025-06-20_3659229603258279473.mp4',
-    category: 'cars'
-  },
+
   {
     id: "3666258138442819116",
     filename: "2025-06-30_3666258138442819116.mp4",

@@ -67,9 +67,19 @@ const ExclusiveDetail = () => {
                 className="w-full h-full object-cover"
                 onPlay={() => setIsPlaying(true)}
                 onPause={() => setIsPlaying(false)}
+                onError={(e) => {
+                  console.log('Video error:', post.videoUrl);
+                  // Попробуем альтернативные URL
+                  const video = e.target as HTMLVideoElement;
+                  if (!video.src.includes('TG/')) {
+                    video.src = post.videoUrl.replace('/IG/', '/TG/');
+                  }
+                }}
+                crossOrigin="anonymous"
+                preload="metadata"
               />
               {!isPlaying && (
-                <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                <div className="absolute inset-0 bg-black/30 flex items-center justify-center pointer-events-none">
                   <div className="w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center">
                     <Play className="w-10 h-10 text-black ml-1" />
                   </div>
@@ -78,9 +88,13 @@ const ExclusiveDetail = () => {
             </div>
           ) : (
             <img 
-              src={post.imageUrl || post.thumbnail}
+              src={(post as any).imageUrl || post.thumbnail}
               alt={post.description}
               className="w-full aspect-square object-cover"
+              onError={(e) => {
+                const img = e.target as HTMLImageElement;
+                img.src = 'https://richbesh.b-cdn.net/TG/photo_2025-08-06_00-02-59.jpg';
+              }}
             />
           )}
         </div>

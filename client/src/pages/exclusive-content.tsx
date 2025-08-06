@@ -17,14 +17,22 @@ const VideoThumbnail = ({ videoUrl, title, className }: { videoUrl: string; titl
     if (!video || !canvas) return;
 
     let currentAttempt = 0;
-    const timePoints = [3, 5, 7, 2, 10, 1, 0.5, 4, 6, 8];
+    let isGenerating = false;
+    const timePoints = [2, 4, 1, 6, 3, 8, 0.5, 5];
     
     const generateThumbnail = () => {
-      const ctx = canvas.getContext('2d');
-      if (!ctx) return;
+      if (isGenerating) return;
+      isGenerating = true;
       
-      if (video.videoWidth === 0 || video.videoHeight === 0) {
-        setTimeout(() => tryNextTimePoint(), 100);
+      const ctx = canvas.getContext('2d');
+      if (!ctx) {
+        isGenerating = false;
+        return;
+      }
+      
+      if (video.videoWidth === 0 || video.videoHeight === 0 || video.readyState < 2) {
+        isGenerating = false;
+        setTimeout(() => tryNextTimePoint(), 200);
         return;
       }
       
@@ -34,27 +42,35 @@ const VideoThumbnail = ({ videoUrl, title, className }: { videoUrl: string; titl
       try {
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
         
-        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        // Проверяем, что кадр не пустой
+        const imageData = ctx.getImageData(0, 0, Math.min(canvas.width, 50), Math.min(canvas.height, 50));
         const data = imageData.data;
-        let brightness = 0;
-        for (let i = 0; i < data.length; i += 4) {
-          brightness += (data[i] + data[i + 1] + data[i + 2]) / 3;
-        }
-        brightness = brightness / (data.length / 4);
+        let hasContent = false;
         
-        if (brightness < 10 && currentAttempt < timePoints.length - 1) {
-          setTimeout(() => tryNextTimePoint(), 100);
+        for (let i = 0; i < data.length; i += 4) {
+          const brightness = (data[i] + data[i + 1] + data[i + 2]) / 3;
+          if (brightness > 15) {
+            hasContent = true;
+            break;
+          }
+        }
+        
+        if (!hasContent && currentAttempt < timePoints.length - 1) {
+          isGenerating = false;
+          setTimeout(() => tryNextTimePoint(), 200);
           return;
         }
         
         setThumbnailGenerated(true);
+        isGenerating = false;
       } catch (error) {
-        setTimeout(() => tryNextTimePoint(), 100);
+        isGenerating = false;
+        setTimeout(() => tryNextTimePoint(), 200);
       }
     };
 
     const tryNextTimePoint = () => {
-      if (currentAttempt < timePoints.length && video.duration > 0) {
+      if (currentAttempt < timePoints.length && video.duration > 0 && !thumbnailGenerated) {
         const timePoint = Math.min(timePoints[currentAttempt], video.duration - 0.1);
         video.currentTime = timePoint;
         currentAttempt++;
@@ -62,29 +78,48 @@ const VideoThumbnail = ({ videoUrl, title, className }: { videoUrl: string; titl
     };
 
     const handleLoadedData = () => {
-      if (video.duration > 0) {
-        tryNextTimePoint();
+      if (video.duration > 0 && !thumbnailGenerated) {
+        setTimeout(() => tryNextTimePoint(), 100);
       }
     };
 
     const handleSeeked = () => {
-      if (!thumbnailGenerated) {
-        generateThumbnail();
+      if (!thumbnailGenerated && !isGenerating) {
+        setTimeout(() => generateThumbnail(), 50);
       }
     };
 
     const handleError = () => {
-      tryNextTimePoint();
+      if (!thumbnailGenerated) {
+        setTimeout(() => tryNextTimePoint(), 200);
+      }
+    };
+
+    const handleCanPlay = () => {
+      if (!thumbnailGenerated && video.duration > 0) {
+        setTimeout(() => tryNextTimePoint(), 100);
+      }
     };
 
     video.addEventListener('loadeddata', handleLoadedData);
     video.addEventListener('seeked', handleSeeked);
     video.addEventListener('error', handleError);
+    video.addEventListener('canplay', handleCanPlay);
+
+    // Fallback timeout - если через 5 секунд превью не сгенерировалось
+    const fallbackTimeout = setTimeout(() => {
+      if (!thumbnailGenerated) {
+        console.log('VideoThumbnail timeout for:', videoUrl);
+        setThumbnailGenerated(false); // Оставляем false, чтобы показать fallback изображение
+      }
+    }, 5000);
 
     return () => {
       video.removeEventListener('loadeddata', handleLoadedData);
       video.removeEventListener('seeked', handleSeeked);
       video.removeEventListener('error', handleError);
+      video.removeEventListener('canplay', handleCanPlay);
+      clearTimeout(fallbackTimeout);
     };
   }, [videoUrl, thumbnailGenerated]);
 
@@ -104,9 +139,14 @@ const VideoThumbnail = ({ videoUrl, title, className }: { videoUrl: string; titl
         className={`w-full h-full object-cover ${!thumbnailGenerated ? 'hidden' : ''}`}
       />
       {!thumbnailGenerated && (
-        <div className="w-full h-full bg-gradient-to-br from-yellow-400/20 to-orange-500/20 flex items-center justify-center">
-          <div className="text-white/60 text-sm font-medium text-center px-4">
-            {title}
+        <div className="relative w-full h-full">
+          <img 
+            src="https://richbesh.b-cdn.net/TG/photo_2025-08-06_00-02-59.jpg"
+            alt={title}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+            <Play className="w-8 h-8 text-white" />
           </div>
         </div>
       )}
