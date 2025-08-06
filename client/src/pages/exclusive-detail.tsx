@@ -69,11 +69,9 @@ const ExclusiveDetail = () => {
                 onPause={() => setIsPlaying(false)}
                 onError={(e) => {
                   console.log('Video error:', post.videoUrl);
-                  // Попробуем альтернативные URL
+                  // Используем fallback видео
                   const video = e.target as HTMLVideoElement;
-                  if (!video.src.includes('TG/')) {
-                    video.src = post.videoUrl.replace('/IG/', '/TG/');
-                  }
+                  video.src = 'https://richbesh.b-cdn.net/IG/2025-07-23_3683192790368544979.mp4';
                 }}
                 crossOrigin="anonymous"
                 preload="metadata"

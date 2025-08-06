@@ -33,7 +33,7 @@ export const instagramData = [
     views: 0,
     type: 'video' as const,
     thumbnail: 'https://richbesh.b-cdn.net/TG/photo_2025-08-06_00-03-03.jpg',
-    videoUrl: 'https://richbesh.b-cdn.net/TG/2025-04-26_3619375607072811190.mp4',
+    videoUrl: 'https://richbesh.b-cdn.net/IG/2025-07-23_3683192790368544979.mp4',
     category: 'cars'
   },
   {
@@ -93,7 +93,7 @@ export const instagramData = [
     views: 0,
     type: 'video' as const,
     thumbnail: 'https://richbesh.b-cdn.net/IG/posts_images/18072548320403661.jpg',
-    videoUrl: 'https://richbesh.b-cdn.net/TG/2025-01-04_3538026678901545863.mp4',
+    videoUrl: 'https://richbesh.b-cdn.net/IG/2025-05-04_3625166336223525938.mp4',
     category: 'lifestyle'
   },
 
@@ -106,7 +106,7 @@ export const instagramData = [
     views: 0,
     type: 'video' as const,
     thumbnail: 'https://richbesh.b-cdn.net/IG/posts_images/18071725017407920.jpg',
-    videoUrl: 'https://richbesh.b-cdn.net/TG/2025-07-19_3680433559831940339.mp4',
+    videoUrl: 'https://richbesh.b-cdn.net/IG/2025-07-21_3681517492775539740.mp4',
     category: 'travel'
   },
 
@@ -119,7 +119,7 @@ export const instagramData = [
     views: 0,
     type: 'video' as const,
     thumbnail: 'https://richbesh.b-cdn.net/IG/posts_images/18047416523569147.jpg',
-    videoUrl: 'https://richbesh.b-cdn.net/TG/2025-06-30_3666258138442819116.mp4',
+    videoUrl: 'https://richbesh.b-cdn.net/IG/2025-06-29_3665695044867554408.mp4',
     category: 'luxury'
   }
 ];

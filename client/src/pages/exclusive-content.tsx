@@ -291,7 +291,7 @@ const ExclusiveContent = () => {
                 {/* Video Thumbnail - извлекаем кадр из видео */}
                 <div className="relative w-36 h-24 flex-shrink-0">
                   <VideoThumbnail 
-                    videoUrl={video.videoUrl}
+                    videoUrl={video.videoUrl || ''}
                     title={video.title}
                     className="w-full h-full"
                   />
