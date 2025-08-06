@@ -92,18 +92,18 @@ const SuccessStories = () => {
             Настоящие истории людей, которые изменили свою жизнь с Rich Besh
           </p>
           
-          <div className="grid grid-cols-3 gap-4 mb-6">
-            <div className="bg-black/20 rounded-2xl p-4">
-              <div className="text-2xl font-black text-black mb-1">500+</div>
-              <div className="text-black/80 text-sm">Миллионеров</div>
+          <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-6 px-2">
+            <div className="bg-black/20 rounded-2xl p-2 sm:p-4">
+              <div className="text-lg sm:text-2xl font-black text-black mb-1">500+</div>
+              <div className="text-black/80 text-xs sm:text-sm leading-tight">Миллионеров</div>
             </div>
-            <div className="bg-black/20 rounded-2xl p-4">
-              <div className="text-2xl font-black text-black mb-1">$50M+</div>
-              <div className="text-black/80 text-sm">Заработано</div>
+            <div className="bg-black/20 rounded-2xl p-2 sm:p-4">
+              <div className="text-lg sm:text-2xl font-black text-black mb-1">$50M+</div>
+              <div className="text-black/80 text-xs sm:text-sm leading-tight">Заработано</div>
             </div>
-            <div className="bg-black/20 rounded-2xl p-4">
-              <div className="text-2xl font-black text-black mb-1">94%</div>
-              <div className="text-black/80 text-sm">Успех</div>
+            <div className="bg-black/20 rounded-2xl p-2 sm:p-4">
+              <div className="text-lg sm:text-2xl font-black text-black mb-1">94%</div>
+              <div className="text-black/80 text-xs sm:text-sm leading-tight">Успех</div>
             </div>
           </div>
         </div>
