@@ -370,8 +370,8 @@ const Stories = () => {
 
         {/* Partner Offers - Show only when ad should show */}
         {showPartnerAd && (
-          <div className="absolute bottom-32 left-4 right-4 z-20">
-            <div className="bg-black/80 backdrop-blur-xl rounded-2xl p-4">
+          <div className="fixed bottom-4 left-4 right-4 z-30">
+            <div className="bg-black/90 backdrop-blur-xl rounded-2xl p-4 border border-yellow-400/30">
               <h3 className="text-white text-lg font-bold mb-4 text-center">
                 Начни зарабатывать как Rich Besh!
               </h3>

@@ -99,7 +99,7 @@ const Home = () => {
           </div>
           
           {/* Stories Section */}
-          <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide mt-4 mb-8" style={{ overflowY: 'visible' }}>
+          <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide mt-8 mb-12" style={{ overflowY: 'visible', marginTop: '2rem' }}>
             {[
               'https://richbesh.b-cdn.net/TG/9A703ADD-2C56-41CE-BA14-BFF553B28172.MP4',
               'https://richbesh.b-cdn.net/TG/circle%201.mp4',

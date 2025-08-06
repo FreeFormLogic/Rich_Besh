@@ -56,16 +56,7 @@ const Lifestyle = () => {
 
       {/* Hero Section */}
       <div className="relative h-64 overflow-hidden">
-        <div className="absolute inset-0">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover"
-          >
-            <source src="https://richbesh.b-cdn.net/IG/2025-07-21_3681517492775539740.mp4" type="video/mp4" />
-          </video>
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/80 to-blue-900/80">
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
         </div>
         
@@ -76,7 +67,7 @@ const Lifestyle = () => {
             <span className="text-yellow-400">Rich Besh</span>
           </h2>
           <p className="text-white/80 text-lg">
-            Эксклюзивные моменты из жизни миллионера
+            Эксклюзивные моменты из жизни<br/>Rich Besh
           </p>
         </div>
       </div>

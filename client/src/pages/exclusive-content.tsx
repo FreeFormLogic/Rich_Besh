@@ -13,8 +13,8 @@ const ExclusiveContent = () => {
   
   const exclusiveVideos = baseInstagramPosts.slice(0, 12).map((post, index) => ({
     id: post.id,
-    title: post.description.split('.')[0].substring(0, 40) || `Эксклюзивный контент #${index + 1}`,
-    description: post.description.length > 60 ? `${post.description.substring(0, 60)}...` : post.description,
+    title: post.description.split('.')[0].substring(0, 30) || `Контент #${index + 1}`,
+    description: post.description.length > 45 ? `${post.description.substring(0, 45)}...` : post.description,
     thumbnail: post.thumbnail,
     videoUrl: post.videoUrl || `https://richbesh.b-cdn.net/TG/circle%20${index + 1}.mp4`,
     duration: `${Math.floor(Math.random() * 20) + 5}:${Math.floor(Math.random() * 60).toString().padStart(2, '0')}`,
@@ -135,11 +135,11 @@ const ExclusiveContent = () => {
                 
                 {/* Video Info */}
                 <div className="flex-1 p-6">
-                  <h3 className="text-white font-bold text-lg mb-2 group-hover:text-yellow-400 transition-colors line-clamp-2">
+                  <h3 className="text-white font-bold text-base mb-2 group-hover:text-yellow-400 transition-colors line-clamp-2 leading-tight">
                     {video.title}
                   </h3>
                   
-                  <p className="text-gray-300 text-sm mb-4 leading-relaxed line-clamp-2">
+                  <p className="text-gray-300 text-xs mb-3 leading-relaxed line-clamp-2">
                     {video.description}
                   </p>
 
