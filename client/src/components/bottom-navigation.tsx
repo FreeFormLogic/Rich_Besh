@@ -1,38 +1,36 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Home, Target, Award, User } from 'react-feather';
-import { useLanguage } from '@/contexts/language-context';
 
 const BottomNavigation = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { t } = useLanguage();
 
   const navItems = [
     {
       id: 'home',
-      label: t('home'),
+      label: 'Главная',
       icon: Home,
       path: '/',
       gradient: 'from-yellow-400 to-orange-500'
     },
     {
       id: 'predictions',
-      label: t('predictions'),
+      label: 'Прогнозы',
       icon: Target,
       path: '/predictions',
       gradient: 'from-red-500 to-pink-500'
     },
     {
       id: 'success',
-      label: t('success'),
+      label: 'Успех',
       icon: Award,
       path: '/success',
       gradient: 'from-green-500 to-emerald-500'
     },
     {
       id: 'lifestyle',
-      label: t('lifestyle'),
+      label: 'Лайфстайл',
       icon: User,
       path: '/lifestyle',
       gradient: 'from-purple-500 to-indigo-500'

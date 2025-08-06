@@ -2,8 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Play, Crown, Zap, TrendingUp, Sparkles, ChevronRight, Star } from 'lucide-react';
 import BottomNavigation from '@/components/bottom-navigation';
-import { useLanguage } from '@/contexts/language-context';
-import LanguageSwitcher from '@/components/language-switcher';
 import { instagramData } from '@shared/instagram-data';
 import avatarImage from '@assets/Avatar_1754480043650.jpg';
 
@@ -123,7 +121,6 @@ const VideoThumbnail = ({ videoUrl, title, className }: { videoUrl: string; titl
 
 const Home = () => {
   const navigate = useNavigate();
-  const { t } = useLanguage();
 
   // Используем только видео контент из Instagram
   const featuredVideos = instagramData.filter(post => post.type === 'video').slice(0, 3).map(post => ({
@@ -139,26 +136,26 @@ const Home = () => {
   const features = [
     {
       icon: <TrendingUp className="w-8 h-8" />,
-      title: t('vipPredictions'),
-      description: t('vipPredictionsDesc'),
+      title: 'VIP Прогнозы',
+      description: 'Точные торговые сигналы с вероятностью успеха 94%',
       color: 'from-green-500 to-emerald-600'
     },
     {
       icon: <Crown className="w-8 h-8" />,
-      title: t('coursesByRichBesh'),
-      description: t('coursesByRichBeshDesc'),
+      title: 'Курсы от Rich Besh',
+      description: 'Эксклюзивное обучение трейдингу и инвестициям',
       color: 'from-yellow-500 to-orange-600'
     },
     {
       icon: <Sparkles className="w-8 h-8" />,
-      title: t('lifestyleContentTitle'),
-      description: t('lifestyleContentDesc'),
+      title: 'Lifestyle контент',
+      description: 'Роскошная жизнь миллионера в Дубае',
       color: 'from-purple-500 to-pink-600'
     },
     {
       icon: <Zap className="w-8 h-8" />,
-      title: t('tradingResultsTitle'),
-      description: t('tradingResultsDesc'),
+      title: 'Торговые результаты',
+      description: 'Реальные сделки и доходы в прямом эфире',
       color: 'from-blue-500 to-cyan-600'
     }
   ];
@@ -181,7 +178,7 @@ const Home = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/90"></div>
         </div>
 
-        {/* Header с профилем, Stories и переключателем языков */}
+        {/* Header с профилем и Stories */}
         <div className="relative z-20 p-6 space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
@@ -198,17 +195,20 @@ const Home = () => {
                 </div>
               </div>
               <div>
-                <h2 className="text-white font-bold text-xl">{t('welcomeTitle')}</h2>
-                <p className="text-yellow-400 text-sm font-medium">{t('welcomeSubtitle')}</p>
+                <h2 className="text-white font-bold text-xl">Rich Besh</h2>
+                <p className="text-yellow-400 text-sm font-medium">Миллионер • Ментор • Lifestyle</p>
                 <div className="flex items-center text-xs text-gray-300 mt-1">
                   <Star className="w-3 h-3 text-yellow-400 mr-1" />
-                  <span>{t('followers')}</span>
+                  <span>4.9 • 25K подписчиков</span>
                 </div>
               </div>
             </div>
             
-            <div className="flex items-center gap-3">
-              <LanguageSwitcher className="flex-shrink-0" />
+            <div className="bg-red-500 backdrop-blur-sm px-4 py-2 rounded-full animate-pulse">
+              <span className="text-white font-bold text-sm flex items-center">
+                <div className="w-2 h-2 bg-white rounded-full mr-2 animate-ping"></div>
+                LIVE
+              </span>
             </div>
           </div>
 
@@ -255,20 +255,20 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Main Content - Основной заголовок ниже Stories с адаптивным отступом */}
-        <div className="absolute top-56 sm:top-48 left-0 right-0 p-6 z-10">
+        {/* Main Content - Основной заголовок ниже Stories */}
+        <div className="absolute top-48 left-0 right-0 p-6 z-10">
           <div className="max-w-2xl">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-6 leading-none tracking-tight">
-              {t('pathToWealth')}
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white mb-6 leading-none tracking-tight">
+              ПУТЬ К
               <br/>
               <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent animate-pulse">
-                {t('wealth')}
+                БОГАТСТВУ
               </span>
             </h1>
             
             <p className="text-white/90 text-lg sm:text-xl mb-8 font-medium leading-relaxed">
-              {t('wealthDescription')} 
-              <span className="text-yellow-400 font-bold"> {t('millions')}</span> {t('asIdo')}
+              Узнай секреты luxury lifestyle и научись зарабатывать 
+              <span className="text-yellow-400 font-bold"> миллионы</span> как я
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
@@ -277,7 +277,7 @@ const Home = () => {
                 className="group bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-6 sm:px-8 py-4 sm:py-5 rounded-2xl font-bold text-base sm:text-lg flex items-center justify-center gap-3 shadow-2xl transform hover:scale-105 transition-all duration-300 hover:shadow-yellow-400/25"
               >
                 <Play className="w-5 h-5 sm:w-6 sm:h-6 group-hover:scale-110 transition-transform" />
-                {t('startEarning')}
+                Начать зарабатывать
                 <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-1 transition-transform" />
               </button>
               
@@ -286,7 +286,7 @@ const Home = () => {
                 className="group bg-black/60 backdrop-blur-md text-white px-6 sm:px-8 py-4 sm:py-5 rounded-2xl font-bold text-base sm:text-lg flex items-center justify-center gap-3 border border-yellow-400/50 hover:border-yellow-400 transition-all duration-300"
               >
                 <Crown className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400" />
-                {t('vipCourses')}
+                VIP курсы
               </button>
             </div>
           </div>
@@ -301,19 +301,19 @@ const Home = () => {
               <div className="text-xl sm:text-3xl font-black bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent mb-1">
                 25K+
               </div>
-              <div className="text-gray-300 text-xs sm:text-sm font-medium leading-tight">{t('studentsInElite')}</div>
+              <div className="text-gray-300 text-xs sm:text-sm font-medium leading-tight">Учеников в элите</div>
             </div>
             <div className="text-center border-x border-gray-700/50 px-1">
               <div className="text-xl sm:text-3xl font-black bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent mb-1">
                 94%
               </div>
-              <div className="text-gray-300 text-xs sm:text-sm font-medium leading-tight">{t('successfulResults')}</div>
+              <div className="text-gray-300 text-xs sm:text-sm font-medium leading-tight">Успешных результатов</div>
             </div>
             <div className="text-center px-1">
               <div className="text-xl sm:text-3xl font-black bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent mb-1">
                 $5M+
               </div>
-              <div className="text-gray-300 text-xs sm:text-sm font-medium leading-tight">{t('earnedByStudents')}</div>
+              <div className="text-gray-300 text-xs sm:text-sm font-medium leading-tight">Заработано учениками</div>
             </div>
           </div>
         </div>
@@ -322,11 +322,11 @@ const Home = () => {
       {/* Features Section */}
       <div className="px-6 py-16">
         <h2 className="text-4xl font-black text-white mb-4 text-center">
-          {t('whyChoose')}
-          <span className="text-yellow-400"> {t('richBesh')}</span>
+          Почему выбирают
+          <span className="text-yellow-400"> Rich Besh</span>
         </h2>
         <p className="text-gray-400 text-center mb-12 text-lg">
-          {t('exclusiveOpportunities')}
+          Эксклюзивные возможности для избранных
         </p>
         
         <div className="space-y-6 max-w-4xl mx-auto">
@@ -375,15 +375,13 @@ const Home = () => {
                   onClick={() => navigate('/consultations')}
                   className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-lg font-bold rounded-full hover:scale-105 transform transition-all duration-300"
                 >
-{t('joinMentorship')}
+                  Записаться на менторство
                 </button>
                 <button className="px-8 py-4 border-2 border-purple-400 text-purple-400 text-lg font-bold rounded-full hover:bg-purple-400 hover:text-white transition-all duration-300">
-                  {t('learnMore')}
+                  Узнать больше
                 </button>
               </div>
             </div>
-            
-
           </div>
         </div>
       </div>

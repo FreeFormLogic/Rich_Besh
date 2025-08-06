@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from 'react';
 import { ArrowLeft, Play, Heart, MessageCircle, Share, Eye, Calendar } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getInstagramPostById } from '@shared/instagram-data';
-import { useLanguage } from '@/contexts/language-context';
 import BottomNavigation from '@/components/bottom-navigation';
 
 // Компонент для автоопределения формата видео
@@ -62,7 +61,6 @@ const VideoPlayer = ({ videoUrl }: { videoUrl: string }) => {
 
 const ExclusiveDetail = () => {
   const navigate = useNavigate();
-  const { t } = useLanguage();
   const { id } = useParams();
   const [post, setPost] = useState<any>(null);
 
@@ -77,12 +75,12 @@ const ExclusiveDetail = () => {
     return (
       <div className="min-h-screen bg-black text-white flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4">{t('contentNotFound')}</h2>
+          <h2 className="text-2xl font-bold mb-4">Контент не найден</h2>
           <button 
             onClick={() => navigate('/exclusive-content')}
             className="bg-yellow-400 text-black px-6 py-3 rounded-lg font-bold"
           >
-            {t('returnToContent')}
+            Вернуться к контенту
           </button>
         </div>
       </div>
@@ -99,10 +97,10 @@ const ExclusiveDetail = () => {
             className="flex items-center gap-2 text-white hover:text-yellow-400 transition-colors"
           >
             <ArrowLeft className="w-6 h-6" />
-            <span className="font-medium">{t('back')}</span>
+            <span className="font-medium">Назад</span>
           </button>
           
-          <h1 className="text-lg font-bold">{t('exclusiveContent')}</h1>
+          <h1 className="text-lg font-bold">Эксклюзивный контент</h1>
           
           <button className="p-2 hover:bg-gray-800 rounded-lg transition-colors">
             <Share className="w-6 h-6" />
@@ -134,7 +132,7 @@ const ExclusiveDetail = () => {
           {/* Title and Description */}
           <div>
             <h2 className="text-2xl font-bold text-white mb-3">
-              {post.description.split(' - ')[0] || post.description.split('.')[0] || t('exclusiveContent')}
+              {post.description.split(' - ')[0] || post.description.split('.')[0] || 'Эксклюзивный контент'}
             </h2>
             <p className="text-gray-300 text-lg leading-relaxed">
               {post.description}

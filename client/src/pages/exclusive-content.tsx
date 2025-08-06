@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Play, Crown, Eye, TrendingUp, Calendar, Clock, Lock, Star } from 'lucide-react';
 import BottomNavigation from '@/components/bottom-navigation';
-import { useLanguage } from '@/contexts/language-context';
 import { getInstagramPostsByCategory } from '@shared/instagram-data';
 
 // Кеш для превью
@@ -186,34 +185,33 @@ const VideoThumbnail = ({ videoUrl, title, className }: { videoUrl: string; titl
 
 const ExclusiveContent = () => {
   const navigate = useNavigate();
-  const { t } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState('all');
 
   // Используем ТОЛЬКО видео контент для эксклюзивного контента
   const baseInstagramPosts = getInstagramPostsByCategory('all').filter(post => post.type === 'video');
   
   const exclusiveVideos = baseInstagramPosts.map((post, index) => {
-    // Short titles based on language
-    let shortTitle = t('language') === 'en' ? 'Content' : 'Контент';
+    // ОЧЕНЬ короткие заголовки для решения проблемы отображения
+    let shortTitle = 'Контент';
     
     if (post.description.includes('Honored to be Invited')) {
-      shortTitle = t('language') === 'en' ? 'VIP Meeting' : 'VIP встреча';
-    } else if (post.description.toLowerCase().includes('мотоцикл') || post.description.toLowerCase().includes('motorcycle')) {
-      shortTitle = t('language') === 'en' ? 'Motorcycle' : 'Мотоцикл';
+      shortTitle = 'VIP встреча';
+    } else if (post.description.toLowerCase().includes('мотоцикл')) {
+      shortTitle = 'Мотоцикл';
     } else if (post.description.toLowerCase().includes('aqua')) {
       shortTitle = 'Aqua';
     } else if (post.description.toLowerCase().includes('remember')) {
-      shortTitle = t('language') === 'en' ? 'Memory' : 'Память';
+      shortTitle = 'Память';
     } else if (post.description.toLowerCase().includes('tesla') || post.description.toLowerCase().includes('car')) {
-      shortTitle = t('language') === 'en' ? 'Car' : 'Авто';
+      shortTitle = 'Авто';
     } else if (post.description.toLowerCase().includes('дом') || post.description.toLowerCase().includes('house')) {
-      shortTitle = t('language') === 'en' ? 'House' : 'Дом';
+      shortTitle = 'Дом';
     } else if (post.description.toLowerCase().includes('trade') || post.description.toLowerCase().includes('торг')) {
-      shortTitle = t('language') === 'en' ? 'Trading' : 'Трейдинг';
+      shortTitle = 'Трейдинг';
     } else if (post.description.toLowerCase().includes('дубай') || post.description.toLowerCase().includes('dubai')) {
-      shortTitle = t('language') === 'en' ? 'Dubai' : 'Дубай';
+      shortTitle = 'Дубай';
     } else {
-      // Take only FIRST short word from description
+      // Берем только ПЕРВОЕ короткое слово из описания
       const words = post.description.split(' ').filter(word => word.length > 2 && word.length < 8);
       if (words.length > 0) {
         shortTitle = words[0];
@@ -233,20 +231,18 @@ const ExclusiveContent = () => {
       views: `${Math.floor(post.likes / 1000)}K`,
       premium: index % 2 === 0,
       category: post.category,
-      uploadDate: t('language') === 'en' ? `${Math.floor(Math.random() * 7) + 1}d ago` : `${Math.floor(Math.random() * 7) + 1}д назад`,
-      profit: index % 3 === 0 ? 
-        (t('language') === 'en' ? `+${Math.floor(Math.random() * 500) + 100}K$` : `+${Math.floor(Math.random() * 500) + 100}K₽`) 
-        : 'VIP'
+      uploadDate: `${Math.floor(Math.random() * 7) + 1}д назад`,
+      profit: index % 3 === 0 ? `+${Math.floor(Math.random() * 500) + 100}K₽` : 'VIP'
     };
   });
 
   const categories = [
-    { id: 'all', name: t('categories.all'), icon: '🔥', count: exclusiveVideos.length },
-    { id: 'luxury', name: t('categories.luxury'), icon: '💎', count: exclusiveVideos.filter(v => v.category === 'luxury').length },
-    { id: 'cars', name: t('categories.cars'), icon: '🏎️', count: exclusiveVideos.filter(v => v.category === 'cars').length },
-    { id: 'daily', name: t('categories.strategies'), icon: '📊', count: exclusiveVideos.filter(v => v.category === 'daily').length },
-    { id: 'education', name: t('categories.education'), icon: '🎓', count: exclusiveVideos.filter(v => v.category === 'education').length },
-    { id: 'lifestyle', name: t('categories.lifestyle'), icon: '✨', count: exclusiveVideos.filter(v => v.category === 'lifestyle').length }
+    { id: 'all', name: 'Все', icon: '🔥', count: exclusiveVideos.length },
+    { id: 'luxury', name: 'Роскошь', icon: '💎', count: exclusiveVideos.filter(v => v.category === 'luxury').length },
+    { id: 'cars', name: 'Авто', icon: '🏎️', count: exclusiveVideos.filter(v => v.category === 'cars').length },
+    { id: 'daily', name: 'Трейдинг', icon: '📊', count: exclusiveVideos.filter(v => v.category === 'daily').length },
+    { id: 'education', name: 'Обучение', icon: '🎓', count: exclusiveVideos.filter(v => v.category === 'education').length },
+    { id: 'lifestyle', name: 'Лайфстайл', icon: '✨', count: exclusiveVideos.filter(v => v.category === 'lifestyle').length }
   ];
 
   const filteredVideos = selectedCategory === 'all' 
@@ -272,8 +268,8 @@ const ExclusiveContent = () => {
           </button>
           
           <div className="flex-1">
-            <h1 className="text-2xl font-bold text-white">{t('exclusiveContent')}</h1>
-            <p className="text-gray-400 text-sm">{t('exclusiveOpportunitiesDesc')}</p>
+            <h1 className="text-2xl font-bold text-white">Эксклюзивный контент</h1>
+            <p className="text-gray-400 text-sm">Закрытые материалы от Rich Besh</p>
           </div>
           
           <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-4 py-2 rounded-full text-sm font-bold">
