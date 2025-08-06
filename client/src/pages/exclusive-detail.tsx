@@ -1,14 +1,68 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { ArrowLeft, Play, Heart, MessageCircle, Share, Eye, Calendar } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getInstagramPostById } from '@shared/instagram-data';
 import BottomNavigation from '@/components/bottom-navigation';
 
+// Компонент для автоопределения формата видео
+const VideoPlayer = ({ videoUrl }: { videoUrl: string }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [aspectRatio, setAspectRatio] = useState<'horizontal' | 'vertical' | 'square'>('horizontal');
+
+  const handleLoadedMetadata = () => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const { videoWidth, videoHeight } = video;
+    const ratio = videoWidth / videoHeight;
+
+    if (ratio > 1.2) {
+      setAspectRatio('horizontal');
+    } else if (ratio < 0.8) {
+      setAspectRatio('vertical');
+    } else {
+      setAspectRatio('square');
+    }
+  };
+
+  return (
+    <div className={`relative ${
+      aspectRatio === 'vertical' ? 'aspect-[9/16] max-h-[70vh]' : 
+      aspectRatio === 'square' ? 'aspect-square' : 
+      'aspect-video'
+    }`}>
+      <video
+        ref={videoRef}
+        src={videoUrl}
+        controls
+        className="w-full h-full object-cover"
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
+        onLoadedMetadata={handleLoadedMetadata}
+        onError={(e) => {
+          console.log('Video error:', videoUrl);
+          const video = e.target as HTMLVideoElement;
+          video.src = 'https://richbesh.b-cdn.net/IG/2025-07-23_3683192790368544979.mp4';
+        }}
+        crossOrigin="anonymous"
+        preload="metadata"
+      />
+      {!isPlaying && (
+        <div className="absolute inset-0 bg-black/30 flex items-center justify-center pointer-events-none">
+          <div className="w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center">
+            <Play className="w-10 h-10 text-black ml-1" />
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const ExclusiveDetail = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [post, setPost] = useState<any>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -59,30 +113,8 @@ const ExclusiveDetail = () => {
         {/* Video/Image Section */}
         <div className="relative rounded-2xl overflow-hidden mb-6 bg-gray-900">
           {post.type === 'video' ? (
-            <div className="relative aspect-video">
-              <video
-                src={post.videoUrl}
-                controls
-                className="w-full h-full object-cover"
-                onPlay={() => setIsPlaying(true)}
-                onPause={() => setIsPlaying(false)}
-                onError={(e) => {
-                  console.log('Video error:', post.videoUrl);
-                  // Используем fallback видео
-                  const video = e.target as HTMLVideoElement;
-                  video.src = 'https://richbesh.b-cdn.net/IG/2025-07-23_3683192790368544979.mp4';
-                }}
-                crossOrigin="anonymous"
-                preload="metadata"
-              />
-              {!isPlaying && (
-                <div className="absolute inset-0 bg-black/30 flex items-center justify-center pointer-events-none">
-                  <div className="w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center">
-                    <Play className="w-10 h-10 text-black ml-1" />
-                  </div>
-                </div>
-              )}
-            </div>
+            <VideoPlayer videoUrl={post.videoUrl} />
+          
           ) : (
             <img 
               src={(post as any).imageUrl || post.thumbnail}
