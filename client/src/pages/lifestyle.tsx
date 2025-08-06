@@ -11,18 +11,32 @@ const Lifestyle = () => {
   
   // Восстанавливаем позицию скролла при возврате
   useEffect(() => {
-    const savedScrollPosition = localStorage.getItem('lifestyle-scroll-position');
-    if (savedScrollPosition && scrollContainerRef.current) {
-      setTimeout(() => {
-        window.scrollTo(0, parseInt(savedScrollPosition));
-      }, 100);
-    }
-    
-    // Очищаем сохраненную позицию после использования
-    return () => {
-      localStorage.removeItem('lifestyle-scroll-position');
+    const restoreScrollPosition = () => {
+      const savedScrollPosition = sessionStorage.getItem('lifestyle-scroll-position');
+      if (savedScrollPosition) {
+        const scrollY = parseInt(savedScrollPosition);
+        console.log(`Restoring scroll position: ${scrollY}`);
+        
+        // Используем requestAnimationFrame для более надежного восстановления
+        requestAnimationFrame(() => {
+          window.scrollTo({
+            top: scrollY,
+            behavior: 'auto'
+          });
+        });
+        
+        // Очищаем после использования
+        sessionStorage.removeItem('lifestyle-scroll-position');
+      }
     };
-  }, []);
+
+    // Восстанавливаем позицию после загрузки контента
+    const timer = setTimeout(restoreScrollPosition, 200);
+    
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [filteredPosts]);
 
   const categories = [
     { id: 'all', label: 'Все', icon: Sparkles },
@@ -153,8 +167,9 @@ const Lifestyle = () => {
               key={post.id}
               onClick={() => {
                 // Сохраняем текущую позицию скролла
-                localStorage.setItem('lifestyle-scroll-position', window.scrollY.toString());
-                console.log(`Navigating to exclusive content: ${post.id}, scroll position: ${window.scrollY}`);
+                const scrollY = window.scrollY;
+                sessionStorage.setItem('lifestyle-scroll-position', scrollY.toString());
+                console.log(`Navigating to exclusive content: ${post.id}, scroll position: ${scrollY}`);
                 navigate(`/exclusive-content/${post.id}`);
               }}
               className="bg-gray-900/80 backdrop-blur-sm rounded-2xl overflow-hidden hover:scale-105 transition-all duration-300 cursor-pointer border border-gray-700/50 hover:border-yellow-400/50"

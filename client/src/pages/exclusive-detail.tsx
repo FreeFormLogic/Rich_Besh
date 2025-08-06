@@ -100,7 +100,10 @@ const ExclusiveDetail = () => {
       <div className="sticky top-0 z-50 bg-black/90 backdrop-blur-sm border-b border-gray-800">
         <div className="flex items-center justify-between p-4">
           <button 
-            onClick={() => navigate(-1)}
+            onClick={() => {
+              console.log('Going back to lifestyle');
+              navigate('/lifestyle');
+            }}
             className="flex items-center gap-3 text-white hover:text-yellow-400 transition-colors"
           >
             <ArrowLeft className="w-6 h-6" />
