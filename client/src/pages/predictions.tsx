@@ -241,9 +241,9 @@ const Predictions = () => {
                   </div>
                   
                   <button 
-                    className="group/btn bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-6 py-3 rounded-2xl font-bold text-base hover:scale-105 transition-all duration-300 flex items-center gap-2 shadow-2xl"
+                    className="group/btn bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-4 py-2 rounded-xl font-bold text-sm hover:scale-105 transition-all duration-300 flex items-center gap-1 shadow-2xl"
                   >
-                    <Crown className="w-5 h-5 group-hover/btn:scale-110 transition-transform" />
+                    <Crown className="w-4 h-4 group-hover/btn:scale-110 transition-transform" />
                     Купить прогноз
                   </button>
                 </div>

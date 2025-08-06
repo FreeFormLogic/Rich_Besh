@@ -15,6 +15,18 @@
     <!-- Telegram WebApp Integration -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     
+    <!-- Disable unsaved changes warning -->
+    <script>
+      window.addEventListener('beforeunload', function (e) {
+        e.preventDefault();
+        e.returnValue = '';
+        return '';
+      });
+      
+      // Override the default beforeunload behavior
+      window.onbeforeunload = null;
+    </script>
+    
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap" rel="stylesheet">
   </head>
   <body>
