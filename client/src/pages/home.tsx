@@ -155,7 +155,7 @@ const Home = () => {
           </div>
 
           {/* Stories Section - Сразу после профиля */}
-          <div className="flex gap-3 overflow-x-auto scrollbar-hide">
+          <div className="flex gap-3 overflow-x-auto scrollbar-hide pl-6 pr-6">
             {[
               'https://richbesh.b-cdn.net/TG/9A703ADD-2C56-41CE-BA14-BFF553B28172.MP4',
               'https://richbesh.b-cdn.net/TG/circle%201.mp4',
@@ -194,7 +194,7 @@ const Home = () => {
         {/* Main Content - Основной заголовок ниже Stories */}
         <div className="absolute top-56 left-0 right-0 p-6 z-10">
           <div className="max-w-2xl">
-            <h1 className="text-5xl font-black text-white mb-6 leading-none tracking-tight">
+            <h1 className="text-4xl sm:text-5xl font-black text-white mb-6 leading-none tracking-tight">
               ПУТЬ К
               <br/>
               <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent animate-pulse">
@@ -202,7 +202,7 @@ const Home = () => {
               </span>
             </h1>
             
-            <p className="text-white/90 text-xl mb-8 font-medium leading-relaxed">
+            <p className="text-white/90 text-lg sm:text-xl mb-8 font-medium leading-relaxed">
               Узнай секреты luxury lifestyle и научись зарабатывать 
               <span className="text-yellow-400 font-bold"> миллионы</span> как я
             </p>
@@ -210,18 +210,18 @@ const Home = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               <button 
                 onClick={() => navigate('/predictions')}
-                className="group bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-8 py-5 rounded-2xl font-bold text-lg flex items-center justify-center gap-3 shadow-2xl transform hover:scale-105 transition-all duration-300 hover:shadow-yellow-400/25"
+                className="group bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-6 sm:px-8 py-4 sm:py-5 rounded-2xl font-bold text-base sm:text-lg flex items-center justify-center gap-3 shadow-2xl transform hover:scale-105 transition-all duration-300 hover:shadow-yellow-400/25"
               >
-                <Play className="w-6 h-6 group-hover:scale-110 transition-transform" />
+                <Play className="w-5 h-5 sm:w-6 sm:h-6 group-hover:scale-110 transition-transform" />
                 Начать зарабатывать
-                <ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+                <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 group-hover:translate-x-1 transition-transform" />
               </button>
               
               <button 
                 onClick={() => navigate('/courses')}
-                className="group bg-black/60 backdrop-blur-md text-white px-8 py-5 rounded-2xl font-bold text-lg flex items-center justify-center gap-3 border border-yellow-400/50 hover:border-yellow-400 transition-all duration-300"
+                className="group bg-black/60 backdrop-blur-md text-white px-6 sm:px-8 py-4 sm:py-5 rounded-2xl font-bold text-base sm:text-lg flex items-center justify-center gap-3 border border-yellow-400/50 hover:border-yellow-400 transition-all duration-300"
               >
-                <Crown className="w-6 h-6 text-yellow-400" />
+                <Crown className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400" />
                 VIP курсы
               </button>
             </div>
@@ -230,7 +230,7 @@ const Home = () => {
       </div>
 
       {/* Premium Stats */}
-      <div className="relative mt-8 mx-4 sm:mx-6 z-30">
+      <div className="relative mt-16 mx-4 sm:mx-6 z-30">
         <div className="bg-black/90 backdrop-blur-xl rounded-3xl border border-yellow-400/30 p-4 sm:p-8 shadow-2xl">
           <div className="grid grid-cols-3 gap-2 sm:gap-8">
             <div className="text-center">
