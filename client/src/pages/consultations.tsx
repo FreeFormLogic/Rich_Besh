@@ -218,28 +218,27 @@ const Consultations = () => {
                     ))}
                   </div>
 
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <div className="flex items-center gap-3">
-                        <span className="text-3xl font-black text-white">
-                          {pkg.price.toLocaleString()}₽
-                        </span>
-                        {pkg.originalPrice && (
-                          <span className="text-gray-500 line-through text-lg">
-                            {pkg.originalPrice.toLocaleString()}₽
-                          </span>
-                        )}
-                      </div>
+                  <div className="flex flex-col gap-4">
+                    <div className="flex items-center gap-3">
+                      <span className="text-3xl font-black text-white">
+                        {pkg.price.toLocaleString()}₽
+                      </span>
                       {pkg.originalPrice && (
-                        <div className="text-sm text-gray-400">
-                          Скидка {Math.round((1 - pkg.price / pkg.originalPrice) * 100)}%
-                        </div>
+                        <span className="text-gray-500 line-through text-lg">
+                          {pkg.originalPrice.toLocaleString()}₽
+                        </span>
                       )}
                     </div>
+                    
+                    {pkg.originalPrice && (
+                      <div className="text-sm text-gray-400">
+                        Скидка {Math.round((1 - pkg.price / pkg.originalPrice) * 100)}%
+                      </div>
+                    )}
 
                     <button
                       onClick={() => setSelectedPackage(pkg.id)}
-                      className={`px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 ${
+                      className={`w-full px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 ${
                         selectedPackage === pkg.id
                           ? 'bg-yellow-400 text-black scale-105'
                           : `bg-gradient-to-r ${pkg.gradient} text-white hover:scale-105`
@@ -357,6 +356,9 @@ const Consultations = () => {
           </div>
         </div>
       </div>
+
+      {/* Отступ для нижнего меню */}
+      <div className="h-20"></div>
 
       <BottomNavigation />
     </div>

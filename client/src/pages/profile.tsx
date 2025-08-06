@@ -37,7 +37,7 @@ export default function Profile() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-rich-black text-white pb-20">
+      <div className="min-h-screen bg-rich-black text-white pb-24">
         <div className="container mx-auto px-4 py-6">
           <div className="text-center py-12">
             <i className="fas fa-user text-6xl text-gray-600 mb-4"></i>
@@ -51,7 +51,7 @@ export default function Profile() {
   }
 
   return (
-    <div className="min-h-screen bg-rich-black text-white pb-20">
+    <div className="min-h-screen bg-rich-black text-white pb-24">
       {/* Header */}
       <header className="sticky top-0 z-50 glass-effect border-b border-rich-gold/20">
         <div className="container mx-auto px-4 py-4">
@@ -69,9 +69,11 @@ export default function Profile() {
         <div className="neubrutalism-card bg-gradient-to-br from-rich-black to-gray-900 p-6 rounded-2xl">
           <div className="flex items-center space-x-4 mb-6">
             <div className="story-ring">
-              <div className="w-16 h-16 bg-gradient-to-br from-rich-gold to-yellow-400 rounded-full flex items-center justify-center text-black font-bold text-2xl">
-                {user.firstName?.charAt(0) || "U"}
-              </div>
+              <img 
+                src="/attached_assets/Avatar_1754480043650.jpg" 
+                alt="Rich Besh"
+                className="w-16 h-16 rounded-full object-cover"
+              />
             </div>
             <div>
               <h2 className="text-2xl font-bold text-white">

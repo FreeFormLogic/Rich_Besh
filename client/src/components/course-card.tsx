@@ -99,7 +99,7 @@ export default function CourseCard({ course }: CourseCardProps) {
           {course.studentsCount} студентов
         </span>
         <button 
-          className="bg-neon-green text-black px-3 py-1 rounded font-bold hover:bg-green-400 transition-colors disabled:opacity-50"
+          className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-4 py-2 rounded-xl font-bold hover:scale-105 transition-all disabled:opacity-50 shadow-lg"
           onClick={handlePurchase}
           disabled={purchaseMutation.isPending}
         >
