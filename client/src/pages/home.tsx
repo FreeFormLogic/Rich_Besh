@@ -98,9 +98,9 @@ const Home = () => {
             </div>
           </div>
           
-          {/* Stories Section - НАД профилем, не пересекается с заголовком */}
-          <div className="absolute top-24 left-6 right-6 z-30">
-            <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide" style={{ overflowY: 'visible' }}>
+          {/* Stories Section - С отступом от профиля и запасом для hover */}
+          <div className="absolute top-32 left-6 right-6 z-30">
+            <div className="flex gap-3 overflow-x-auto py-6 px-2 scrollbar-hide" style={{ overflowY: 'visible', margin: '4px 0' }}>
               {[
                 'https://richbesh.b-cdn.net/TG/9A703ADD-2C56-41CE-BA14-BFF553B28172.MP4',
                 'https://richbesh.b-cdn.net/TG/circle%201.mp4',
@@ -122,7 +122,7 @@ const Home = () => {
                     console.log(`Stories click #${index} -> /stories?video=${index}`);
                     navigate(`/stories?video=${index}`);
                   }}
-                  className="story-ring hover:scale-105 transition-transform cursor-pointer shrink-0"
+                  className="story-ring hover:scale-[1.03] transition-transform cursor-pointer shrink-0"
                 >
                   <video
                     src={videoUrl}
