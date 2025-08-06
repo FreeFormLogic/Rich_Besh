@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Play, Crown, Zap, TrendingUp, Sparkles, ChevronRight, Star } from 'lucide-react';
 import BottomNavigation from '@/components/bottom-navigation';
@@ -9,6 +9,7 @@ import avatarImage from '@assets/Avatar_1754480043650.jpg';
 const VideoThumbnail = ({ videoUrl, title, className }: { videoUrl: string; title: string; className?: string }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [thumbnailGenerated, setThumbnailGenerated] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -16,31 +17,59 @@ const VideoThumbnail = ({ videoUrl, title, className }: { videoUrl: string; titl
     
     if (!video || !canvas) return;
 
+    let currentAttempt = 0;
+    const timePoints = [2, 4, 6, 8, 1, 0.5]; // Попробуем разные моменты времени
+    
     const generateThumbnail = () => {
       const ctx = canvas.getContext('2d');
       if (!ctx) return;
       
+      // Проверяем, что видео загружено и имеет размеры
+      if (video.videoWidth === 0 || video.videoHeight === 0) {
+        tryNextTimePoint();
+        return;
+      }
+      
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      setThumbnailGenerated(true);
+    };
+
+    const tryNextTimePoint = () => {
+      if (currentAttempt < timePoints.length && video.duration > 0) {
+        const timePoint = Math.min(timePoints[currentAttempt], video.duration - 0.1);
+        video.currentTime = timePoint;
+        currentAttempt++;
+      }
     };
 
     const handleLoadedData = () => {
-      video.currentTime = 1; // Получаем кадр через 1 секунду
+      if (video.duration > 0) {
+        tryNextTimePoint();
+      }
     };
 
     const handleSeeked = () => {
-      generateThumbnail();
+      if (!thumbnailGenerated) {
+        generateThumbnail();
+      }
+    };
+
+    const handleError = () => {
+      tryNextTimePoint();
     };
 
     video.addEventListener('loadeddata', handleLoadedData);
     video.addEventListener('seeked', handleSeeked);
+    video.addEventListener('error', handleError);
 
     return () => {
       video.removeEventListener('loadeddata', handleLoadedData);
       video.removeEventListener('seeked', handleSeeked);
+      video.removeEventListener('error', handleError);
     };
-  }, [videoUrl]);
+  }, [videoUrl, thumbnailGenerated]);
 
   return (
     <div className={className}>
@@ -55,8 +84,15 @@ const VideoThumbnail = ({ videoUrl, title, className }: { videoUrl: string; titl
       />
       <canvas
         ref={canvasRef}
-        className="w-full h-full object-cover"
+        className={`w-full h-full object-cover ${!thumbnailGenerated ? 'hidden' : ''}`}
       />
+      {!thumbnailGenerated && (
+        <div className="w-full h-full bg-gradient-to-br from-yellow-400/20 to-orange-500/20 flex items-center justify-center">
+          <div className="text-white/60 text-sm font-medium text-center px-4">
+            {title}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
