@@ -94,12 +94,15 @@ const Predictions = () => {
     : predictions.filter(p => p.sport === selectedCategory || p.status === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black text-white pb-20">
+    <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black text-white pb-32">
       {/* Header */}
       <div className="sticky top-0 z-50 bg-black/90 backdrop-blur-xl border-b border-yellow-400/20">
         <div className="flex items-center gap-4 p-6">
           <button 
-            onClick={() => navigate(-1)}
+            onClick={() => {
+              navigate('/');
+              window.scrollTo(0, 0);
+            }}
             className="p-2 rounded-full bg-yellow-400/20 hover:bg-yellow-400/30 transition-colors"
           >
             <ArrowLeft className="w-6 h-6 text-yellow-400" />
@@ -137,7 +140,7 @@ const Predictions = () => {
         </div>
 
         {/* Categories */}
-        <div className="flex gap-3 overflow-x-auto pb-2 mb-6">
+        <div className="px-2 flex gap-3 overflow-x-auto pb-2 mb-6">
           {categories.map(category => (
             <button
               key={category.id}
@@ -238,9 +241,9 @@ const Predictions = () => {
                   </div>
                   
                   <button 
-                    className="group/btn bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-8 py-4 rounded-2xl font-bold text-lg hover:scale-105 transition-all duration-300 flex items-center gap-3 shadow-2xl"
+                    className="group/btn bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-6 py-3 rounded-2xl font-bold text-base hover:scale-105 transition-all duration-300 flex items-center gap-2 shadow-2xl"
                   >
-                    <Crown className="w-6 h-6 group-hover/btn:scale-110 transition-transform" />
+                    <Crown className="w-5 h-5 group-hover/btn:scale-110 transition-transform" />
                     Купить прогноз
                   </button>
                 </div>
