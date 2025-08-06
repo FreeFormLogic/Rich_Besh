@@ -195,8 +195,7 @@ const ExclusiveContent = () => {
               key={video.id}
               className="group relative bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-xl rounded-3xl overflow-hidden border border-gray-700/50 hover:border-yellow-400/50 transition-all duration-300 cursor-pointer"
               onClick={() => {
-                // For now, redirect to stories page - later can be individual video pages
-                navigate('/stories');
+                navigate(`/exclusive-content/${video.id}`);
               }}
             >
               <div className="flex">
@@ -233,8 +232,8 @@ const ExclusiveContent = () => {
                     {video.title}
                   </h3>
                   
-                  <p className="text-gray-300 text-sm mb-4 leading-relaxed">
-                    {video.description}
+                  <p className="text-gray-300 text-sm mb-4 leading-relaxed line-clamp-2">
+                    {video.description.length > 80 ? `${video.description.substring(0, 80)}...` : video.description}
                   </p>
 
                   <div className="flex items-center justify-between">

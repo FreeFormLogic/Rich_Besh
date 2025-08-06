@@ -99,7 +99,7 @@ const Home = () => {
           </div>
           
           {/* Stories Section */}
-          <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide mt-4 mb-8 overflow-visible">
+          <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide mt-4 mb-8" style={{ overflowY: 'visible' }}>
             {[
               'https://richbesh.b-cdn.net/TG/9A703ADD-2C56-41CE-BA14-BFF553B28172.MP4',
               'https://richbesh.b-cdn.net/TG/circle%201.mp4',
@@ -117,7 +117,8 @@ const Home = () => {
               <button
                 key={index}
                 onClick={() => navigate('/stories')}
-                className="relative w-20 h-20 flex-shrink-0 rounded-full border-4 border-yellow-400 p-0.5 hover:scale-110 transition-all duration-300 overflow-visible"
+                className="relative w-20 h-20 flex-shrink-0 rounded-full border-4 border-yellow-400 p-0.5 hover:scale-110 transition-all duration-300 z-20"
+                style={{ position: 'relative', transformOrigin: 'center' }}
               >
                 <div className="w-full h-full rounded-full overflow-hidden bg-black">
                   <video
