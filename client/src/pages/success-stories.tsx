@@ -65,7 +65,7 @@ const SuccessStories = () => {
     : successStories.filter(story => story.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black text-white pb-20">
+    <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black text-white">
       {/* Header */}
       <div className="sticky top-0 z-50 bg-black/80 backdrop-blur-xl border-b border-yellow-400/20">
         <div className="flex items-center gap-4 p-6">
@@ -227,7 +227,7 @@ const SuccessStories = () => {
       </div>
 
       {/* Call to Action */}
-      <div className="px-6 pt-12">
+      <div className="px-6 pt-12 pb-32">
         <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl p-8 text-center">
           <h2 className="text-white text-2xl font-black mb-4">
             Готов стать следующим?
