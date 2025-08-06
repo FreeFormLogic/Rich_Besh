@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useTelegram } from "@/hooks/use-telegram";
 import { useToast } from "@/hooks/use-toast";
+import { getImageSrc } from "@/utils/image-utils";
 
 interface Course {
   id: string;
@@ -71,18 +72,7 @@ export default function CourseCard({ course }: CourseCardProps) {
     return (price / 100).toLocaleString() + "₽";
   };
 
-  const getImageSrc = (imageUrl: string | undefined) => {
-    if (!imageUrl) {
-      return "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=200";
-    }
-    
-    if (imageUrl.startsWith('@assets/')) {
-      // Для изображений из assets используем прямой путь
-      return imageUrl.replace('@assets/', '/attached_assets/');
-    }
-    
-    return imageUrl;
-  };
+
 
   return (
     <div className="bg-white/5 rounded-xl p-4 hover:bg-white/10 transition-colors cursor-pointer group">

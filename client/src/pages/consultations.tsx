@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Crown, MessageCircle, Video, Phone, Star, Calendar, Clock, User, CheckCircle2, Zap, Target } from 'lucide-react';
 import BottomNavigation from '@/components/bottom-navigation';
+import { avatarImageSrc } from '@/utils/image-utils';
 
 const Consultations = () => {
   const navigate = useNavigate();
@@ -149,7 +150,7 @@ const Consultations = () => {
         <div className="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-3xl p-8 mb-8 text-center">
           <div className="w-20 h-20 bg-black/20 rounded-full flex items-center justify-center mx-auto mb-4">
             <img 
-              src="/attached_assets/Avatar_1754505326694.jpg" 
+              src={avatarImageSrc} 
               alt="Rich Besh" 
               className="w-full h-full object-cover rounded-full"
               onError={(e) => {
