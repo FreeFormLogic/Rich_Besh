@@ -98,8 +98,8 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Stories Section - Отдельный слой между профилем и контентом */}
-        <div className="relative z-30 px-6 mt-4 mb-8">
+        {/* Stories Section - Фиксированная позиция под профилем */}
+        <div className="absolute top-28 left-6 right-6 z-40">
           <div className="flex gap-3 overflow-x-auto py-2 scrollbar-hide">
             {[
               'https://richbesh.b-cdn.net/TG/9A703ADD-2C56-41CE-BA14-BFF553B28172.MP4',
@@ -139,7 +139,7 @@ const Home = () => {
         {/* Main Content - Основной заголовок в нижней части */}
         <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
           <div className="max-w-2xl">
-            <h1 className="text-5xl font-black text-white mb-6 leading-none tracking-tight" style={{ position: 'relative', zIndex: 25 }}>
+            <h1 className="text-5xl font-black text-white mb-6 leading-none tracking-tight">
               ПУТЬ К
               <br/>
               <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent animate-pulse">
