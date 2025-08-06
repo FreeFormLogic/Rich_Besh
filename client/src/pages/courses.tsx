@@ -13,7 +13,7 @@ export default function Courses() {
   return (
     <div className="min-h-screen bg-rich-black text-white pb-24">
       {/* Header */}
-      <Header />
+      <Header showBackButton={true} />
       
       {/* Section Introduction */}
       <div className="pt-20">

@@ -148,7 +148,15 @@ const Consultations = () => {
         {/* Hero Section */}
         <div className="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-3xl p-8 mb-8 text-center">
           <div className="w-20 h-20 bg-black/20 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span className="text-3xl font-black text-black">RB</span>
+            <img 
+              src="/attached_assets/Avatar_1754505326694.jpg" 
+              alt="Rich Besh" 
+              className="w-full h-full object-cover rounded-full"
+              onError={(e) => {
+                e.currentTarget.style.display = 'none';
+                e.currentTarget.parentElement!.innerHTML = '<span class="text-3xl font-black text-black">RB</span>';
+              }}
+            />
           </div>
           
           <h2 className="text-black text-2xl font-black mb-4">
