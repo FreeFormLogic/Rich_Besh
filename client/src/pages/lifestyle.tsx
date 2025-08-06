@@ -56,7 +56,7 @@ const Lifestyle = () => {
       </div>
 
       {/* Hero Section with Video Background */}
-      <div className="relative h-64 overflow-hidden">
+      <div className="relative h-72 overflow-hidden mt-4">
         <div className="absolute inset-0">
           <video
             autoPlay
@@ -65,8 +65,7 @@ const Lifestyle = () => {
             playsInline
             className="w-full h-full object-cover"
           >
-            <source src="https://richbesh.b-cdn.net/IG/2025-07-23_3683192790368544979.mp4" type="video/mp4" />
-            <source src="https://richbesh.b-cdn.net/IG/2025-06-29_3665695044867554408.mp4" type="video/mp4" />
+            <source src="https://richbesh.b-cdn.net/IG/2025-07-21_3681517492775539740.mp4" type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/30" />
         </div>
