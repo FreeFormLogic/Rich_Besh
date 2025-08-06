@@ -96,18 +96,7 @@ export const instagramData = [
     videoUrl: 'https://richbesh.b-cdn.net/IG/2025-01-04_3538026678901545863.mp4',
     category: 'lifestyle'
   },
-  {
-    id: "3647526713313247480",
-    filename: "2025-06-04_3647526713313247480.jpg",
-    description: "A Day to Remember - день рождения друга",
-    likes: 5660,
-    comments: 51,
-    views: 0,
-    type: 'image' as const,
-    thumbnail: 'https://richbesh.b-cdn.net/IG/posts_images/17984556112852396.jpg',
-    imageUrl: 'https://richbesh.b-cdn.net/IG/2025-06-04_3647526713313247480.jpg',
-    category: 'lifestyle'
-  },
+
   {
     id: "3680433559831940339",
     filename: "2025-07-19_3680433559831940339.mp4",
@@ -128,7 +117,7 @@ export const instagramData = [
     comments: 109,
     views: 0,
     type: 'video' as const,
-    thumbnail: 'https://richbesh.b-cdn.net/IG/posts_images/17847249411106827.jpg',
+    thumbnail: 'https://richbesh.b-cdn.net/IG/2025-06-20_3659229603258279473.mp4', // Извлекаем кадр из видео
     videoUrl: 'https://richbesh.b-cdn.net/IG/2025-06-20_3659229603258279473.mp4',
     category: 'cars'
   },

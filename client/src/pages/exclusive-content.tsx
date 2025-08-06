@@ -1,8 +1,118 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Play, Crown, Eye, TrendingUp, Calendar, Clock, Lock, Star } from 'lucide-react';
 import BottomNavigation from '@/components/bottom-navigation';
 import { getInstagramPostsByCategory } from '@shared/instagram-data';
+
+// Компонент для создания превью из видео
+const VideoThumbnail = ({ videoUrl, title, className }: { videoUrl: string; title: string; className?: string }) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [thumbnailGenerated, setThumbnailGenerated] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    const canvas = canvasRef.current;
+    
+    if (!video || !canvas) return;
+
+    let currentAttempt = 0;
+    const timePoints = [3, 5, 7, 2, 10, 1, 0.5, 4, 6, 8];
+    
+    const generateThumbnail = () => {
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+      
+      if (video.videoWidth === 0 || video.videoHeight === 0) {
+        setTimeout(() => tryNextTimePoint(), 100);
+        return;
+      }
+      
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      
+      try {
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imageData.data;
+        let brightness = 0;
+        for (let i = 0; i < data.length; i += 4) {
+          brightness += (data[i] + data[i + 1] + data[i + 2]) / 3;
+        }
+        brightness = brightness / (data.length / 4);
+        
+        if (brightness < 10 && currentAttempt < timePoints.length - 1) {
+          setTimeout(() => tryNextTimePoint(), 100);
+          return;
+        }
+        
+        setThumbnailGenerated(true);
+      } catch (error) {
+        setTimeout(() => tryNextTimePoint(), 100);
+      }
+    };
+
+    const tryNextTimePoint = () => {
+      if (currentAttempt < timePoints.length && video.duration > 0) {
+        const timePoint = Math.min(timePoints[currentAttempt], video.duration - 0.1);
+        video.currentTime = timePoint;
+        currentAttempt++;
+      }
+    };
+
+    const handleLoadedData = () => {
+      if (video.duration > 0) {
+        tryNextTimePoint();
+      }
+    };
+
+    const handleSeeked = () => {
+      if (!thumbnailGenerated) {
+        generateThumbnail();
+      }
+    };
+
+    const handleError = () => {
+      tryNextTimePoint();
+    };
+
+    video.addEventListener('loadeddata', handleLoadedData);
+    video.addEventListener('seeked', handleSeeked);
+    video.addEventListener('error', handleError);
+
+    return () => {
+      video.removeEventListener('loadeddata', handleLoadedData);
+      video.removeEventListener('seeked', handleSeeked);
+      video.removeEventListener('error', handleError);
+    };
+  }, [videoUrl, thumbnailGenerated]);
+
+  return (
+    <div className={className}>
+      <video
+        ref={videoRef}
+        src={videoUrl}
+        muted
+        playsInline
+        preload="metadata"
+        className="hidden"
+        crossOrigin="anonymous"
+      />
+      <canvas
+        ref={canvasRef}
+        className={`w-full h-full object-cover ${!thumbnailGenerated ? 'hidden' : ''}`}
+      />
+      {!thumbnailGenerated && (
+        <div className="w-full h-full bg-gradient-to-br from-yellow-400/20 to-orange-500/20 flex items-center justify-center">
+          <div className="text-white/60 text-sm font-medium text-center px-4">
+            {title}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
 
 const ExclusiveContent = () => {
   const navigate = useNavigate();
@@ -45,9 +155,10 @@ const ExclusiveContent = () => {
       id: post.id,
       title: shortTitle,
       description: post.description.length > 40 ? `${post.description.substring(0, 40)}...` : post.description,
-      thumbnail: post.thumbnail,
-      videoUrl: post.videoUrl || `https://richbesh.b-cdn.net/TG/circle%20${index + 1}.mp4`,
-      duration: `${Math.floor(Math.random() * 20) + 5}:${Math.floor(Math.random() * 60).toString().padStart(2, '0')}`,
+      thumbnail: post.type === 'image' ? ((post as any).imageUrl || post.thumbnail) : null, // Для изображений используем прямую ссылку
+      videoUrl: post.videoUrl || null,
+      isVideo: post.type === 'video',
+      duration: post.type === 'video' ? `${Math.floor(Math.random() * 3) + 1}:${Math.floor(Math.random() * 60).toString().padStart(2, '0')}` : null,
       views: `${Math.floor(post.likes / 1000)}K`,
       premium: index % 2 === 0,
       category: post.category,
@@ -135,24 +246,34 @@ const ExclusiveContent = () => {
               <div className="flex">
                 {/* Video Thumbnail - уменьшен размер */}
                 <div className="relative w-36 h-24 flex-shrink-0">
-                  <img 
-                    src={video.thumbnail}
-                    alt={video.title}
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      e.currentTarget.src = 'https://richbesh.b-cdn.net/TG/photo_2025-08-06_00-02-59.jpg';
-                    }}
-                  />
+                  {video.isVideo && video.videoUrl ? (
+                    <VideoThumbnail 
+                      videoUrl={video.videoUrl}
+                      title={video.title}
+                      className="w-full h-full"
+                    />
+                  ) : (
+                    <img 
+                      src={video.thumbnail}
+                      alt={video.title}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.currentTarget.src = 'https://richbesh.b-cdn.net/TG/photo_2025-08-06_00-02-59.jpg';
+                      }}
+                    />
+                  )}
                   <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                     <div className="w-12 h-12 bg-yellow-400/90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-2xl">
                       <Play className="w-6 h-6 text-black ml-0.5" />
                     </div>
                   </div>
                   
-                  {/* Duration */}
-                  <div className="absolute bottom-1 right-1 bg-black/80 text-white text-xs px-1.5 py-0.5 rounded">
-                    {video.duration}
-                  </div>
+                  {/* Duration - только для видео */}
+                  {video.isVideo && video.duration && (
+                    <div className="absolute bottom-1 right-1 bg-black/80 text-white text-xs px-1.5 py-0.5 rounded">
+                      {video.duration}
+                    </div>
+                  )}
 
                   {/* Premium Badge */}
                   {video.premium && (
