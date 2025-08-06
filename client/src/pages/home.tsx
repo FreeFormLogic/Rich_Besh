@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Play, Crown, Zap, TrendingUp, Sparkles, ChevronRight, Star } from 'lucide-react';
 import BottomNavigation from '@/components/bottom-navigation';
+import { useLanguage } from '@/contexts/language-context';
+import LanguageSwitcher from '@/components/language-switcher';
 import { instagramData } from '@shared/instagram-data';
 import avatarImage from '@assets/Avatar_1754480043650.jpg';
 
@@ -121,6 +123,7 @@ const VideoThumbnail = ({ videoUrl, title, className }: { videoUrl: string; titl
 
 const Home = () => {
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   // Используем только видео контент из Instagram
   const featuredVideos = instagramData.filter(post => post.type === 'video').slice(0, 3).map(post => ({
@@ -178,7 +181,7 @@ const Home = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/90"></div>
         </div>
 
-        {/* Header с профилем и Stories */}
+        {/* Header с профилем, Stories и переключателем языков */}
         <div className="relative z-20 p-6 space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
@@ -195,8 +198,8 @@ const Home = () => {
                 </div>
               </div>
               <div>
-                <h2 className="text-white font-bold text-xl">Rich Besh</h2>
-                <p className="text-yellow-400 text-sm font-medium">Миллионер • Ментор • Lifestyle</p>
+                <h2 className="text-white font-bold text-xl">{t('welcomeTitle')}</h2>
+                <p className="text-yellow-400 text-sm font-medium">{t('welcomeSubtitle')}</p>
                 <div className="flex items-center text-xs text-gray-300 mt-1">
                   <Star className="w-3 h-3 text-yellow-400 mr-1" />
                   <span>4.9 • 25K подписчиков</span>
@@ -204,11 +207,14 @@ const Home = () => {
               </div>
             </div>
             
-            <div className="bg-red-500 backdrop-blur-sm px-4 py-2 rounded-full animate-pulse">
-              <span className="text-white font-bold text-sm flex items-center">
-                <div className="w-2 h-2 bg-white rounded-full mr-2 animate-ping"></div>
-                LIVE
-              </span>
+            <div className="flex items-center gap-3">
+              <LanguageSwitcher className="flex-shrink-0" />
+              <div className="bg-red-500 backdrop-blur-sm px-4 py-2 rounded-full animate-pulse">
+                <span className="text-white font-bold text-sm flex items-center">
+                  <div className="w-2 h-2 bg-white rounded-full mr-2 animate-ping"></div>
+                  LIVE
+                </span>
+              </div>
             </div>
           </div>
 
