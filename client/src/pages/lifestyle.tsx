@@ -16,7 +16,7 @@ const Lifestyle = () => {
     { id: 'lifestyle', label: 'Жизнь', icon: MapPin }
   ];
 
-  // ИСПРАВЛЕНО: Используем ВСЕ реальные данные Instagram
+  // ИСПРАВЛЕНО: Используем ВСЕ реальные данные Instagram, а не только 12
   const baseInstagramPosts = getInstagramPostsByCategory('all').map(post => ({
     id: post.id,
     image: post.thumbnail,
@@ -29,6 +29,7 @@ const Lifestyle = () => {
     isVideo: post.type === 'video'
   }));
 
+  // ПОКАЗЫВАЕМ ВСЕ ПОСТЫ
   const filteredPosts = selectedCategory === 'all' 
     ? baseInstagramPosts 
     : baseInstagramPosts.filter(post => post.category === selectedCategory);
@@ -54,9 +55,19 @@ const Lifestyle = () => {
         </div>
       </div>
 
-      {/* ИСПРАВЛЕНО: Hero Section без видео из Stories */}
-      <div className="relative h-64 overflow-hidden bg-gradient-to-br from-yellow-400/20 via-orange-500/20 to-purple-600/20">
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent" />
+      {/* Hero Section */}
+      <div className="relative h-64 overflow-hidden">
+        <div className="absolute inset-0">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+            src="https://richbesh.b-cdn.net/TG/circle%201.mp4"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+        </div>
         
         <div className="absolute bottom-8 left-6 right-6">
           <h2 className="text-4xl font-black text-white mb-4 leading-tight">
@@ -65,16 +76,12 @@ const Lifestyle = () => {
             <span className="text-yellow-400">Rich Besh</span>
           </h2>
           <p className="text-white/80 text-lg">
-            Все {baseInstagramPosts.length} постов Instagram - настоящая роскошная жизнь миллионера
+            Все {baseInstagramPosts.length} постов Instagram с роскошной жизни миллионера
           </p>
         </div>
-
-        {/* Декоративные элементы вместо видео */}
-        <div className="absolute top-4 right-4 w-20 h-20 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full opacity-30 animate-pulse"></div>
-        <div className="absolute top-20 left-8 w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full opacity-20 animate-pulse delay-1000"></div>
       </div>
 
-      {/* Stats - показываем реальное количество */}
+      {/* Stats - ИСПРАВЛЕНО: показываем реальное количество постов */}
       <div className="px-4 -mt-8 relative z-10">
         <div className="bg-gray-900/90 backdrop-blur-xl rounded-2xl p-6 border border-gray-700/50 mt-6">
           <div className="grid grid-cols-3 gap-4 text-center">
@@ -117,7 +124,7 @@ const Lifestyle = () => {
         </div>
       </div>
 
-      {/* Posts Grid - показываем ВСЕ посты */}
+      {/* Posts Grid - ИСПРАВЛЕНО: показываем ВСЕ посты */}
       <div className="px-4 pb-6">
         <div className="text-white mb-4 text-center">
           <p className="text-gray-400">Показано {filteredPosts.length} из {baseInstagramPosts.length} постов Instagram</p>
@@ -130,6 +137,7 @@ const Lifestyle = () => {
               onClick={() => navigate(`/exclusive-content/${post.id}`)}
               className="bg-gray-900/80 backdrop-blur-sm rounded-2xl overflow-hidden hover:scale-105 transition-all duration-300 cursor-pointer border border-gray-700/50 hover:border-yellow-400/50"
             >
+              {/* Media */}
               <div className="relative aspect-square">
                 {post.isVideo ? (
                   <>
@@ -151,17 +159,19 @@ const Lifestyle = () => {
                     alt={post.caption}
                     className="w-full h-full object-cover"
                     onError={(e) => {
-                      e.currentTarget.src = 'https://richbesh.b-cdn.net/TG/photo_2025-08-06_00-02-59.jpg';
+                      e.currentTarget.src = '/attached_assets/image_1754412229756.png';
                     }}
                   />
                 )}
                 
+                {/* Category Badge */}
                 <div className="absolute top-4 left-4">
                   <span className="bg-black/70 text-yellow-400 px-3 py-1 rounded-full text-sm font-semibold backdrop-blur-sm">
                     {post.category}
                   </span>
                 </div>
                 
+                {/* Location */}
                 <div className="absolute top-4 right-4">
                   <div className="flex items-center gap-1 bg-black/70 px-3 py-1 rounded-full backdrop-blur-sm">
                     <MapPin className="w-3 h-3 text-gray-300" />
@@ -170,11 +180,13 @@ const Lifestyle = () => {
                 </div>
               </div>
 
+              {/* Content */}
               <div className="p-4">
                 <p className="text-white text-base leading-relaxed mb-4">
                   {post.caption}
                 </p>
                 
+                {/* Stats */}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     <button className="flex items-center gap-1 text-gray-400 hover:text-red-400 transition-colors">

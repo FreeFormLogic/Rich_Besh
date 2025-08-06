@@ -43,7 +43,7 @@ function AppRouter() {
 }
 
 function App() {
-  // FORCE RELOAD v2: 2025-08-06T07:35:00.000Z
+  // Cache buster: 2025-08-06T07:22:52.000Z
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>

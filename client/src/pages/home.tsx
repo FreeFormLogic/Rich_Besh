@@ -98,14 +98,8 @@ const Home = () => {
             </div>
           </div>
           
-          {/* ИСПРАВЛЕНО: Stories Section с большим отступом от заголовка */}
-          <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide" style={{ 
-            marginTop: '80px', 
-            marginBottom: '40px', 
-            overflowY: 'visible', 
-            position: 'relative', 
-            zIndex: 10 
-          }}>
+          {/* Stories Section - ИСПРАВЛЕНО: не перекрываем заголовок */}
+          <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide mt-12 mb-16" style={{ overflowY: 'visible', position: 'relative', zIndex: 30 }}>
             {[
               'https://richbesh.b-cdn.net/TG/9A703ADD-2C56-41CE-BA14-BFF553B28172.MP4',
               'https://richbesh.b-cdn.net/TG/circle%201.mp4',
