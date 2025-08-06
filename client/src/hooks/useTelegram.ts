@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-// Типы для Telegram WebApp API
-interface TelegramWebApp {
+// Упрощенные типы для Telegram WebApp API
+interface TelegramWebAppSimple {
   initData: string;
   initDataUnsafe: {
     user?: {
@@ -99,7 +99,7 @@ interface TelegramWebApp {
 declare global {
   interface Window {
     Telegram?: {
-      WebApp: any;
+      WebApp: TelegramWebAppSimple;
     };
   }
 }

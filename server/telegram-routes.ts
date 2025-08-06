@@ -44,7 +44,12 @@ export function registerTelegramRoutes(app: Express, botService?: TelegramBotSer
       
       if (botService) {
         // Обрабатываем update через бота
-        botService.getBot().handleUpdate(update, res);
+        const bot = botService.getBot();
+        if (bot) {
+          bot.handleUpdate(update, res);
+        } else {
+          res.status(200).json({ ok: true });
+        }
       } else {
         res.status(200).json({ ok: true });
       }
