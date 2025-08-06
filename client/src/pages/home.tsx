@@ -301,7 +301,7 @@ const Home = () => {
               >
                 <div className="relative w-full h-44">
                   <img 
-                    src={`https://richbesh.b-cdn.net/IG/${
+                    src={video.thumbnail || `https://richbesh.b-cdn.net/IG/${
                       index === 0 ? '2025-06-04_3647526713313247480.jpg' :
                       index === 1 ? '2021-09-07_2657730220765174215.jpg' :
                       index === 2 ? '2025-06-04_3647526713321600785.jpg' :
@@ -311,7 +311,13 @@ const Home = () => {
                     alt={video.title}
                     className="w-full h-full object-cover"
                     onError={(e) => {
-                      e.currentTarget.src = '/attached_assets/image_1754412229756.png';
+                      const fallbackImages = [
+                        'https://richbesh.b-cdn.net/TG/photo_2025-08-06_00-02-59.jpg',
+                        'https://richbesh.b-cdn.net/TG/photo_2025-08-06_00-03-14.jpg',
+                        'https://richbesh.b-cdn.net/TG/photo_2025-08-06_00-03-03.jpg',
+                        '/attached_assets/image_1754412229756.png'
+                      ];
+                      e.currentTarget.src = fallbackImages[index] || fallbackImages[0];
                     }}
                   />
                   <div 
