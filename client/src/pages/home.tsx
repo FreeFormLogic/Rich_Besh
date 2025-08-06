@@ -98,7 +98,7 @@ const Home = () => {
             </div>
           </div>
           
-          {/* Stories Section */}
+          {/* Stories Section - ОБНОВЛЕНО */}
           <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide mt-4 mb-8" style={{ overflowY: 'visible' }}>
             {[
               'https://richbesh.b-cdn.net/TG/9A703ADD-2C56-41CE-BA14-BFF553B28172.MP4',
@@ -115,8 +115,11 @@ const Home = () => {
               'https://richbesh.b-cdn.net/TG/IMG_8764.MOV'
             ].filter(url => url.endsWith('.MP4') || url.endsWith('.MOV') || url.endsWith('.mp4')).map((videoUrl, index) => (
               <button
-                key={index}
-                onClick={() => navigate(`/stories?video=${index}`)}
+                key={`story-${index}-${Date.now()}`}
+                onClick={() => {
+                  console.log(`Клик на Stories #${index}, переход на /stories?video=${index}`);
+                  navigate(`/stories?video=${index}`);
+                }}
                 className="relative w-20 h-20 flex-shrink-0 rounded-full border-4 border-yellow-400 p-0.5 hover:scale-110 transition-all duration-300 z-20"
                 style={{ position: 'relative', transformOrigin: 'center' }}
               >
