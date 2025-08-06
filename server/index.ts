@@ -1,6 +1,7 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import TelegramBotService from "./telegram-bot";
 
 const app = express();
 app.use(express.json());
@@ -37,7 +38,24 @@ app.use((req, res, next) => {
 });
 
 (async () => {
+  // Инициализируем Telegram бота
+  let telegramBot: TelegramBotService | null = null;
+  try {
+    if (process.env.TELEGRAM_BOT_TOKEN) {
+      telegramBot = new TelegramBotService();
+      telegramBot.start();
+    }
+  } catch (error) {
+    console.error('Ошибка инициализации Telegram бота:', error);
+  }
+
   const server = await registerRoutes(app);
+  
+  // Регистрируем Telegram роуты если бот доступен
+  if (telegramBot) {
+    const { registerTelegramRoutes } = await import("./telegram-routes");
+    registerTelegramRoutes(app, telegramBot);
+  }
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
