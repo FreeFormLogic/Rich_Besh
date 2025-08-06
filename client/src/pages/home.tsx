@@ -202,7 +202,7 @@ const Home = () => {
                 <p className="text-yellow-400 text-sm font-medium">{t('welcomeSubtitle')}</p>
                 <div className="flex items-center text-xs text-gray-300 mt-1">
                   <Star className="w-3 h-3 text-yellow-400 mr-1" />
-                  <span>4.9 • 25K подписчиков</span>
+                  <span>{t('followers')}</span>
                 </div>
               </div>
             </div>
@@ -381,12 +381,34 @@ const Home = () => {
                   onClick={() => navigate('/consultations')}
                   className="px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-lg font-bold rounded-full hover:scale-105 transform transition-all duration-300"
                 >
-                  Записаться на менторство
+{t('joinMentorship')}
                 </button>
                 <button className="px-8 py-4 border-2 border-purple-400 text-purple-400 text-lg font-bold rounded-full hover:bg-purple-400 hover:text-white transition-all duration-300">
-                  Узнать больше
+                  {t('learnMore')}
                 </button>
               </div>
+            </div>
+            
+            {/* Social Links */}
+            <div className="flex gap-3 mt-4">
+              <a 
+                href="https://www.instagram.com/rich_besh?igsh=MW0wYWQ2ZmRmNXBmOA%3D%3D"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:scale-105 transition-transform"
+              >
+                <span>📷</span>
+                {t('instagram')}
+              </a>
+              <a 
+                href="https://t.me/+Mwbx2HUKDvRkNGI8"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-cyan-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:scale-105 transition-transform"
+              >
+                <span>✈️</span>
+                {t('telegram')}
+              </a>
             </div>
           </div>
         </div>

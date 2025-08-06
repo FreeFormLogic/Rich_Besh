@@ -134,7 +134,7 @@ const ExclusiveDetail = () => {
           {/* Title and Description */}
           <div>
             <h2 className="text-2xl font-bold text-white mb-3">
-              {post.description.split(' - ')[0] || post.description.split('.')[0] || 'Эксклюзивный контент'}
+              {post.description.split(' - ')[0] || post.description.split('.')[0] || t('exclusiveContent')}
             </h2>
             <p className="text-gray-300 text-lg leading-relaxed">
               {post.description}

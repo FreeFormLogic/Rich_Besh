@@ -93,7 +93,50 @@ export const translations = {
     lifestyleContentTitle: 'Lifestyle контент',
     lifestyleContentDesc: 'Роскошная жизнь миллионера в Дубае',
     tradingResultsTitle: 'Торговые результаты',
-    tradingResultsDesc: 'Реальные сделки и доходы в прямом эфире'
+    tradingResultsDesc: 'Реальные сделки и доходы в прямом эфире',
+    followers: '4.9 • 3.3М подписчиков',
+    
+    // Social links
+    instagram: 'Instagram',
+    telegram: 'Telegram',
+    follow: 'Подписаться',
+    
+    // Additional translations for Russian version
+    learnMore: 'Узнать больше',
+    exclusiveOpportunitiesDesc: 'Закрытые материалы от Rich Besh',
+    joinMentorship: 'Записаться на менторство',
+    language: 'ru',
+    
+    // Categories
+    categories: {
+      all: 'Все',
+      luxury: 'Роскошь',
+      cars: 'Авто', 
+      strategies: 'Трейдинг',
+      education: 'Обучение',
+      lifestyle: 'Лайфстайл',
+      crypto: 'Крипто',
+      mindset: 'Мышление'
+    },
+    
+    // Consultations page
+    personalWork: 'Личная работа с Rich Besh',
+    personalRecommendations: 'Получите персональные рекомендации от успешного трейдера с 8-летним опытом и прибылью более 50 миллионов рублей',
+    satisfiedClients: 'Довольных клиентов',
+    averageProfit: 'Средняя прибыль',
+    yearsExperience: 'Лет опыта',
+    selectFormat: 'Выберите формат консультации',
+    
+    // Testimonials
+    testimonialName1: 'Александр К.',
+    testimonialProfit1: '+240,000₽',
+    testimonialPeriod1: 'за 2 месяца',
+    testimonialName2: 'Мария В.',
+    testimonialProfit2: '+890,000₽',
+    testimonialPeriod2: 'за 6 месяцев',
+    testimonialName3: 'Дмитрий С.',
+    testimonialProfit3: '+1,200,000₽',
+    testimonialPeriod3: 'за 1 год',
   },
   
   en: {
@@ -179,16 +222,49 @@ export const translations = {
     whyChoose: 'Why Choose',
     richBesh: 'Rich Besh',
     exclusiveOpportunities: 'Exclusive opportunities for the chosen ones',
+    followers: '4.9 • 3.3M followers',
     
-    // Features
-    vipPredictions: 'VIP Predictions',
-    vipPredictionsDesc: 'Precise trading signals with 94% success probability',
-    coursesByRichBesh: 'Rich Besh Courses',
-    coursesByRichBeshDesc: 'Exclusive trading and investment education',
-    lifestyleContentTitle: 'Lifestyle Content',
-    lifestyleContentDesc: 'Millionaire luxury life in Dubai',
-    tradingResultsTitle: 'Trading Results',
-    tradingResultsDesc: 'Real trades and profits live'
+    // Social links
+    instagram: 'Instagram',
+    telegram: 'Telegram',
+    follow: 'Follow',
+    
+    // Additional translations for complete English version
+    learnMore: 'Learn More',
+    exclusiveOpportunitiesDesc: 'Closed materials from Rich Besh',
+    joinMentorship: 'Join Mentorship',
+    language: 'en',
+    
+    // Categories
+    categories: {
+      all: 'All',
+      luxury: 'Luxury',
+      cars: 'Cars', 
+      strategies: 'Trading',
+      education: 'Education',
+      lifestyle: 'Lifestyle',
+      crypto: 'Crypto',
+      mindset: 'Mindset'
+    },
+    
+    // Consultations page
+    personalWork: 'Personal Work with Rich Besh',
+    personalRecommendations: 'Get personal recommendations from a successful trader with 8 years of experience and profits over 50 million rubles',
+    satisfiedClients: 'Satisfied Clients',
+    averageProfit: 'Average Profit',
+    yearsExperience: 'Years Experience',
+    selectFormat: 'Select Consultation Format',
+    
+    // Testimonials
+    testimonialName1: 'Alexander K.',
+    testimonialProfit1: '+$240,000',
+    testimonialPeriod1: 'in 2 months',
+    testimonialName2: 'Maria V.',
+    testimonialProfit2: '+$890,000',
+    testimonialPeriod2: 'in 6 months',
+    testimonialName3: 'Dmitry S.',
+    testimonialProfit3: '+$1,200,000',
+    testimonialPeriod3: 'in 1 year'
   }
 };
 

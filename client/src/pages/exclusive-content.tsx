@@ -193,27 +193,27 @@ const ExclusiveContent = () => {
   const baseInstagramPosts = getInstagramPostsByCategory('all').filter(post => post.type === 'video');
   
   const exclusiveVideos = baseInstagramPosts.map((post, index) => {
-    // ОЧЕНЬ короткие заголовки для решения проблемы отображения
-    let shortTitle = 'Контент';
+    // Short titles based on language
+    let shortTitle = t('language') === 'en' ? 'Content' : 'Контент';
     
     if (post.description.includes('Honored to be Invited')) {
-      shortTitle = 'VIP встреча';
-    } else if (post.description.toLowerCase().includes('мотоцикл')) {
-      shortTitle = 'Мотоцикл';
+      shortTitle = t('language') === 'en' ? 'VIP Meeting' : 'VIP встреча';
+    } else if (post.description.toLowerCase().includes('мотоцикл') || post.description.toLowerCase().includes('motorcycle')) {
+      shortTitle = t('language') === 'en' ? 'Motorcycle' : 'Мотоцикл';
     } else if (post.description.toLowerCase().includes('aqua')) {
       shortTitle = 'Aqua';
     } else if (post.description.toLowerCase().includes('remember')) {
-      shortTitle = 'Память';
+      shortTitle = t('language') === 'en' ? 'Memory' : 'Память';
     } else if (post.description.toLowerCase().includes('tesla') || post.description.toLowerCase().includes('car')) {
-      shortTitle = 'Авто';
+      shortTitle = t('language') === 'en' ? 'Car' : 'Авто';
     } else if (post.description.toLowerCase().includes('дом') || post.description.toLowerCase().includes('house')) {
-      shortTitle = 'Дом';
+      shortTitle = t('language') === 'en' ? 'House' : 'Дом';
     } else if (post.description.toLowerCase().includes('trade') || post.description.toLowerCase().includes('торг')) {
-      shortTitle = 'Трейдинг';
+      shortTitle = t('language') === 'en' ? 'Trading' : 'Трейдинг';
     } else if (post.description.toLowerCase().includes('дубай') || post.description.toLowerCase().includes('dubai')) {
-      shortTitle = 'Дубай';
+      shortTitle = t('language') === 'en' ? 'Dubai' : 'Дубай';
     } else {
-      // Берем только ПЕРВОЕ короткое слово из описания
+      // Take only FIRST short word from description
       const words = post.description.split(' ').filter(word => word.length > 2 && word.length < 8);
       if (words.length > 0) {
         shortTitle = words[0];
@@ -233,8 +233,10 @@ const ExclusiveContent = () => {
       views: `${Math.floor(post.likes / 1000)}K`,
       premium: index % 2 === 0,
       category: post.category,
-      uploadDate: `${Math.floor(Math.random() * 7) + 1}д назад`,
-      profit: index % 3 === 0 ? `+${Math.floor(Math.random() * 500) + 100}K₽` : 'VIP'
+      uploadDate: t('language') === 'en' ? `${Math.floor(Math.random() * 7) + 1}d ago` : `${Math.floor(Math.random() * 7) + 1}д назад`,
+      profit: index % 3 === 0 ? 
+        (t('language') === 'en' ? `+${Math.floor(Math.random() * 500) + 100}K$` : `+${Math.floor(Math.random() * 500) + 100}K₽`) 
+        : 'VIP'
     };
   });
 
@@ -271,7 +273,7 @@ const ExclusiveContent = () => {
           
           <div className="flex-1">
             <h1 className="text-2xl font-bold text-white">{t('exclusiveContent')}</h1>
-            <p className="text-gray-400 text-sm">{t('exclusiveOpportunities')}</p>
+            <p className="text-gray-400 text-sm">{t('exclusiveOpportunitiesDesc')}</p>
           </div>
           
           <div className="bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-4 py-2 rounded-full text-sm font-bold">
