@@ -266,38 +266,47 @@ const Home = () => {
       </div>
 
       {/* Featured Videos */}
-      <div className="px-6 py-12">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-4xl font-black text-white">
-            Эксклюзивный контент
-          </h2>
-          <button 
-            onClick={() => navigate('/exclusive-content')}
-            className="text-yellow-400 hover:text-white transition-colors font-semibold flex items-center gap-2"
-          >
-            Смотреть все
-            <ChevronRight className="w-5 h-5" />
-          </button>
+      <div className="py-12">
+        <div className="px-6 mb-6">
+          <div className="flex items-center justify-between">
+            <h2 className="text-3xl font-black text-white">
+              Эксклюзивный
+              <span className="text-yellow-400"> контент</span>
+            </h2>
+            <button 
+              onClick={() => navigate('/exclusive-content')}
+              className="text-yellow-400 hover:text-white transition-colors font-semibold flex items-center gap-2 text-sm"
+            >
+              Смотреть все
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
         </div>
         
-        <div className="space-y-4">
-          {featuredVideos.slice(0, 3).map((video, index) => (
-            <div 
-              key={video.id}
-              className="group relative bg-gradient-to-r from-gray-900/90 to-gray-800/90 backdrop-blur-xl rounded-2xl overflow-hidden border border-gray-700/50 hover:border-yellow-400/50 transition-all duration-300 cursor-pointer"
-              onClick={(e) => {
-                const target = e.target as HTMLElement;
-                if (target.closest('.video-play-area')) {
-                  window.open(video.videoUrl, '_blank');
-                } else {
-                  navigate(`/exclusive-content/${video.id}`);
-                }
-              }}
-            >
-              <div className="flex flex-col sm:flex-row">
-                <div className="relative w-full sm:w-36 h-32 sm:h-24 flex-shrink-0">
+        <div className="overflow-x-auto scrollbar-hide">
+          <div className="flex gap-4 px-6 pb-2" style={{ width: 'max-content' }}>
+            {featuredVideos.slice(0, 5).map((video, index) => (
+              <div 
+                key={video.id}
+                className="group relative bg-gradient-to-r from-gray-900/90 to-gray-800/90 backdrop-blur-xl rounded-2xl overflow-hidden border border-gray-700/50 hover:border-yellow-400/50 transition-all duration-300 cursor-pointer w-80 flex-shrink-0"
+                onClick={(e) => {
+                  const target = e.target as HTMLElement;
+                  if (target.closest('.video-play-area')) {
+                    window.open(video.videoUrl, '_blank');
+                  } else {
+                    navigate(`/exclusive-content/${video.id}`);
+                  }
+                }}
+              >
+                <div className="relative w-full h-44">
                   <img 
-                    src={video.thumbnail}
+                    src={`https://richbesh.b-cdn.net/IG/${
+                      index === 0 ? '2025-06-04_3647526713313247480.jpg' :
+                      index === 1 ? '2021-09-07_2657730220765174215.jpg' :
+                      index === 2 ? '2025-06-04_3647526713321600785.jpg' :
+                      index === 3 ? '2021-09-05_2656128052716999245.jpg' :
+                      '2025-06-04_3647526713313209596.jpg'
+                    }`}
                     alt={video.title}
                     className="w-full h-full object-cover"
                     onError={(e) => {
@@ -311,42 +320,41 @@ const Home = () => {
                       window.open(video.videoUrl, '_blank');
                     }}
                   >
-                    <div className="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-2xl">
-                      <Play className="w-6 h-6 text-black ml-0.5" />
+                    <div className="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-2xl">
+                      <Play className="w-8 h-8 text-black ml-1" />
                     </div>
                   </div>
                   
-                  <div className="absolute bottom-1 right-1 bg-black/80 text-white text-xs px-2 py-1 rounded">
+                  <div className="absolute bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-1 rounded">
                     {video.duration}
+                  </div>
+                  
+                  <div className="absolute top-2 right-2">
+                    <span className="text-yellow-400 text-xs font-semibold bg-yellow-400/10 backdrop-blur-sm px-2 py-1 rounded-full">
+                      Премиум
+                    </span>
                   </div>
                 </div>
                 
-                <div className="flex-1 p-4">
-                  <div className="flex flex-col space-y-2">
-                    <div className="flex items-start justify-between">
-                      <h3 className="text-white font-bold text-lg group-hover:text-yellow-400 transition-colors leading-tight flex-1 mr-2">
-                        {video.title}
-                      </h3>
-                      <span className="text-yellow-400 text-xs font-semibold bg-yellow-400/10 px-2 py-1 rounded-full whitespace-nowrap">
-                        Премиум
-                      </span>
-                    </div>
-                    
-                    <p className="text-gray-300 text-sm leading-relaxed line-clamp-2">
-                      {video.description}
-                    </p>
-                    
-                    <div className="flex items-center text-xs text-gray-400 pt-1">
-                      <span className="flex items-center">
-                        <TrendingUp className="w-3 h-3 mr-1" />
-                        {video.views} просмотров
-                      </span>
-                    </div>
+                <div className="p-4">
+                  <h3 className="text-white font-bold text-lg group-hover:text-yellow-400 transition-colors leading-tight mb-2 line-clamp-2">
+                    {video.title}
+                  </h3>
+                  
+                  <p className="text-gray-300 text-sm leading-relaxed line-clamp-2 mb-3">
+                    {video.description}
+                  </p>
+                  
+                  <div className="flex items-center text-xs text-gray-400">
+                    <span className="flex items-center">
+                      <TrendingUp className="w-3 h-3 mr-1" />
+                      {video.views} просмотров
+                    </span>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
 
