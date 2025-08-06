@@ -98,50 +98,47 @@ const Home = () => {
             </div>
           </div>
           
-          {/* Stories Section - Позиционируем в верхней части экрана */}
-          <div className="flex gap-3 overflow-x-auto pb-6 scrollbar-hide mt-8" style={{ overflowY: 'visible', position: 'relative', zIndex: 15 }}>
-            {[
-              'https://richbesh.b-cdn.net/TG/9A703ADD-2C56-41CE-BA14-BFF553B28172.MP4',
-              'https://richbesh.b-cdn.net/TG/circle%201.mp4',
-              'https://richbesh.b-cdn.net/TG/circle%202.mp4',
-              'https://richbesh.b-cdn.net/TG/circle%203.mp4',
-              'https://richbesh.b-cdn.net/TG/circle%204.mp4',
-              'https://richbesh.b-cdn.net/TG/circle%205.mp4',
-              'https://richbesh.b-cdn.net/TG/circle%206.mp4',
-              'https://richbesh.b-cdn.net/TG/circle%207.mp4',
-              'https://richbesh.b-cdn.net/TG/circle%208.mp4',
-              'https://richbesh.b-cdn.net/TG/E97D113E-0D7D-4268-B08B-CB647C4EAA65.MOV',
-              'https://richbesh.b-cdn.net/TG/IMG_6817.MP4',
-              'https://richbesh.b-cdn.net/TG/IMG_8764.MOV'
-            ].filter(url => url.endsWith('.MP4') || url.endsWith('.MOV') || url.endsWith('.mp4')).map((videoUrl, index) => (
-              <div
-                key={`story-${index}-${Date.now()}`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  console.log(`Клик на Stories #${index}, переход на /stories?video=${index}`);
-                  navigate(`/stories?video=${index}`);
-                }}
-                className="relative flex-shrink-0 hover:scale-110 transition-all duration-300 cursor-pointer"
-                style={{ position: 'relative', transformOrigin: 'center', userSelect: 'none' }}
-              >
-                <div className="story-ring">
+          {/* Stories Section - НАД профилем, не пересекается с заголовком */}
+          <div className="absolute top-24 left-6 right-6 z-30">
+            <div className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide" style={{ overflowY: 'visible' }}>
+              {[
+                'https://richbesh.b-cdn.net/TG/9A703ADD-2C56-41CE-BA14-BFF553B28172.MP4',
+                'https://richbesh.b-cdn.net/TG/circle%201.mp4',
+                'https://richbesh.b-cdn.net/TG/circle%202.mp4',
+                'https://richbesh.b-cdn.net/TG/circle%203.mp4',
+                'https://richbesh.b-cdn.net/TG/circle%204.mp4',
+                'https://richbesh.b-cdn.net/TG/circle%205.mp4',
+                'https://richbesh.b-cdn.net/TG/circle%206.mp4',
+                'https://richbesh.b-cdn.net/TG/circle%207.mp4',
+                'https://richbesh.b-cdn.net/TG/circle%208.mp4',
+                'https://richbesh.b-cdn.net/TG/E97D113E-0D7D-4268-B08B-CB647C4EAA65.MOV',
+                'https://richbesh.b-cdn.net/TG/IMG_6817.MP4',
+                'https://richbesh.b-cdn.net/TG/IMG_8764.MOV'
+              ].filter(url => url.endsWith('.MP4') || url.endsWith('.MOV') || url.endsWith('.mp4')).slice(0, 6).map((videoUrl, index) => (
+                <button
+                  key={`story-${index}-${videoUrl.slice(-20)}`}
+                  type="button"
+                  onClick={() => {
+                    console.log(`Stories click #${index} -> /stories?video=${index}`);
+                    navigate(`/stories?video=${index}`);
+                  }}
+                  className="story-ring hover:scale-105 transition-transform cursor-pointer shrink-0"
+                >
                   <video
                     src={videoUrl}
-                    className="w-full h-full object-cover rounded-full pointer-events-none"
+                    className="w-full h-full object-cover rounded-full"
                     muted
                     playsInline
-                    loop
-                    onLoadedData={() => console.log(`Video ${index} loaded`)}
+                    preload="metadata"
                   />
-                </div>
-              </div>
-            ))}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
         {/* Main Content - Основной заголовок в нижней части */}
-        <div className="absolute bottom-0 left-0 right-0 p-6 z-20" style={{ paddingTop: '120px' }}>
+        <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
           <div className="max-w-2xl">
             <h1 className="text-5xl font-black text-white mb-6 leading-none tracking-tight" style={{ position: 'relative', zIndex: 25 }}>
               ПУТЬ К

@@ -93,6 +93,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border: none;
+    outline: none;
+    position: relative;
+    z-index: 1;
   }
 
   .story-ring-small {
