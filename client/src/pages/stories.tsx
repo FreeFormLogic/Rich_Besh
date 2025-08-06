@@ -191,10 +191,10 @@ const Stories = () => {
           setShowPartnerAd(true);
           setIsPlaying(false);
           setProgress(100);
-          // Hide ad after 8 seconds
-          setTimeout(() => {
-            setShowPartnerAd(false);
-          }, 8000);
+          // Keep ad visible until user dismisses
+          // setTimeout(() => {
+          //   setShowPartnerAd(false);
+          // }, 8000);
         }
       }
     };
@@ -384,7 +384,10 @@ const Stories = () => {
                     </div>
                   </div>
                   <button
-                    onClick={() => window.open('https://iqoption.com/richbesh')}
+                    onClick={() => {
+                      window.open('https://iqoption.com/richbesh');
+                      setShowPartnerAd(false);
+                    }}
                     className="w-full bg-white text-blue-600 py-2 rounded-lg font-bold text-sm hover:scale-105 transition-all"
                   >
                     Начать торговать
@@ -402,10 +405,20 @@ const Stories = () => {
                     </div>
                   </div>
                   <button
-                    onClick={() => window.open('https://forexclub.com/richbesh')}
+                    onClick={() => {
+                      window.open('https://forexclub.com/richbesh');
+                      setShowPartnerAd(false);
+                    }}
                     className="w-full bg-white text-orange-600 py-2 rounded-lg font-bold text-sm hover:scale-105 transition-all"
                   >
                     Получить бонус
+                  </button>
+                  
+                  <button
+                    onClick={() => setShowPartnerAd(false)}
+                    className="mt-4 w-full bg-gray-600 text-white py-2 rounded-lg font-bold text-sm hover:bg-gray-700 transition-all"
+                  >
+                    Пропустить
                   </button>
                 </div>
               </div>

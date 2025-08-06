@@ -10,6 +10,7 @@ import Courses from "@/pages/courses";
 import SuccessStories from "@/pages/success-stories";
 import Stories from "@/pages/stories";
 import ExclusiveContent from "@/pages/exclusive-content";
+import ExclusiveDetail from "@/pages/exclusive-detail";
 import TrustManagement from "@/pages/trust-management";
 import Consultations from "@/pages/consultations";
 import Partners from "@/pages/partners";
@@ -28,6 +29,7 @@ function AppRouter() {
         <Route path="/success" element={<SuccessStories />} />
         <Route path="/stories" element={<Stories />} />
         <Route path="/exclusive-content" element={<ExclusiveContent />} />
+        <Route path="/exclusive-content/:id" element={<ExclusiveDetail />} />
         <Route path="/trust-management" element={<TrustManagement />} />
         <Route path="/consultations" element={<Consultations />} />
         <Route path="/partners" element={<Partners />} />

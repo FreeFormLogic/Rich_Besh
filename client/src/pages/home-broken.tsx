@@ -7,7 +7,6 @@ import { instagramData } from '@shared/instagram-data';
 const Home = () => {
   const navigate = useNavigate();
 
-  // Используем реальные данные Instagram
   const featuredVideos = instagramData.slice(0, 3).map(post => ({
     id: post.id,
     title: post.description.split(' - ')[0] || post.description.split('.')[0] || 'Эксклюзивный контент',
@@ -17,66 +16,98 @@ const Home = () => {
     views: `${Math.floor(post.likes / 1000)}K`,
     duration: '02:15'
   }));
+      thumbnail: 'https://richbesh.b-cdn.net/IG/2024-05-25_3372073464799556635.jpg',
+      description: 'Показываю крупную сделку в реальном времени',
+      views: '850K',
+      duration: '03:42'
+    },
+    {
+      id: 'luxury-cars',
+      title: 'Новый Lamborghini за прибыль',
+      videoUrl: 'https://richbesh.b-cdn.net/IG/2025-04-26_3619375607072811190.mp4',
+      thumbnail: 'https://richbesh.b-cdn.net/IG/2024-05-25_3372073464799556642.jpg',
+      description: 'Покупаю суперкар на торговые доходы',
+      views: '2.1M',
+      duration: '01:58'
+    },
+    {
+      id: 'penthouse-tour',
+      title: 'Пентхаус в Дубае',
+      videoUrl: 'https://richbesh.b-cdn.net/IG/videos/penthouse_tour.mp4',
+      thumbnail: 'https://richbesh.b-cdn.net/IG/2024-05-25_3372073464799556648.jpg',
+      description: 'Экскурсия по моей новой квартире за $5M',
+      views: '3.2M',
+      duration: '08:15'
+    },
+    {
+      id: 'psychology',
+      title: 'Психология миллионера',
+      videoUrl: 'https://richbesh.b-cdn.net/IG/videos/psychology.mp4',
+      thumbnail: 'https://richbesh.b-cdn.net/IG/2024-05-25_3372073464799556654.jpg',
+      description: 'Как контролировать эмоции и зарабатывать больше',
+      views: '1.9M',
+      duration: '15:30'
+    },
+    {
+      id: 'private-jet',
+      title: 'Частный самолет и бизнес',
+      videoUrl: 'https://richbesh.b-cdn.net/IG/videos/private_jet.mp4',
+      thumbnail: 'https://richbesh.b-cdn.net/IG/2024-05-25_3372073464799556661.jpg',
+      description: 'Рассказываю о своих инвестициях в авиацию',
+      views: '2.4M',
+      duration: '06:45'
+    }
+  ];
 
   const features = [
     {
       icon: <TrendingUp className="w-8 h-8" />,
-      title: 'VIP Прогнозы',
-      description: 'Точные торговые сигналы с вероятностью успеха 94%',
-      color: 'from-green-500 to-emerald-600'
+      title: 'Стратегии миллионера',
+      description: 'Проверенные методы заработка от 7-значных доходов',
+      color: 'from-emerald-600 to-green-500'
     },
     {
       icon: <Crown className="w-8 h-8" />,
-      title: 'Курсы от Rich Besh',
-      description: 'Эксклюзивное обучение трейдингу и инвестициям',
-      color: 'from-yellow-500 to-orange-600'
+      title: 'VIP сопровождение',
+      description: 'Персональное наставничество для избранных',
+      color: 'from-yellow-500 to-orange-500'
     },
     {
       icon: <Sparkles className="w-8 h-8" />,
-      title: 'Lifestyle контент',
-      description: 'Роскошная жизнь миллионера в Дубае',
-      color: 'from-purple-500 to-pink-600'
-    },
-    {
-      icon: <Zap className="w-8 h-8" />,
-      title: 'Торговые результаты',
-      description: 'Реальные сделки и доходы в прямом эфире',
-      color: 'from-blue-500 to-cyan-600'
+      title: 'Эксклюзивная информация',
+      description: 'Инсайды и возможности для элиты',
+      color: 'from-purple-600 to-pink-500'
     }
   ];
 
   return (
-    <div className="relative bg-black text-white min-h-screen overflow-hidden">
+    <div className="pb-20 bg-gradient-to-b from-black via-gray-900 to-black min-h-screen overflow-hidden">
       {/* Hero Section */}
-      <div className="relative min-h-screen">
-        {/* Background Video */}
-        <div className="absolute inset-0 z-0">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover"
-          >
-            <source src="https://richbesh.b-cdn.net/IG/2025-07-21_3681517492775539740.mp4" type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/90"></div>
-        </div>
-
+      <div className="relative h-screen overflow-hidden">
+        <video 
+          autoPlay 
+          muted 
+          loop 
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          src="https://richbesh.b-cdn.net/IG/2025-07-21_3681517492775539740.mp4"
+        />
+        
+        {/* Gradient Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40" />
+        
         {/* Header */}
-        <div className="relative z-10 p-6">
-          {/* Profile Section */}
+        <div className="absolute top-0 left-0 right-0 p-6 z-20">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <div className="relative">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 p-1">
-                  <img 
-                    src="https://richbesh.b-cdn.net/TG/photo_2025-08-06_00-02-59.jpg"
-                    alt="Rich Besh"
-                    className="w-full h-full rounded-full object-cover"
-                  />
+                <div className="w-16 h-16 rounded-full bg-gradient-to-r from-yellow-400 via-orange-500 to-yellow-400 p-1 animate-pulse">
+                  <div className="w-full h-full rounded-full bg-black flex items-center justify-center">
+                    <Crown className="w-8 h-8 text-yellow-400" />
+                  </div>
                 </div>
-                <div className="absolute -bottom-1 -right-1 flex items-center space-x-1 bg-green-500 px-2 py-1 rounded-full">
+                <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-black flex items-center justify-center">
                   <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
                 </div>
               </div>
@@ -235,6 +266,7 @@ const Home = () => {
         </div>
         
         {/* Mentorship Block */}
+        {/* Mentorship Block */}
         <div className="mt-16 mb-8">
           <div className="bg-gradient-to-r from-purple-900/50 to-pink-900/50 backdrop-blur-xl rounded-3xl p-8 border border-purple-500/30">
             <div className="text-center">
@@ -284,10 +316,13 @@ const Home = () => {
               key={video.id}
               className="group relative bg-gradient-to-r from-gray-900/90 to-gray-800/90 backdrop-blur-xl rounded-3xl overflow-hidden border border-gray-700/50 hover:border-yellow-400/50 transition-all duration-300 cursor-pointer"
               onClick={(e) => {
+                // Check if click was on the play button (video area)
                 const target = e.target as HTMLElement;
                 if (target.closest('.video-play-area')) {
+                  // Open video player
                   window.open(video.videoUrl, '_blank');
                 } else {
+                  // Navigate to specific video detail
                   navigate(`/exclusive-content/${video.id}`);
                 }
               }}
@@ -320,24 +355,22 @@ const Home = () => {
                 </div>
                 
                 <div className="flex-1 p-6">
-                  <div className="flex items-start justify-between mb-3">
-                    <h3 className="text-white font-bold text-xl group-hover:text-yellow-400 transition-colors leading-tight">
-                      {video.title}
-                    </h3>
-                    <span className="text-yellow-400 text-sm font-semibold bg-yellow-400/10 px-3 py-1 rounded-full whitespace-nowrap ml-4">
-                      Премиум контент
-                    </span>
-                  </div>
-                  
-                  <p className="text-gray-300 text-base mb-4 leading-relaxed">
+                  <h3 className="text-white font-bold text-xl mb-2 group-hover:text-yellow-400 transition-colors">
+                    {video.title}
+                  </h3>
+                  <p className="text-gray-300 text-base mb-3 leading-relaxed">
                     {video.description}
                   </p>
                   
-                  <div className="flex items-center text-sm text-gray-400">
-                    <span className="flex items-center">
-                      <TrendingUp className="w-4 h-4 mr-1" />
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center text-yellow-400 text-sm font-medium">
+                      <Crown className="w-4 h-4 mr-2" />
+                      <span>Премиум контент</span>
+                    </div>
+                    
+                    <div className="text-gray-400 text-sm">
                       {video.views} просмотров
-                    </span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -346,16 +379,17 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Final CTA */}
-      <div className="relative">
-        <div className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 p-12 text-center">
-          <div className="absolute inset-0 bg-black/30"></div>
-          <div className="relative z-10 max-w-4xl mx-auto">
-            <h2 className="text-5xl font-black text-black mb-6 leading-tight">
-              Готов стать следующим?
+      {/* Call to Action */}
+      <div className="px-6 pb-16">
+        <div className="relative bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 rounded-3xl p-8 text-center overflow-hidden">
+          <div className="absolute inset-0 bg-black/20"></div>
+          
+          <div className="relative z-10">
+            <h2 className="text-black text-3xl font-black mb-4">
+              Готов стать миллионером?
             </h2>
-            <p className="text-black/80 text-xl mb-12 font-semibold max-w-2xl mx-auto">
-              Присоединяйся к элитному сообществу миллионеров
+            <p className="text-black/80 text-lg mb-8 font-medium">
+              Присоединяйся к элитному сообществу успешных людей и измени свою жизнь навсегда
             </p>
             
             <div className="space-y-4 max-w-md mx-auto">
@@ -364,7 +398,7 @@ const Home = () => {
                 className="w-full bg-black text-yellow-400 py-5 rounded-2xl font-bold text-lg flex items-center justify-center gap-3 hover:bg-gray-900 transition-colors shadow-2xl"
               >
                 <Zap className="w-6 h-6" />
-                Начать зарабатывать сейчас
+                Получить VIP прогнозы
                 <ChevronRight className="w-6 h-6" />
               </button>
               
@@ -372,7 +406,7 @@ const Home = () => {
                 onClick={() => navigate('/courses')}
                 className="w-full bg-black/20 backdrop-blur-sm text-black py-5 rounded-2xl font-bold text-lg hover:bg-black/30 transition-colors"
               >
-                Посмотреть обучение
+                Смотреть курсы обучения
               </button>
             </div>
           </div>
