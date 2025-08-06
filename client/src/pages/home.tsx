@@ -209,12 +209,6 @@ const Home = () => {
             
             <div className="flex items-center gap-3">
               <LanguageSwitcher className="flex-shrink-0" />
-              <div className="bg-red-500 backdrop-blur-sm px-4 py-2 rounded-full animate-pulse">
-                <span className="text-white font-bold text-sm flex items-center">
-                  <div className="w-2 h-2 bg-white rounded-full mr-2 animate-ping"></div>
-                  LIVE
-                </span>
-              </div>
             </div>
           </div>
 
@@ -261,10 +255,10 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Main Content - Основной заголовок ниже Stories */}
-        <div className="absolute top-48 left-0 right-0 p-6 z-10">
+        {/* Main Content - Основной заголовок ниже Stories с адаптивным отступом */}
+        <div className="absolute top-56 sm:top-48 left-0 right-0 p-6 z-10">
           <div className="max-w-2xl">
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white mb-6 leading-none tracking-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-6 leading-none tracking-tight">
               {t('pathToWealth')}
               <br/>
               <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent animate-pulse">
@@ -389,27 +383,7 @@ const Home = () => {
               </div>
             </div>
             
-            {/* Social Links */}
-            <div className="flex gap-3 mt-4">
-              <a 
-                href="https://www.instagram.com/rich_besh?igsh=MW0wYWQ2ZmRmNXBmOA%3D%3D"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:scale-105 transition-transform"
-              >
-                <span>📷</span>
-                {t('instagram')}
-              </a>
-              <a 
-                href="https://t.me/+Mwbx2HUKDvRkNGI8"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-cyan-600 text-white px-4 py-2 rounded-full text-sm font-medium hover:scale-105 transition-transform"
-              >
-                <span>✈️</span>
-                {t('telegram')}
-              </a>
-            </div>
+
           </div>
         </div>
       </div>
