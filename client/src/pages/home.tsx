@@ -122,11 +122,11 @@ const VideoThumbnail = ({ videoUrl, title, className }: { videoUrl: string; titl
 const Home = () => {
   const navigate = useNavigate();
 
-  // Используем реальные данные Instagram
-  const featuredVideos = instagramData.slice(0, 3).map(post => ({
+  // Используем только видео контент из Instagram
+  const featuredVideos = instagramData.filter(post => post.type === 'video').slice(0, 3).map(post => ({
     id: post.id,
     title: post.description.split(' - ')[0] || post.description.split('.')[0] || 'Эксклюзивный контент',
-    videoUrl: post.type === 'video' ? post.videoUrl : '',
+    videoUrl: post.videoUrl,
     thumbnail: post.thumbnail,
     description: post.description,
     views: `${Math.floor(post.likes / 1000)}K`,

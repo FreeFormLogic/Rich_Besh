@@ -162,10 +162,10 @@ const ExclusiveContent = () => {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState('all');
 
-  // Используем реальные Instagram данные для эксклюзивного контента
-  const baseInstagramPosts = getInstagramPostsByCategory('all');
+  // Используем ТОЛЬКО видео контент для эксклюзивного контента
+  const baseInstagramPosts = getInstagramPostsByCategory('all').filter(post => post.type === 'video');
   
-  const exclusiveVideos = baseInstagramPosts.slice(0, 12).map((post, index) => {
+  const exclusiveVideos = baseInstagramPosts.map((post, index) => {
     // ОЧЕНЬ короткие заголовки для решения проблемы отображения
     let shortTitle = 'Контент';
     
@@ -199,10 +199,10 @@ const ExclusiveContent = () => {
       id: post.id,
       title: shortTitle,
       description: post.description.length > 40 ? `${post.description.substring(0, 40)}...` : post.description,
-      thumbnail: post.type === 'image' ? ((post as any).imageUrl || post.thumbnail) : null, // Для изображений используем прямую ссылку
+      thumbnail: post.thumbnail, // Превью из видео кадра
       videoUrl: post.videoUrl || null,
-      isVideo: post.type === 'video',
-      duration: post.type === 'video' ? `${Math.floor(Math.random() * 3) + 1}:${Math.floor(Math.random() * 60).toString().padStart(2, '0')}` : null,
+      isVideo: true, // Все элементы теперь видео
+      duration: `${Math.floor(Math.random() * 3) + 1}:${Math.floor(Math.random() * 60).toString().padStart(2, '0')}`, // Все видео имеют длительность
       views: `${Math.floor(post.likes / 1000)}K`,
       premium: index % 2 === 0,
       category: post.category,
@@ -288,36 +288,23 @@ const ExclusiveContent = () => {
               }}
             >
               <div className="flex">
-                {/* Video Thumbnail - уменьшен размер */}
+                {/* Video Thumbnail - извлекаем кадр из видео */}
                 <div className="relative w-36 h-24 flex-shrink-0">
-                  {video.isVideo && video.videoUrl ? (
-                    <VideoThumbnail 
-                      videoUrl={video.videoUrl}
-                      title={video.title}
-                      className="w-full h-full"
-                    />
-                  ) : (
-                    <img 
-                      src={video.thumbnail}
-                      alt={video.title}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        e.currentTarget.src = 'https://richbesh.b-cdn.net/TG/photo_2025-08-06_00-02-59.jpg';
-                      }}
-                    />
-                  )}
+                  <VideoThumbnail 
+                    videoUrl={video.videoUrl}
+                    title={video.title}
+                    className="w-full h-full"
+                  />
                   <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                     <div className="w-12 h-12 bg-yellow-400/90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform shadow-2xl">
                       <Play className="w-6 h-6 text-black ml-0.5" />
                     </div>
                   </div>
                   
-                  {/* Duration - только для видео */}
-                  {video.isVideo && video.duration && (
-                    <div className="absolute bottom-1 right-1 bg-black/80 text-white text-xs px-1.5 py-0.5 rounded">
-                      {video.duration}
-                    </div>
-                  )}
+                  {/* Duration - все элементы видео */}
+                  <div className="absolute bottom-1 right-1 bg-black/80 text-white text-xs px-1.5 py-0.5 rounded">
+                    {video.duration}
+                  </div>
 
                   {/* Premium Badge */}
                   {video.premium && (
