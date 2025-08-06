@@ -173,7 +173,7 @@ const Home = () => {
       </div>
 
       {/* Premium Stats */}
-      <div className="relative -mt-24 mx-6 z-30">
+      <div className="relative mt-8 mx-6 z-30">
         <div className="bg-black/90 backdrop-blur-xl rounded-3xl border border-yellow-400/30 p-8 shadow-2xl">
           <div className="grid grid-cols-3 gap-8">
             <div className="text-center">
