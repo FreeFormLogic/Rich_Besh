@@ -192,7 +192,7 @@ const Home = () => {
         </div>
 
         {/* Main Content - Основной заголовок ниже Stories */}
-        <div className="absolute top-44 left-0 right-0 p-6 z-10">
+        <div className="absolute top-56 left-0 right-0 p-6 z-10">
           <div className="max-w-2xl">
             <h1 className="text-5xl font-black text-white mb-6 leading-none tracking-tight">
               ПУТЬ К
@@ -230,26 +230,26 @@ const Home = () => {
       </div>
 
       {/* Premium Stats */}
-      <div className="relative mt-8 mx-6 z-30">
-        <div className="bg-black/90 backdrop-blur-xl rounded-3xl border border-yellow-400/30 p-8 shadow-2xl">
-          <div className="grid grid-cols-3 gap-8">
+      <div className="relative mt-8 mx-4 sm:mx-6 z-30">
+        <div className="bg-black/90 backdrop-blur-xl rounded-3xl border border-yellow-400/30 p-4 sm:p-8 shadow-2xl">
+          <div className="grid grid-cols-3 gap-2 sm:gap-8">
             <div className="text-center">
-              <div className="text-4xl font-black bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent mb-2">
+              <div className="text-2xl sm:text-4xl font-black bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent mb-1 sm:mb-2">
                 25K+
               </div>
-              <div className="text-gray-300 text-sm font-medium">Учеников в элите</div>
+              <div className="text-gray-300 text-xs sm:text-sm font-medium leading-tight">Учеников в элите</div>
             </div>
-            <div className="text-center border-x border-gray-700/50">
-              <div className="text-4xl font-black bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent mb-2">
+            <div className="text-center border-x border-gray-700/50 px-1">
+              <div className="text-2xl sm:text-4xl font-black bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent mb-1 sm:mb-2">
                 94%
               </div>
-              <div className="text-gray-300 text-sm font-medium">Успешных результатов</div>
+              <div className="text-gray-300 text-xs sm:text-sm font-medium leading-tight">Успешных результатов</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-black bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent mb-2">
+              <div className="text-2xl sm:text-4xl font-black bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent mb-1 sm:mb-2">
                 $5M+
               </div>
-              <div className="text-gray-300 text-sm font-medium">Заработано учениками</div>
+              <div className="text-gray-300 text-xs sm:text-sm font-medium leading-tight">Заработано учениками</div>
             </div>
           </div>
         </div>
@@ -324,18 +324,18 @@ const Home = () => {
 
       {/* Featured Videos */}
       <div className="py-12">
-        <div className="px-6 mb-6">
+        <div className="px-4 sm:px-6 mb-6">
           <div className="flex items-center justify-between">
-            <h2 className="text-3xl font-black text-white">
+            <h2 className="text-2xl sm:text-3xl font-black text-white flex-1">
               Эксклюзивный
               <span className="text-yellow-400"> контент</span>
             </h2>
             <button 
               onClick={() => navigate('/exclusive-content')}
-              className="text-yellow-400 hover:text-white transition-colors font-semibold flex items-center gap-2 text-sm"
+              className="text-yellow-400 hover:text-white transition-colors font-semibold flex items-center gap-1 text-xs sm:text-sm ml-2 flex-shrink-0"
             >
               Смотреть все
-              <ChevronRight className="w-4 h-4" />
+              <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4" />
             </button>
           </div>
         </div>
@@ -419,31 +419,29 @@ const Home = () => {
 
       {/* Final CTA */}
       <div className="relative">
-        <div className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 p-12 text-center">
+        <div className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 p-6 sm:p-12 text-center">
           <div className="absolute inset-0 bg-black/30"></div>
           <div className="relative z-10 max-w-4xl mx-auto">
-            <h2 className="text-5xl font-black text-black mb-6 leading-tight">
+            <h2 className="text-3xl sm:text-5xl font-black text-black mb-4 sm:mb-6 leading-tight px-2">
               Готов стать следующим?
             </h2>
-            <p className="text-black/80 text-xl mb-12 font-semibold max-w-2xl mx-auto">
+            <p className="text-black/80 text-lg sm:text-xl mb-8 sm:mb-12 font-semibold max-w-2xl mx-auto px-4">
               Присоединяйся к элитному сообществу миллионеров
             </p>
             
-            <div className="space-y-4 max-w-md mx-auto">
+            <div className="space-y-4 max-w-md mx-auto px-4">
               <button 
                 onClick={() => navigate('/predictions')}
-                className="w-full bg-black text-yellow-400 py-5 rounded-2xl font-bold text-lg flex items-center justify-center hover:bg-gray-900 transition-colors shadow-2xl relative"
+                className="w-full bg-black text-yellow-400 py-4 sm:py-5 rounded-2xl font-bold text-base sm:text-lg flex items-center justify-center hover:bg-gray-900 transition-colors shadow-2xl relative pl-12 pr-12"
               >
-                <span className="flex items-center gap-2">
-                  <Zap className="w-5 h-5" />
-                  Начать зарабатывать сейчас
-                </span>
-                <ChevronRight className="w-5 h-5 absolute right-4" />
+                <Zap className="w-4 h-4 sm:w-5 sm:h-5 absolute left-4" />
+                <span className="text-center flex-1">Начать зарабатывать сейчас</span>
+                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 absolute right-4" />
               </button>
               
               <button 
                 onClick={() => navigate('/courses')}
-                className="w-full bg-black/20 backdrop-blur-sm text-black py-5 rounded-2xl font-bold text-lg hover:bg-black/30 transition-colors"
+                className="w-full bg-black/20 backdrop-blur-sm text-black py-4 sm:py-5 rounded-2xl font-bold text-base sm:text-lg hover:bg-black/30 transition-colors"
               >
                 Посмотреть обучение
               </button>
